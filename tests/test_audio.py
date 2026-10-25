@@ -12,8 +12,8 @@ def test_rms_level_measures_known_signal():
     assert np.isclose(rms_level(signal), np.sqrt(0.5))
 
 
-def test_detection_threshold_uses_median_noise_and_floor():
-    # The outlier should not dominate the median-based room-noise estimate.
+def test_detection_threshold_uses_lower_quartile_and_floor():
+    # A loud transient should not dominate the lower-quartile estimate.
     result = detection_threshold([0.001, 0.001, 0.001, 0.5], 0.00015, 1.5)
     assert np.isclose(result, 0.0015)
 
