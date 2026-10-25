@@ -8,7 +8,8 @@ PanelWindow {
     id: root
     implicitWidth: 760
     implicitHeight: expanded ? 520 : 88
-    anchors { top: true; horizontalCenter: true }
+    anchors { top: true; left: true; right: true }
+    screen: Quickshell.screens[0]
     margins { top: 18 }
     color: "transparent"
     WlrLayershell.layer: WlrLayer.Overlay
