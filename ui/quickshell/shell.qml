@@ -57,18 +57,49 @@ PanelWindow {
             spacing: 13
 
             Rectangle {
-                width: 42; height: 42; radius: 14
-                color: "#102B31"; border.color: "#6B52F4E0"; border.width: 1
+                id: core
+                width: 44; height: 44; radius: 15
+                color: "#0B2027"; border.color: "#6B52F4E0"; border.width: 1
+                clip: true
+
                 Rectangle {
+                    id: outerRing
                     anchors.centerIn: parent
-                    width: 13; height: 13; radius: 7
+                    width: 34; height: 34; radius: 17
+                    color: "transparent"
+                    border.color: "#7752F4E0"; border.width: 1
+                    RotationAnimation on rotation { from: 0; to: 360; duration: 9000; loops: Animation.Infinite }
+                }
+                Rectangle {
+                    id: innerRing
+                    anchors.centerIn: parent
+                    width: 24; height: 24; radius: 12
+                    color: "transparent"
+                    border.color: "#B852F4E0"; border.width: 1
+                    RotationAnimation on rotation { from: 360; to: 0; duration: 5200; loops: Animation.Infinite }
+                }
+                Rectangle {
+                    id: coreLight
+                    anchors.centerIn: parent
+                    width: 9; height: 9; radius: 5
                     color: root.cyan
+                    SequentialAnimation on scale {
+                        running: root.visible; loops: Animation.Infinite
+                        NumberAnimation { to: 1.35; duration: 1100; easing.type: Easing.InOutSine }
+                        NumberAnimation { to: 0.78; duration: 1100; easing.type: Easing.InOutSine }
+                    }
                     SequentialAnimation on opacity {
                         running: root.visible; loops: Animation.Infinite
-                        NumberAnimation { to: 0.48; duration: 900 }
-                        NumberAnimation { to: 1; duration: 900 }
+                        NumberAnimation { to: 0.55; duration: 1100 }
+                        NumberAnimation { to: 1; duration: 1100 }
                     }
-                    Rectangle { anchors.centerIn: parent; width: 26; height: 26; radius: 13; color: "transparent"; border.color: "#8A52F4E0"; border.width: 1 }
+                }
+                Rectangle {
+                    id: orbitDot
+                    width: 4; height: 4; radius: 2; color: "#D8FFFA"
+                    x: 20 + Math.cos(orbit.rotation * Math.PI / 180) * 16
+                    y: 20 + Math.sin(orbit.rotation * Math.PI / 180) * 16
+                    RotationAnimation { id: orbit; target: orbitDot; property: "rotation"; from: 0; to: 360; duration: 3400; loops: Animation.Infinite }
                 }
             }
             ColumnLayout {
@@ -90,7 +121,19 @@ PanelWindow {
             }
         }
 
-        Rectangle { Layout.fillWidth: true; height: 1; color: root.line; Layout.topMargin: 8; Layout.bottomMargin: 14 }
+        Rectangle {
+            Layout.fillWidth: true; height: 1
+            color: root.line
+            Layout.topMargin: 8; Layout.bottomMargin: 14
+            Rectangle {
+                width: 76; height: 1; color: root.cyan; opacity: 0.75
+                SequentialAnimation on x {
+                    running: root.visible; loops: Animation.Infinite
+                    NumberAnimation { from: 0; to: Math.max(0, parent.width - 76); duration: 4200; easing.type: Easing.InOutSine }
+                    NumberAnimation { from: Math.max(0, parent.width - 76); to: 0; duration: 4200; easing.type: Easing.InOutSine }
+                }
+            }
+        }
 
         RowLayout {
             Layout.fillWidth: true; Layout.fillHeight: true; spacing: 16
