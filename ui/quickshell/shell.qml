@@ -132,9 +132,9 @@ PanelWindow {
                 }
                 Rectangle {
                     width: 4; height: 4; radius: 2; color: "#E9FFFB"
-                    x: 19 + Math.cos(orbit.rotation * Math.PI / 180) * 15
-                    y: 19 + Math.sin(orbit.rotation * Math.PI / 180) * 15
-                    RotationAnimation { id: orbit; target: parent; property: "rotation"; from: 0; to: 360; duration: 3300; loops: Animation.Infinite }
+                    x: 19 + Math.cos(orbitDot.rotation * Math.PI / 180) * 15
+                    y: 19 + Math.sin(orbitDot.rotation * Math.PI / 180) * 15
+                    RotationAnimation { id: orbit; target: orbitDot; property: "rotation"; from: 0; to: 360; duration: 3300; loops: Animation.Infinite }
                 }
             }
             ColumnLayout {
