@@ -9,7 +9,7 @@ class AudioCaptureError(RuntimeError):
 
 
 def resolve_input_device(configured_name: str | None):
-    """Resolve a preferred input by name so changing device indices is harmless."""
+    """Resolve a PortAudio input by name; PipeWire can route the selected default source."""
     if not configured_name:
         return None
     try:
@@ -30,7 +30,7 @@ def resolve_input_device(configured_name: str | None):
             if int(device.get("max_input_channels", 0)) > 0
         ]
         raise AudioCaptureError(
-            f"Configured microphone not found: {configured_name}. "
+            f"Configured audio route not found: {configured_name}. "
             f"Available inputs: {', '.join(available) or 'none'}"
         )
     return matches[0][0]
@@ -73,7 +73,7 @@ async def record_until_silence(cfg: dict) -> np.ndarray:
             callback=callback,
         ):
             if device_name:
-                print(f"Using microphone: {device_name}", flush=True)
+                print(f"Using audio input route: {device_name}", flush=True)
             print("Calibrating microphone — please stay quiet for a moment…",
                   flush=True)
             calibration = []
