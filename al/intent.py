@@ -45,13 +45,18 @@ def route_with_skills(
 ) -> tuple[str, str]:
     """Route exact, harmless status phrases through the typed skill registry."""
     normalized = re.sub(r"\s+", " ", text.lower()).strip(" .!?\t\n")
-    # Whisper occasionally inserts a short filler before a one-word command.
-    # Accept only a small allowlist of observed status variants, never a suffix
-    # match on arbitrary longer requests.
+    # Normalize punctuation for repeated words, e.g. "Status. Status. Status."
+    status_tokens = re.sub(r"[,!?\.]+", " ", text.lower())
+    status_tokens = re.sub(r"\s+", " ", status_tokens).strip().split()
+    # Only accept short, allowlisted status-only utterances. Never treat a
+    # status word embedded in an arbitrary command as permission to act.
+    status_only = bool(status_tokens) and "status" in status_tokens and all(
+        token in {"status", "al", "i'll", "ill", "and", "en"} for token in status_tokens
+    )
     if normalized in {
         "status", "al status", "are you ready", "al, status",
         "i'll status", "ill status", "and status", "en status",
-    }:
+    } or status_only:
         active_registry = registry if registry is not None else create_builtin_registry()
         result = active_registry.execute("local_status")
         if result.ok:
