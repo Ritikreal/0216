@@ -32,7 +32,9 @@ class SpeechRecognizer:
                 audio,
                 language=self.cfg.get("language", "en"),
                 beam_size=int(self.cfg.get("beam_size", 1)),
-                vad_filter=True,
+                # Our recorder already stops after silence. Whisper's extra VAD
+                # can discard very short commands (e.g. "Hey AL") entirely.
+                vad_filter=bool(self.cfg.get("vad_filter", False)),
                 condition_on_previous_text=False,
             )
             return " ".join(seg.text.strip() for seg in segments).strip()
