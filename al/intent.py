@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import re
 
+from .builtin_skills import create_builtin_registry
+from .skills import SkillRegistry
 
-# Phase 2 intentionally only recognizes harmless commands. System-control skills
-# and their safety policy are introduced in Phase 3.
+
+# Phase 2 recognizes harmless phrases only. No arbitrary text becomes an action.
 def route(text: str) -> tuple[str, str]:
     normalized = re.sub(r"\s+", " ", text.lower()).strip(" .!?\t\n")
     if not normalized:
@@ -35,5 +37,18 @@ def route(text: str) -> tuple[str, str]:
     if any(p in normalized for p in ("are you there", "you there", "can you hear me")):
         return ("reply", "Yep. Loud and clear.")
 
-    # Keep unknown requests honest and concise. Never execute arbitrary text.
     return ("unknown", "I heard you. I can't do that yet.")
+
+
+def route_with_skills(
+    text: str, registry: SkillRegistry | None = None
+) -> tuple[str, str]:
+    """Route exact, harmless status phrases through the typed skill registry."""
+    normalized = re.sub(r"\s+", " ", text.lower()).strip(" .!?\t\n")
+    if normalized in {"status", "al status", "are you ready", "al, status"}:
+        active_registry = registry if registry is not None else create_builtin_registry()
+        result = active_registry.execute("local_status")
+        if result.ok:
+            return ("reply", result.message)
+        return ("reply", "I couldn't check my local status safely.")
+    return route(text)
