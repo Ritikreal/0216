@@ -9,10 +9,10 @@ from pathlib import Path
 from .audio import AudioCaptureError, record_until_silence
 from .config import DEFAULT_CONFIG, load_config
 from .intent import route
-from .speech import PiperSpeaker, SpeechRecognizer
+from .speech import KokoroSpeaker, SpeechRecognizer
 
 
-async def listen_once(cfg: dict, stt: SpeechRecognizer, tts: PiperSpeaker):
+async def listen_once(cfg: dict, stt: SpeechRecognizer, tts: KokoroSpeaker):
     total_started = time.perf_counter()
     try:
         capture_started = time.perf_counter()
@@ -59,7 +59,7 @@ async def run(args):
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
     stt = SpeechRecognizer(cfg)
-    tts = PiperSpeaker(cfg)
+    tts = KokoroSpeaker(cfg)
 
     # Keep one recognizer/model instance for the entire process. Persistent
     # mode warms it before the first utterance; --once stays lazy unless --warm.
