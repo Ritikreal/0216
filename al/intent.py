@@ -6,9 +6,8 @@ from .builtin_skills import create_builtin_registry
 from .skills import SkillRegistry
 
 
-# Phase 2 recognizes harmless phrases only. No arbitrary text becomes an action.
 def route(text: str) -> tuple[str, str]:
-    normalized = re.sub(r"\s+", " ", re.sub(r"[,!?\.]+", " ", text.lower())).strip()
+    normalized = re.sub(r"\\s+", " ", re.sub(r"[,!?\\.]+", " ", text.lower())).strip()
     if not normalized:
         return ("empty", "Sorry, I missed that.")
 
@@ -26,7 +25,7 @@ def route(text: str) -> tuple[str, str]:
         "hey al what can i do for you", "hey what can i do for you",
         "can you help me can you help me",
     }:
-        return ("reply", "Right now, I can listen and reply locally. Desktop controls are next.")
+        return ("reply", "I can answer the time, date, and local system status. More desktop skills are coming next.")
 
     if normalized in {"stop", "cancel", "never mind", "nevermind"}:
         return ("reply", "Cancelled.")
@@ -46,23 +45,23 @@ def route(text: str) -> tuple[str, str]:
 def route_with_skills(
     text: str, registry: SkillRegistry | None = None
 ) -> tuple[str, str]:
-    """Route exact, harmless status phrases through the typed skill registry."""
-    normalized = re.sub(r"\s+", " ", text.lower()).strip(" .!?\t\n")
-    # Normalize punctuation for repeated words, e.g. "Status. Status. Status."
-    status_tokens = re.sub(r"[,!?\.]+", " ", text.lower())
-    status_tokens = re.sub(r"\s+", " ", status_tokens).strip().split()
-    # Only accept short, allowlisted status-only utterances. Never treat a
-    # status word embedded in an arbitrary command as permission to act.
-    status_only = bool(status_tokens) and "status" in status_tokens and all(
-        token in {"status", "al", "i'll", "ill", "and", "en"} for token in status_tokens
-    )
-    if normalized in {
-        "status", "al status", "are you ready", "al, status",
-        "i'll status", "ill status", "and status", "en status",
-    } or status_only:
-        active_registry = registry if registry is not None else create_builtin_registry()
-        result = active_registry.execute("local_status")
-        if result.ok:
-            return ("reply", result.message)
-        return ("reply", "I couldn't check my local status safely.")
-    return route(text)
+    """Route narrowly allowlisted local information requests to registered skills."""
+    normalized = re.sub(r"\\s+", " ", re.sub(r"[,!?\\.]+", " ", text.lower())).strip()
+    tokens = normalized.split()
+
+    status_tokens = {"status", "al", "i'll", "ill", "and", "en"}
+    status_only = bool(tokens) and "status" in tokens and all(token in status_tokens for token in tokens)
+    if normalized in {"status", "al status", "are you ready", "i'll status", "ill status", "and status", "en status"} or status_only:
+        skill_name = "local_status"
+    elif normalized in {"time", "what time is it", "what's the time", "whats the time", "tell me the time", "current time", "al time"}:
+        skill_name = "local_time"
+    elif normalized in {"date", "what's the date", "whats the date", "what is the date", "what's today's date", "whats todays date", "what day is it", "what is today's date", "today's date", "todays date", "al date"}:
+        skill_name = "local_date"
+    else:
+        return route(text)
+
+    active_registry = registry if registry is not None else create_builtin_registry()
+    result = active_registry.execute(skill_name)
+    if result.ok:
+        return ("reply", result.message)
+    return ("reply", "I couldn't check that local information safely.")
