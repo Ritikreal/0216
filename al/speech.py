@@ -127,7 +127,7 @@ class KokoroSpeaker:
 
         chunks = [
             part.strip()
-            for part in re.split(r"(?<=[!?])\\s+|\\.{3,}\\s+|(?<!\\.)\\.(?!\\.)\\s+", text.strip())
+            for part in re.split(r"(?<=[!?])\s+|\.{3,}\s+|(?<!\.)\.(?!\.)\s+", text.strip())
             if part.strip()
         ] or [text.strip()]
 
