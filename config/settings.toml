@@ -7,12 +7,18 @@ log_level = "INFO"
 sample_rate = 16000
 channels = 1
 block_seconds = 0.25
+calibration_seconds = 0.6
 silence_seconds = 0.9
 max_record_seconds = 15.0
+min_speech_seconds = 0.12
 # Use PipeWire's input route so it can resample to 16 kHz.
 input_device_name = "pipewire"
-# Increase this if the built-in laptop mic is noisy; decrease if it misses speech.
+# The configured floor prevents very quiet noise from triggering speech detection.
 energy_threshold = 0.00015
+# Adaptive threshold = max(energy_threshold, median calibration RMS * multiplier).
+threshold_multiplier = 1.5
+# Set true temporarily to print per-block RMS/peak levels while diagnosing the mic.
+debug_levels = false
 
 [stt]
 engine = "faster-whisper"
@@ -21,6 +27,7 @@ device = "cpu"
 compute_type = "int8"
 language = "en"
 beam_size = 1
+vad_filter = false
 
 [tts]
 # Set to an installed Piper voice model path. Empty disables speech output until configured.
