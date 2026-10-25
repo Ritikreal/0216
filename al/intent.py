@@ -21,8 +21,9 @@ def route(text: str) -> tuple[str, str]:
     if normalized in {
         "help", "help me", "please help me", "can you help", "can you help me",
         "what can you do", "what can you do right now",
-        "hey al what can you do", "hey what can you do",
-        "hey al what can you do right now",
+        "what can i do for you", "hey al what can you do",
+        "hey what can you do", "hey al what can you do right now",
+        "hey al what can i do for you", "hey what can i do for you",
         "can you help me can you help me",
     }:
         return ("reply", "Right now, I can listen and reply locally. Desktop controls are next.")
