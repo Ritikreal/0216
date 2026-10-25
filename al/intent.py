@@ -45,7 +45,13 @@ def route_with_skills(
 ) -> tuple[str, str]:
     """Route exact, harmless status phrases through the typed skill registry."""
     normalized = re.sub(r"\s+", " ", text.lower()).strip(" .!?\t\n")
-    if normalized in {"status", "al status", "are you ready", "al, status"}:
+    # Whisper occasionally inserts a short filler before a one-word command.
+    # Accept only a small allowlist of observed status variants, never a suffix
+    # match on arbitrary longer requests.
+    if normalized in {
+        "status", "al status", "are you ready", "al, status",
+        "i'll status", "ill status", "and status", "en status",
+    }:
         active_registry = registry if registry is not None else create_builtin_registry()
         result = active_registry.execute("local_status")
         if result.ok:
