@@ -48,8 +48,11 @@ def rms_level(chunk: np.ndarray) -> float:
 
 def detection_threshold(noise_levels: list[float], configured: float,
                        multiplier: float) -> float:
-    """Use median room noise to adapt the threshold without following outliers."""
-    noise_floor = float(np.median(noise_levels)) if noise_levels else 0.0
+    """Estimate quiet-room noise robustly without letting loud calibration outliers dominate."""
+    # A median can be pulled upward when a short calibration window contains speech,
+    # a bump, or other transient noise. The lower quartile better represents the
+    # steady background in this short window.
+    noise_floor = float(np.percentile(noise_levels, 25)) if noise_levels else 0.0
     return max(float(configured), noise_floor * float(multiplier))
 
 
@@ -122,7 +125,7 @@ async def record_until_silence(cfg: dict) -> np.ndarray:
                     break
 
             print(
-                f"Listening… speak now. (threshold={threshold:.4f}; Ctrl+C cancels)",
+                f"Listening… speak now. (threshold={threshold:.6f}; Ctrl+C cancels)",
                 flush=True,
             )
 
