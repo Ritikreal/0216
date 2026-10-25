@@ -25,3 +25,10 @@ def test_registry_policy_remains_safe():
     description = create_builtin_registry().describe()
     assert len(description) == 1
     assert description[0][2] is SkillPolicy.SAFE
+
+
+
+def test_help_intent_accepts_wake_word_prefix():
+    assert route_with_skills("Hey Al, what can you do?") == (
+        "reply", "Right now, I can listen and reply locally. Desktop controls are next."
+    )
