@@ -8,11 +8,11 @@ def route(text: str) -> tuple[str, str]:
     if not normalized:
         return ("empty", "I didn't catch that.")
     if normalized in {"hello", "hi al", "hey al", "hello al"}:
-        return ("reply", "Hey. I'm here.")
+        return ("reply", "Hey. I'm here. What's up?")
     if any(p in normalized for p in ("who are you", "what are you")):
-        return ("reply", "I'm AL. Local, mostly useful, and still under construction.")
+        return ("reply", "I'm AL. Your local assistant... mostly useful, occasionally charming, and still under construction.")
     if normalized in {"stop", "cancel", "never mind", "nevermind"}:
-        return ("reply", "Cancelled.")
+        return ("reply", "All right. Stopping now.")
     if normalized in {"help", "what can you do"}:
-        return ("reply", "For now, I can hear you and respond locally. Desktop controls arrive in the next phase.")
-    return ("unknown", "I heard you, but that skill isn't available yet.")
+        return ("reply", "Right now, I can hear you and respond locally. Desktop controls are next... give me a little time.")
+    return ("unknown", "I heard you. That skill isn't available yet... but we're working on it.")
