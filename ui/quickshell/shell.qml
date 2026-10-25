@@ -36,16 +36,16 @@ PanelWindow {
         { title: "System overview", detail: "Runtime state and interface controls", icon: "◈", target: "Overview" }
     ]
 
-    readonly property color ink: "#05090D"
-    readonly property color panel: "#09131B"
-    readonly property color panelRaised: "#0D1B25"
-    readonly property color cyan: "#62F5DF"
-    readonly property color teal: "#2CAFA9"
-    readonly property color dim: "#7C98A5"
-    readonly property color muted: "#4D6875"
-    readonly property color line: "#203744"
-    readonly property color amber: "#F1C27A"
-    readonly property color red: "#F17D8A"
+    readonly property color ink: "#080A0B"
+    readonly property color panel: "#101213"
+    readonly property color panelRaised: "#171A1A"
+    readonly property color cyan: "#C4D0B2"
+    readonly property color teal: "#87977A"
+    readonly property color dim: "#A0A6A0"
+    readonly property color muted: "#747B75"
+    readonly property color line: "#303533"
+    readonly property color amber: "#D9B77A"
+    readonly property color red: "#D98D83"
 
     function notify(message, kind) {
         notice = message
@@ -81,9 +81,9 @@ PanelWindow {
             anchors.fill: parent
             anchors.leftMargin: Math.max(12, (parent.width - 940) / 2)
             anchors.rightMargin: Math.max(12, (parent.width - 940) / 2)
-            radius: 24
-            color: "#F0060C12"
-            border.color: "#6638D9D0"
+            radius: 18
+            color: "#F00D0F0E"
+            border.color: "#55494F48"
             border.width: 1
         }
     }
@@ -104,7 +104,7 @@ PanelWindow {
             Rectangle {
                 id: core
                 width: 42; height: 42; radius: 14
-                color: "#0B2228"; border.color: "#735FF5DF"; border.width: 1
+                color: "#171B18"; border.color: "#665C6756"; border.width: 1
                 clip: true
                 Rectangle {
                     anchors.centerIn: parent
@@ -144,7 +144,7 @@ PanelWindow {
             }
             Item { Layout.fillWidth: true }
             Rectangle {
-                radius: 9; color: "#0C201F"; border.color: "#28544F"
+                radius: 9; color: "#171C17"; border.color: "#3B493B"
                 Layout.preferredWidth: 112; Layout.preferredHeight: 28
                 RowLayout {
                     anchors.centerIn: parent; spacing: 7
@@ -193,7 +193,7 @@ PanelWindow {
                         delegate: Rectangle {
                             Layout.fillWidth: true; height: 39; radius: 11
                             color: root.page === modelData.label ? "#14302F" : navMouse.containsMouse ? "#101F28" : "transparent"
-                            border.color: root.page === modelData.label ? "#356B63" : "transparent"
+                            border.color: root.page === modelData.label ? "#52614B" : "transparent"
                             Behavior on color { ColorAnimation { duration: 120 } }
                             RowLayout {
                                 anchors.fill: parent; anchors.leftMargin: 11; anchors.rightMargin: 9; spacing: 10
@@ -211,15 +211,15 @@ PanelWindow {
                         ColumnLayout {
                             anchors.fill: parent; anchors.margins: 12; spacing: 7
                             RowLayout {
-                                Text { text: "LOCAL FIRST"; color: root.cyan; font.pixelSize: 9; font.bold: true; font.letterSpacing: 1 }
+                                Text { text: "LOCAL BY DESIGN"; color: root.cyan; font.pixelSize: 9; font.bold: true; font.letterSpacing: 1 }
                                 Item { Layout.fillWidth: true }
                                 Rectangle { width: 5; height: 5; radius: 3; color: root.cyan }
                             }
                             Text { text: "Private by default.\nYour machine, your data."; color: "#89A3AC"; font.pixelSize: 10; lineHeight: 1.2; Layout.fillWidth: true }
-                            Text { text: "NO CLOUD FALLBACK"; color: "#4F707B"; font.pixelSize: 8; font.letterSpacing: 0.7 }
+                            Text { text: "PRIVATE BY DEFAULT"; color: "#4F707B"; font.pixelSize: 8; font.letterSpacing: 0.7 }
                         }
                     }
-                    Text { text: "AL  /  PHASE 02"; color: "#3E5A65"; font.pixelSize: 8; font.letterSpacing: 1; Layout.leftMargin: 5; Layout.topMargin: 5 }
+                    Text { text: "AL  /  LOCAL INTERFACE"; color: "#3E5A65"; font.pixelSize: 8; font.letterSpacing: 1; Layout.leftMargin: 5; Layout.topMargin: 5 }
                 }
             }
 
@@ -242,8 +242,8 @@ PanelWindow {
                                 Layout.fillWidth: true
                                 ColumnLayout {
                                     spacing: 4
-                                    Text { text: "Your lab, at a glance."; color: "#EDF8F8"; font.pixelSize: 22; font.weight: Font.Medium }
-                                    Text { text: "A personal workspace for thinking, building, and doing."; color: root.dim; font.pixelSize: 10; wrapMode: Text.Wrap }
+                                    Text { text: "Your workspace, at a glance."; color: "#EDF8F8"; font.pixelSize: 22; font.weight: Font.Medium }
+                                    Text { text: "A calm control surface for your local assistant."; color: root.dim; font.pixelSize: 10; wrapMode: Text.Wrap }
                                 }
                                 Item { Layout.fillWidth: true }
                                 Text { text: "LOCAL SESSION"; color: "#53717D"; font.pixelSize: 8; font.letterSpacing: 1 }
@@ -251,7 +251,7 @@ PanelWindow {
 
                             Rectangle {
                                 Layout.fillWidth: true; implicitHeight: 154; radius: 17; clip: true
-                                color: "#0B1B24"; border.color: "#25464F"
+                                color: "#111514"; border.color: "#343A35"
                                 Rectangle {
                                     width: 220; height: 220; radius: 110
                                     anchors.right: parent.right; anchors.rightMargin: 26; anchors.verticalCenter: parent.verticalCenter
@@ -267,9 +267,9 @@ PanelWindow {
                                 ColumnLayout {
                                     anchors { left: parent.left; verticalCenter: parent.verticalCenter; leftMargin: 20 }
                                     spacing: 9
-                                    Text { text: "SYSTEM ONLINE"; color: root.cyan; font.pixelSize: 9; font.bold: true; font.letterSpacing: 1.5 }
-                                    Text { text: "Build something\nremarkable."; color: "#F1FAFA"; font.pixelSize: 23; font.weight: Font.Medium; lineHeight: 1.0 }
-                                    Text { text: "The interface is ready. Intelligence integration is next."; color: "#8AA7AF"; font.pixelSize: 9; wrapMode: Text.Wrap; Layout.maximumWidth: 275 }
+                                    Text { text: "INTERFACE READY"; color: root.cyan; font.pixelSize: 9; font.bold: true; font.letterSpacing: 1.5 }
+                                    Text { text: "Quietly capable.\nReady when you are."; color: "#F1FAFA"; font.pixelSize: 23; font.weight: Font.Medium; lineHeight: 1.0 }
+                                    Text { text: "Local assistant workspace · runtime connection shown honestly."; color: "#8AA7AF"; font.pixelSize: 9; wrapMode: Text.Wrap; Layout.maximumWidth: 275 }
                                 }
                             }
 
@@ -280,7 +280,7 @@ PanelWindow {
                                     model: root.quickActions
                                     delegate: Rectangle {
                                         Layout.fillWidth: true; Layout.preferredHeight: 78; radius: 13
-                                        color: quickMouse.containsMouse ? "#11272D" : "#0A171F"; border.color: quickMouse.containsMouse ? "#3D827A" : "#203944"
+                                        color: quickMouse.containsMouse ? "#1C211D" : "#111414"; border.color: quickMouse.containsMouse ? "#525E4B" : "#303533"
                                         Behavior on color { ColorAnimation { duration: 130 } }
                                         ColumnLayout {
                                             anchors.fill: parent; anchors.margins: 12; spacing: 5
@@ -307,7 +307,7 @@ PanelWindow {
                                         { value: "PREVIEW", label: "HUD BRIDGE", tint: "#F1C27A" }
                                     ]
                                     delegate: Rectangle {
-                                        Layout.fillWidth: true; Layout.preferredHeight: 66; radius: 11; color: "#0A151D"; border.color: "#1D343E"
+                                        Layout.fillWidth: true; Layout.preferredHeight: 66; radius: 11; color: "#111414"; border.color: "#303533"
                                         ColumnLayout {
                                             anchors.fill: parent; anchors.margins: 10; spacing: 6
                                             Text { text: modelData.value; color: modelData.tint; font.pixelSize: 12; font.bold: true; font.letterSpacing: 0.6 }
@@ -360,7 +360,7 @@ PanelWindow {
                         }
                         Rectangle {
                             Layout.fillWidth: true; height: 49; radius: 13
-                            color: "#080F15"; border.color: input.activeFocus ? root.cyan : "#263E48"
+                            color: "#0D0F0E"; border.color: input.activeFocus ? root.cyan : "#3A403B"
                             RowLayout {
                                 anchors.fill: parent; anchors.leftMargin: 13; anchors.rightMargin: 7; spacing: 8
                                 Text { text: "›"; color: root.cyan; font.pixelSize: 22 }
@@ -400,7 +400,7 @@ PanelWindow {
                                     { number: "06", title: "HUD and voice bridge", state: "PREVIEW ONLY", detail: "UI state chips are previews; they do not start microphone capture.", tone: "#F1C27A" }
                                 ]
                                 delegate: Rectangle {
-                                    Layout.fillWidth: true; implicitHeight: 91; radius: 13; color: "#0A171F"; border.color: "#203943"
+                                    Layout.fillWidth: true; implicitHeight: 91; radius: 13; color: "#111414"; border.color: "#303533"
                                     RowLayout {
                                         anchors.fill: parent; anchors.margins: 13; spacing: 12
                                         Rectangle {
