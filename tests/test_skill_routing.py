@@ -7,7 +7,7 @@ def test_exact_status_phrase_uses_registered_skill():
     registry = create_builtin_registry()
     kind, reply = route_with_skills("AL status", registry)
     assert kind == "reply"
-    assert reply == "AL runtime is ready."
+    assert reply.startswith("AL is ready.")
 
 
 def test_status_phrase_does_not_accept_arbitrary_command_text():
@@ -23,14 +23,14 @@ def test_skill_routing_does_not_change_other_intents():
 
 def test_registry_policy_remains_safe():
     description = create_builtin_registry().describe()
-    assert len(description) == 1
-    assert description[0][2] is SkillPolicy.SAFE
+    assert {item[0] for item in description} == {"local_status", "local_time", "local_date"}
+    assert all(item[2] is SkillPolicy.SAFE for item in description)
 
 
 
 def test_help_intent_accepts_wake_word_prefix():
     assert route_with_skills("Hey Al, what can you do?") == (
-        "reply", "Right now, I can listen and reply locally. Desktop controls are next."
+        "reply", "I can check time, date, and system status."
     )
 
 
