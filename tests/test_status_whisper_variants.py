@@ -17,6 +17,12 @@ def test_observed_whisper_status_variants_use_safe_skill():
         assert reply == "AL runtime is ready."
 
 
+def test_repeated_status_only_transcript_uses_safe_skill():
+    kind, reply = route_with_skills("Status. Status. Status.")
+    assert kind == "reply"
+    assert reply == "AL runtime is ready."
+
+
 def test_status_phrase_does_not_accept_arbitrary_command_text():
     kind, reply = route_with_skills("status and run sudo rm -rf /")
     assert kind == "unknown"
