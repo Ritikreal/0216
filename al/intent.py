@@ -8,7 +8,7 @@ from .skills import SkillRegistry
 
 # Phase 2 recognizes harmless phrases only. No arbitrary text becomes an action.
 def route(text: str) -> tuple[str, str]:
-    normalized = re.sub(r"\s+", " ", text.lower()).strip(" .!?\t\n")
+    normalized = re.sub(r"\s+", " ", re.sub(r"[,!?\.]+", " ", text.lower())).strip()
     if not normalized:
         return ("empty", "Sorry, I missed that.")
 
