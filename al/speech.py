@@ -46,6 +46,9 @@ class PiperSpeaker:
     def __init__(self, cfg: dict):
         self.model = cfg["tts"].get("model", "").strip()
         self.executable = cfg["tts"].get("executable", "piper")
+        # Slightly slower delivery and a deliberate pause between sentences.
+        self.length_scale = float(cfg["tts"].get("length_scale", 1.08))
+        self.sentence_silence = float(cfg["tts"].get("sentence_silence", 0.35))
 
     async def speak(self, text: str) -> bool:
         if not self.model or not shutil.which(self.executable):
@@ -59,7 +62,11 @@ class PiperSpeaker:
                 wav = tmp.name
             try:
                 proc = subprocess.run(
-                    [self.executable, "--model", self.model, "--output_file", wav],
+                    [
+                        self.executable, "--model", self.model, "--output_file", wav,
+                        "--length_scale", str(self.length_scale),
+                        "--sentence_silence", str(self.sentence_silence),
+                    ],
                     input=text,
                     text=True,
                     capture_output=True,
