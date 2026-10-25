@@ -66,7 +66,11 @@ def create_builtin_registry() -> SkillRegistry:
         battery = _battery_percent()
         if battery is not None:
             parts.append(f"Battery is at {battery} percent.")
-        message = " ".join(parts)
+        # Keep spoken status brief; long numeric diagnostics make voice turns slow.
+        # Detailed metrics can be added to a separate diagnostics view later.
+        message = "AL is ready."
+        if battery is not None:
+            message = f"AL is ready. Battery is at {battery} percent."
         return SkillResult(True, message, {"status": "ready"})
 
     def local_time(_arguments: Mapping[str, Any]) -> SkillResult:
