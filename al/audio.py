@@ -61,7 +61,8 @@ async def record_until_silence(cfg: dict) -> np.ndarray:
                 for c in calibration
             ]
             noise_floor = float(np.median(noise_levels))
-            threshold = max(configured_threshold, noise_floor * 2.5)
+            # A lower multiplier helps detect the quiet built-in stereo mic.
+            threshold = max(configured_threshold, noise_floor * 1.5)
 
             # Keep calibration audio out of the utterance.
             while not queue.empty():
@@ -110,5 +111,3 @@ async def record_until_silence(cfg: dict) -> np.ndarray:
         raise AudioCaptureError("No audio was captured.")
 
     return np.concatenate(chunks).astype(np.float32, copy=False)
-
-
