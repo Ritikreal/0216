@@ -130,7 +130,9 @@ PanelWindow {
                         color: modelData.who === "AL" ? "#11232C" : "#0A141B"
                         border.color: modelData.who === "AL" ? "#244A56" : "#1A3039"
                         ColumnLayout {
-                            id: bubble; anchors { left: parent.left; right: parent.right; top: parent.top; margins: 11 }; spacing: 4
+                            id: bubble
+                            anchors { left: parent.left; right: parent.right; top: parent.top; margins: 11 }
+                            spacing: 4
                             RowLayout {
                                 Text { text: modelData.who; color: modelData.who === "AL" ? "#5DE4F0" : "#77949D"; font.pixelSize: 9; font.bold: true; font.letterSpacing: 1 }
                                 Item { Layout.fillWidth: true }
