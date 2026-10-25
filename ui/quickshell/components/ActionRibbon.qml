@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import ".." as Al
 
-Al.AlPanel {
+AlPanel {
     id: root
 
     property string summary: ""
