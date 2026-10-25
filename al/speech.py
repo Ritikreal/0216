@@ -5,6 +5,7 @@ import os
 import shutil
 import subprocess
 import tempfile
+import time
 from pathlib import Path
 
 import numpy as np
@@ -124,12 +125,14 @@ class KokoroSpeaker:
         def run() -> bool:
             try:
                 self.load()
+                generation_started = time.perf_counter()
                 audio, sample_rate = self.engine.create(
                     text,
                     voice=self.voice,
                     speed=self.speed,
                     lang="en-us",
                 )
+                generation_seconds = time.perf_counter() - generation_started
             except Exception as exc:
                 print(f"Kokoro TTS unavailable: {exc}")
                 return False
@@ -143,12 +146,21 @@ class KokoroSpeaker:
             with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
                 wav = tmp.name
             try:
+                write_started = time.perf_counter()
                 sf.write(wav, audio, sample_rate)
+                write_seconds = time.perf_counter() - write_started
+                playback_started = time.perf_counter()
                 result = subprocess.run(
                     [player, wav],
                     capture_output=True,
                     timeout=60,
                     check=False,
+                )
+                playback_seconds = time.perf_counter() - playback_started
+                print(
+                    f"TTS breakdown: generation {generation_seconds:.2f}s | "
+                    f"WAV write {write_seconds:.2f}s | playback {playback_seconds:.2f}s",
+                    flush=True,
                 )
                 if result.returncode != 0:
                     print("Audio playback failed:", result.stderr.decode(errors="replace")[-500:])
