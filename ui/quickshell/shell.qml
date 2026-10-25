@@ -260,7 +260,12 @@ PanelWindow {
                                     Rectangle { anchors.centerIn: parent; width: 118; height: 118; radius: 59; color: "#0B252A"; border.color: "#3B8980"; border.width: 1 }
                                     Rectangle { anchors.centerIn: parent; width: 78; height: 78; radius: 39; color: "#102E32"; border.color: "#4FCFBC"; border.width: 1 }
                                     Rectangle { anchors.centerIn: parent; width: 10; height: 10; radius: 5; color: root.cyan
-                                        SequentialAnimation on opacity { running: root.visible; loops: Animation.Infinite; NumberAnimation { to: 0.45; duration: 900 }; NumberAnimation { to: 1; duration: 900 } }
+                                        SequentialAnimation on opacity {
+                                            running: root.visible
+                                            loops: Animation.Infinite
+                                            NumberAnimation { to: 0.45; duration: 900 }
+                                            NumberAnimation { to: 1; duration: 900 }
+                                        }
                                     }
                                     RotationAnimation on rotation { from: 0; to: 360; duration: 18000; loops: Animation.Infinite }
                                 }
@@ -506,7 +511,13 @@ PanelWindow {
                                 ColumnLayout {
                                     anchors.fill: parent; anchors.margins: 13; spacing: 4
                                     Text { text: "Safety boundary"; color: root.cyan; font.pixelSize: 10; font.bold: true; font.letterSpacing: 0.8 }
-                                    Text { text: "No arbitrary shell execution, microphone capture, or desktop control is triggered by this UI.", color: root.dim; font.pixelSize: 10; wrapMode: Text.Wrap; Layout.fillWidth: true }
+                                    Text {
+                                        text: "No arbitrary shell execution, microphone capture, or desktop control is triggered by this UI."
+                                        color: root.dim
+                                        font.pixelSize: 10
+                                        wrapMode: Text.Wrap
+                                        Layout.fillWidth: true
+                                    }
                                 }
                             }
                         }
