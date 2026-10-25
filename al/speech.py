@@ -127,7 +127,7 @@ class KokoroSpeaker:
         # Split only at sentence boundaries; keep ellipses inside the same chunk.
         chunks = [
             part.strip()
-            for part in re.split(r"(?<=[!?])\\s+|(?<!\\.)\\.(?!\\.)\\s+", text.strip())
+            for part in re.split(r"(?<=[!?])\s+|(?<!\.)\.(?!\.)\s+", text.strip())
             if part.strip()
         ]
         if not chunks:
