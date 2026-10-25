@@ -16,7 +16,11 @@ def route(text: str) -> tuple[str, str]:
     if any(p in normalized for p in ("who are you", "what are you", "tell me about yourself")):
         return ("reply", "I'm AL, your local assistant. Still learning my way around your desktop, but I'm here.")
 
-    if normalized in {"help", "what can you do", "what can you do right now"}:
+    if normalized in {
+        "help", "help me", "please help me", "can you help", "can you help me",
+        "what can you do", "what can you do right now",
+        "can you help me can you help me",
+    }:
         return ("reply", "Right now, I can listen and reply locally. Desktop controls are next.")
 
     if normalized in {"stop", "cancel", "never mind", "nevermind"}:
