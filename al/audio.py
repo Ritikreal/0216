@@ -48,10 +48,9 @@ def rms_level(chunk: np.ndarray) -> float:
 
 def detection_threshold(noise_levels: list[float], configured: float,
                        multiplier: float) -> float:
-    """Estimate quiet-room noise robustly without letting loud calibration outliers dominate."""
-    # A median can be pulled upward when a short calibration window contains speech,
-    # a bump, or other transient noise. The lower quartile better represents the
-    # steady background in this short window.
+    """Estimate the onset threshold from the quieter part of the calibration window."""
+    # Calibration is short, so use the lower quartile to reduce the effect of a bump
+    # or brief sound. The configured floor and multiplier help reject low-level noise.
     noise_floor = float(np.percentile(noise_levels, 25)) if noise_levels else 0.0
     return max(float(configured), noise_floor * float(multiplier))
 
