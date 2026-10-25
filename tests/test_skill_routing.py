@@ -37,5 +37,5 @@ def test_help_intent_accepts_wake_word_prefix():
 
 def test_help_intent_accepts_whisper_rephrasing():
     assert route_with_skills("Hey Al, what can I do for you?") == (
-        "reply", "Right now, I can listen and reply locally. Desktop controls are next."
+        "reply", "I can check time, date, and system status."
     )
