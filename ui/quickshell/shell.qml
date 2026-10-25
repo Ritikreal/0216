@@ -17,7 +17,7 @@ PanelWindow {
     WlrLayershell.keyboardFocus: expanded ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.OnDemand
 
     property bool expanded: true
-    property string mode: "STANDBY"
+    property string mode: "IDLE"
     property string draft: ""
     property var messages: [
         { who: "AL", text: "Systems are quiet. I'm ready when you are.", time: "NOW" }
@@ -65,24 +65,26 @@ PanelWindow {
                 Rectangle {
                     id: outerRing
                     anchors.centerIn: parent
-                    width: 34; height: 34; radius: 17
+                    width: root.mode === "LISTENING" ? 39 : 34; height: width; radius: width / 2
                     color: "transparent"
-                    border.color: "#7752F4E0"; border.width: 1
-                    RotationAnimation on rotation { from: 0; to: 360; duration: 9000; loops: Animation.Infinite }
+                    border.color: root.mode === "ERROR" ? "#D66B76" : "#7752F4E0"; border.width: root.mode === "THINKING" ? 2 : 1
+                    Behavior on width { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
+                    RotationAnimation on rotation { from: 0; to: 360; duration: root.mode === "THINKING" ? 2200 : 9000; loops: Animation.Infinite }
                 }
                 Rectangle {
                     id: innerRing
                     anchors.centerIn: parent
-                    width: 24; height: 24; radius: 12
+                    width: root.mode === "SPEAKING" ? 29 : 24; height: width; radius: width / 2
                     color: "transparent"
-                    border.color: "#B852F4E0"; border.width: 1
-                    RotationAnimation on rotation { from: 360; to: 0; duration: 5200; loops: Animation.Infinite }
+                    border.color: root.mode === "ACTION" ? "#D7A56C" : "#B852F4E0"; border.width: 1
+                    Behavior on width { NumberAnimation { duration: 180 } }
+                    RotationAnimation on rotation { from: 360; to: 0; duration: root.mode === "THINKING" ? 1700 : 5200; loops: Animation.Infinite }
                 }
                 Rectangle {
                     id: coreLight
                     anchors.centerIn: parent
                     width: 9; height: 9; radius: 5
-                    color: root.cyan
+                    color: root.mode === "ERROR" ? "#F07883" : root.mode === "ACTION" ? "#F3C17B" : root.cyan
                     SequentialAnimation on scale {
                         running: root.visible; loops: Animation.Infinite
                         NumberAnimation { to: 1.35; duration: 1100; easing.type: Easing.InOutSine }
@@ -111,7 +113,7 @@ PanelWindow {
             RowLayout {
                 spacing: 6
                 Rectangle { width: 6; height: 6; radius: 3; color: root.cyan }
-                Text { text: root.mode; color: root.cyan; font.pixelSize: 10; font.bold: true; font.letterSpacing: 1.2 }
+                Text { text: root.mode; color: root.mode === "ERROR" ? "#F07883" : root.mode === "ACTION" ? "#F3C17B" : root.cyan; font.pixelSize: 10; font.bold: true; font.letterSpacing: 1.2; Behavior on color { ColorAnimation { duration: 220 } } }
             }
             Rectangle {
                 width: 34; height: 34; radius: 10
@@ -156,7 +158,22 @@ PanelWindow {
                         Text { text: "Private by design.\nYour machine, your data."; color: "#819EA7"; font.pixelSize: 11; lineHeight: 1.2 }
                     }
                 }
-                Text { text: "CAPABILITIES"; color: root.dim; font.pixelSize: 9; font.bold: true; font.letterSpacing: 1.8; Layout.topMargin: 8; Layout.bottomMargin: 2 }
+                Text { text: "LIVE STATE PREVIEW"; color: root.dim; font.pixelSize: 9; font.bold: true; font.letterSpacing: 1.4; Layout.topMargin: 4; Layout.bottomMargin: 1 }
+                Flow {
+                    Layout.fillWidth: true
+                    spacing: 5
+                    Repeater {
+                        model: ["IDLE", "LISTENING", "THINKING", "SPEAKING", "ACTION", "ERROR"]
+                        delegate: Rectangle {
+                            width: stateText.implicitWidth + 14; height: 25; radius: 8
+                            color: root.mode === modelData ? "#1D4B4B" : "#0A131A"
+                            border.color: root.mode === modelData ? root.cyan : "#1C3039"
+                            Text { id: stateText; anchors.centerIn: parent; text: modelData; color: root.mode === modelData ? root.cyan : "#78939B"; font.pixelSize: 8; font.bold: true }
+                            MouseArea { anchors.fill: parent; onClicked: root.mode = modelData }
+                        }
+                    }
+                }
+                Text { text: "CAPABILITIES"; color: root.dim; font.pixelSize: 9; font.bold: true; font.letterSpacing: 1.8; Layout.topMargin: 4; Layout.bottomMargin: 2 }
                 Repeater {
                     model: [
                         ["01", "Voice interface", "STANDBY"],
@@ -252,5 +269,11 @@ PanelWindow {
     }
 
     Shortcut { sequence: "Escape"; onActivated: root.expanded = false }
-    Shortcut { sequence: "Ctrl+Space"; onActivated: { root.expanded = true; root.mode = root.mode === "LISTENING" ? "STANDBY" : "LISTENING" } }
+    Shortcut { sequence: "Ctrl+Space"; onActivated: { root.expanded = true; root.mode = root.mode === "LISTENING" ? "IDLE" : "LISTENING" } }
+    Shortcut { sequence: "Ctrl+1"; onActivated: root.mode = "IDLE" }
+    Shortcut { sequence: "Ctrl+2"; onActivated: root.mode = "LISTENING" }
+    Shortcut { sequence: "Ctrl+3"; onActivated: root.mode = "THINKING" }
+    Shortcut { sequence: "Ctrl+4"; onActivated: root.mode = "SPEAKING" }
+    Shortcut { sequence: "Ctrl+5"; onActivated: root.mode = "ACTION" }
+    Shortcut { sequence: "Ctrl+6"; onActivated: root.mode = "ERROR" }
 }
