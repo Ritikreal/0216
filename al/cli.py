@@ -8,7 +8,7 @@ from pathlib import Path
 
 from .audio import AudioCaptureError, record_until_silence
 from .config import load_config
-from .intent import route
+from .intent import route_with_skills
 from .speech import KokoroSpeaker, SpeechRecognizer
 
 
@@ -25,7 +25,7 @@ async def listen_once(cfg: dict, stt: SpeechRecognizer, tts: KokoroSpeaker):
         stt_seconds = time.perf_counter() - stt_started
 
         print(f"You: {text or '(no transcript)'}", flush=True)
-        kind, response = route(text)
+        kind, response = route_with_skills(text)
         print(f"AL: {response}", flush=True)
 
         tts_started = time.perf_counter()
