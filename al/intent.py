@@ -7,7 +7,7 @@ from .skills import SkillRegistry
 
 
 def route(text: str) -> tuple[str, str]:
-    normalized = re.sub(r"\\s+", " ", re.sub(r"[,!?\\.]+", " ", text.lower())).strip()
+    normalized = re.sub(r"\s+", " ", re.sub(r"[,!?\.]+", " ", text.lower())).strip()
     if not normalized:
         return ("empty", "Sorry, I missed that.")
 
@@ -46,7 +46,7 @@ def route_with_skills(
     text: str, registry: SkillRegistry | None = None
 ) -> tuple[str, str]:
     """Route narrowly allowlisted local information requests to registered skills."""
-    normalized = re.sub(r"\\s+", " ", re.sub(r"[,!?\\.]+", " ", text.lower())).strip()
+    normalized = re.sub(r"\s+", " ", re.sub(r"[,!?\.]+", " ", text.lower())).strip()
     tokens = normalized.split()
 
     status_tokens = {"status", "al", "i'll", "ill", "and", "en"}
