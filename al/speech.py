@@ -1,10 +1,12 @@
 from __future__ import annotations
+
 import asyncio
 import os
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
+
 import numpy as np
 
 
@@ -42,53 +44,114 @@ class SpeechRecognizer:
         return await asyncio.to_thread(run)
 
 
-class PiperSpeaker:
+class KokoroSpeaker:
+    """Local Kokoro TTS with lazy model loading and PipeWire playback."""
+
     def __init__(self, cfg: dict):
-        self.model = cfg["tts"].get("model", "").strip()
-        self.executable = cfg["tts"].get("executable", "piper")
-        # Slightly slower delivery and a deliberate pause between sentences.
-        self.length_scale = float(cfg["tts"].get("length_scale", 1.08))
-        self.sentence_silence = float(cfg["tts"].get("sentence_silence", 0.35))
+        tts = cfg["tts"]
+        self.model_path = Path(tts.get("model", "")).expanduser()
+        self.voices_path = Path(tts.get("voices", "")).expanduser()
+        self.voice = tts.get("voice", "af_heart")
+        self.speed = float(tts.get("speed", 1.0))
+        self.engine = None
+
+    def load(self):
+        if self.engine is not None:
+            return
+
+        if not self.model_path.is_file() or not self.voices_path.is_file():
+            raise FileNotFoundError(
+                "Kokoro model or voices file is missing. Check [tts] paths in "
+                "~/.config/al/settings.toml."
+            )
+
+        try:
+            from kokoro_onnx import Kokoro
+        except ImportError as exc:
+            raise RuntimeError(
+                "Kokoro is not installed in AL's virtual environment. "
+                "Install kokoro-onnx and soundfile."
+            ) from exc
+
+        # Some Kokoro ONNX exports declare speed as float while the current
+        # package's newer-export path supplies int32. Choose the tensor type
+        # from the model metadata so AL works with either export format.
+        class CompatibleKokoro(Kokoro):
+            def _create_audio(self, phonemes, voice, speed):
+                from kokoro_onnx import MAX_PHONEME_LENGTH, SAMPLE_RATE
+
+                phonemes = phonemes[:MAX_PHONEME_LENGTH]
+                tokens = np.array(self.tokenizer.tokenize(phonemes), dtype=np.int64)
+                voice = voice[len(tokens)]
+                tokens = [[0, *tokens, 0]]
+                input_names = {item.name: item.type for item in self.sess.get_inputs()}
+
+                if "input_ids" in input_names:
+                    speed_dtype = (
+                        np.float32
+                        if input_names.get("speed") == "tensor(float)"
+                        else np.int32
+                    )
+                    inputs = {
+                        "input_ids": tokens,
+                        "style": np.array(voice, dtype=np.float32),
+                        "speed": np.array([speed], dtype=speed_dtype),
+                    }
+                else:
+                    inputs = {
+                        "tokens": tokens,
+                        "style": voice,
+                        "speed": np.ones(1, dtype=np.float32) * speed,
+                    }
+
+                audio = self.sess.run(None, inputs)[0]
+                return audio, SAMPLE_RATE
+
+        self.engine = CompatibleKokoro(
+            str(self.model_path),
+            str(self.voices_path),
+        )
 
     async def speak(self, text: str) -> bool:
-        if not self.model or not shutil.which(self.executable):
-            return False
-        if not Path(self.model).is_file():
-            print(f"TTS disabled: Piper model not found: {self.model}")
+        if not text.strip():
             return False
 
-        def run():
+        player = shutil.which("pw-play") or shutil.which("aplay")
+        if not player:
+            print("No pw-play or aplay found; skipping spoken output.")
+            return False
+
+        def run() -> bool:
+            try:
+                self.load()
+                audio, sample_rate = self.engine.create(
+                    text,
+                    voice=self.voice,
+                    speed=self.speed,
+                    lang="en-us",
+                )
+            except Exception as exc:
+                print(f"Kokoro TTS unavailable: {exc}")
+                return False
+
+            try:
+                import soundfile as sf
+            except ImportError:
+                print("Kokoro TTS requires soundfile in AL's virtual environment.")
+                return False
+
             with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
                 wav = tmp.name
             try:
-                proc = subprocess.run(
-                    [
-                        self.executable, "--model", self.model, "--output_file", wav,
-                        "--length_scale", str(self.length_scale),
-                        "--sentence_silence", str(self.sentence_silence),
-                    ],
-                    input=text,
-                    text=True,
-                    capture_output=True,
-                    timeout=30,
-                    check=False,
-                    env={**os.environ, "PIPER_NO_DOWNLOAD": "1"},
-                )
-                if proc.returncode != 0:
-                    print("Piper failed:", proc.stderr[-500:])
-                    return False
-
-                # PipeWire's default player is used; no shell is involved.
-                player = shutil.which("pw-play") or shutil.which("aplay")
-                if not player:
-                    print("No pw-play or aplay found; skipping spoken output.")
-                    return False
+                sf.write(wav, audio, sample_rate)
                 result = subprocess.run(
                     [player, wav],
                     capture_output=True,
-                    timeout=45,
+                    timeout=60,
                     check=False,
                 )
+                if result.returncode != 0:
+                    print("Audio playback failed:", result.stderr.decode(errors="replace")[-500:])
                 return result.returncode == 0
             finally:
                 try:
