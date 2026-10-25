@@ -10,7 +10,7 @@ AL is being built as a responsive, local-first desktop assistant. The current im
 - Baseline RMS-energy silence detection.
 - Local speech recognition with faster-whisper on CPU.
 - A few safe phrase-based responses without an LLM.
-- Optional local Piper speech output when a voice model is configured.
+- Local Kokoro ONNX speech output with the selected female `af_heart` voice.
 - Tests ensuring unknown commands are not executed.
 
 The voice loop has worked on the target Arch laptop, but short utterances have been inconsistent. Microphone routing and voice detection remain active work. Piper output and desktop integration still need end-to-end validation.
@@ -31,7 +31,7 @@ sudo pacman -Syu
 sudo pacman -S --needed base-devel python python-pip python-virtualenv portaudio pipewire pipewire-audio pipewire-pulse wireplumber git
 ```
 
-Piper is optional until local spoken output is configured. Packaging varies by repository/AUR state; inspect package details before installing it.
+Kokoro ONNX speech dependencies are installed with the project. Download its model and voice bundle separately using the voice setup guide.
 
 From the repository directory:
 
@@ -59,13 +59,13 @@ The first model download is a setup step. Once the selected model is cached, the
 
 `config/settings.toml` defaults to the `base.en` model, CPU, and int8 compute. `tiny.en` may reduce latency at some cost to accuracy; `small.en` may improve accuracy at a higher resource cost. Benchmark on the target laptop before changing defaults.
 
-To enable local spoken output, follow [the Piper voice setup guide](docs/VOICE_SETUP.md). It installs Piper in the project venv and downloads a voice model explicitly; runtime TTS does not need cloud access.
+To configure local spoken output, follow [the Kokoro voice setup guide](docs/VOICE_SETUP.md). It downloads the model and voice bundle explicitly; runtime TTS does not use cloud services.
 
 ## Current limitations
 
 - Terminal-based one-shot / Enter-to-talk workflow; no global hotkey or HUD yet.
 - Energy-based voice activity detection is a baseline and needs robustness work.
-- Piper currently generates a full WAV before playback.
+- Kokoro generates a complete WAV before playback.
 - No general LLM conversation or desktop-control skill is implemented.
 - The systemd unit is a template and must be reviewed against the actual installation path before use.
 
