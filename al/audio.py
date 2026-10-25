@@ -40,10 +40,12 @@ def resolve_input_device(configured_name: str | None):
 
 
 def rms_level(chunk: np.ndarray) -> float:
-    """Return a stable RMS level for a floating-point audio block."""
+    """Return AC RMS, ignoring any constant DC offset in the capture signal."""
     if chunk.size == 0:
         return 0.0
-    return float(np.sqrt(np.mean(np.square(chunk, dtype=np.float64))))
+    centered = chunk.astype(np.float64, copy=False)
+    centered = centered - np.mean(centered)
+    return float(np.sqrt(np.mean(np.square(centered))))
 
 
 def detection_threshold(noise_levels: list[float], configured: float,
@@ -84,8 +86,10 @@ async def record_until_silence(cfg: dict) -> np.ndarray:
             dropped_blocks += 1
 
     def callback(indata, frames, time_info, status):
-        # Copy because PortAudio owns/reuses the callback buffer.
+        # Copy because PortAudio owns/reuses the callback buffer. Remove the
+        # per-block DC offset so it cannot swamp speech detection or STT.
         data = indata[:, 0].copy()
+        data -= np.mean(data, dtype=np.float64).astype(np.float32)
         loop.call_soon_threadsafe(enqueue, data)
 
     chunks: list[np.ndarray] = []
