@@ -6,6 +6,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import threading
 import time
 from pathlib import Path
 
@@ -115,7 +116,7 @@ class KokoroSpeaker:
         )
 
     async def speak(self, text: str) -> bool:
-        """Generate and play sentence-sized chunks so speech starts sooner."""
+        """Generate upcoming sentence audio while the current sentence plays."""
         if not text.strip():
             return False
 
@@ -124,14 +125,11 @@ class KokoroSpeaker:
             print("No pw-play or aplay found; skipping spoken output.")
             return False
 
-        # Split only at sentence boundaries; keep ellipses inside the same chunk.
         chunks = [
             part.strip()
-            for part in re.split(r"(?<=[!?])\s+|(?<!\.)\.(?!\.)\s+", text.strip())
+            for part in re.split(r"(?<=[!?])\\s+|(?<!\\.)\\.(?!\\.)\\s+", text.strip())
             if part.strip()
-        ]
-        if not chunks:
-            chunks = [text.strip()]
+        ] or [text.strip()]
 
         def run() -> bool:
             try:
@@ -141,64 +139,110 @@ class KokoroSpeaker:
                 print(f"Kokoro TTS unavailable: {exc}")
                 return False
 
-            generation_total = 0.0
-            playback_total = 0.0
-            first_audio = True
+            # A one-item queue bounds memory: synthesis stays at most one
+            # sentence ahead while playback runs in the foreground.
+            import queue
+            ready = queue.Queue(maxsize=1)
+            sentinel = object()
+            timings = {"generation": 0.0, "first_generation": 0.0}
+            failures = []
 
-            for chunk in chunks:
+            def synthesize() -> None:
                 try:
-                    generation_started = time.perf_counter()
-                    audio, sample_rate = self.engine.create(
-                        chunk,
-                        voice=self.voice,
-                        speed=self.speed,
-                        lang="en-us",
-                    )
-                    generation_seconds = time.perf_counter() - generation_started
-                    generation_total += generation_seconds
+                    for index, chunk in enumerate(chunks):
+                        started = time.perf_counter()
+                        audio, sample_rate = self.engine.create(
+                            chunk,
+                            voice=self.voice,
+                            speed=self.speed,
+                            lang="en-us",
+                        )
+                        generated = time.perf_counter() - started
+                        timings["generation"] += generated
+                        if index == 0:
+                            timings["first_generation"] = generated
+
+                        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
+                            wav = tmp.name
+                        try:
+                            sf.write(wav, audio, sample_rate)
+                        except Exception:
+                            try:
+                                os.unlink(wav)
+                            except OSError:
+                                pass
+                            raise
+                        ready.put(wav)
                 except Exception as exc:
-                    print(f"Kokoro TTS unavailable: {exc}")
-                    return False
+                    failures.append(exc)
+                finally:
+                    ready.put(sentinel)
 
-                # Play each completed sentence immediately rather than waiting
-                # for the entire response to be synthesized into one large WAV.
-                with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
-                    wav = tmp.name
+            producer = threading.Thread(target=synthesize, name="al-kokoro-synthesis", daemon=True)
+            producer.start()
+            playback_total = 0.0
+            played_chunks = 0
+            first_audio_reported = False
+            success = True
+
+            while True:
+                item = ready.get()
+                if item is sentinel:
+                    break
+                wav = item
                 try:
-                    sf.write(wav, audio, sample_rate)
-                    playback_started = time.perf_counter()
+                    started = time.perf_counter()
                     result = subprocess.run(
                         [player, wav],
                         capture_output=True,
                         timeout=60,
                         check=False,
                     )
-                    playback_seconds = time.perf_counter() - playback_started
-                    playback_total += playback_seconds
+                    playback_total += time.perf_counter() - started
                     if result.returncode != 0:
                         print(
                             "Audio playback failed:",
                             result.stderr.decode(errors="replace")[-500:],
                         )
-                        return False
-                    if first_audio:
+                        success = False
+                        break
+                    played_chunks += 1
+                    if not first_audio_reported:
                         print(
-                            f"TTS first audio ready in {generation_seconds:.2f}s "
-                            "(sentence chunking enabled).",
+                            f"TTS first audio ready in {timings['first_generation']:.2f}s "
+                            "(sentence synthesis overlaps playback).",
                             flush=True,
                         )
-                        first_audio = False
+                        first_audio_reported = True
+                except Exception as exc:
+                    print(f"Audio playback failed: {exc}")
+                    success = False
+                    break
                 finally:
                     try:
                         os.unlink(wav)
                     except OSError:
                         pass
 
+            # Ensure the producer is finished and remove any queued temporary WAVs.
+            producer.join()
+            while not ready.empty():
+                item = ready.get_nowait()
+                if item is not sentinel:
+                    try:
+                        os.unlink(item)
+                    except OSError:
+                        pass
+
+            if failures:
+                print(f"Kokoro TTS unavailable: {failures[0]}")
+                success = False
+
             print(
-                f"TTS breakdown: generation {generation_total:.2f}s | "
-                f"playback {playback_total:.2f}s | chunks {len(chunks)}",
+                f"TTS breakdown: generation {timings['generation']:.2f}s | "
+                f"playback {playback_total:.2f}s | chunks {played_chunks}/{len(chunks)}",
                 flush=True,
             )
-            return True
+            return success and played_chunks == len(chunks)
 
         return await asyncio.to_thread(run)
