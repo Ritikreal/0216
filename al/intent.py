@@ -6,7 +6,7 @@ import re
 # Phase 2 intentionally only recognizes harmless commands. System-control skills
 # and their safety policy are introduced in Phase 3.
 def route(text: str) -> tuple[str, str]:
-    normalized = re.sub(r"\s+", " ", text.lower()).strip(" .!?\\t\\n")
+    normalized = re.sub(r"\s+", " ", text.lower()).strip(" .!?\t\n")
     if not normalized:
         return ("empty", "Sorry, I missed that.")
 
@@ -19,7 +19,10 @@ def route(text: str) -> tuple[str, str]:
     if normalized in {"help", "what can you do", "what can you do right now"}:
         return ("reply", "Right now, I can listen and reply locally. Desktop controls are next.")
 
-    if normalized in {"stop", "cancel", "never mind", "nevermind", "that's all", "thats all"}:
+    if normalized in {"stop", "cancel", "never mind", "nevermind"}:
+        return ("reply", "Cancelled.")
+
+    if normalized in {"that's all", "thats all"}:
         return ("reply", "Got it.")
 
     if any(p in normalized for p in ("thank you", "thanks al", "thanks")):
