@@ -7,7 +7,7 @@ import time
 from pathlib import Path
 
 from .audio import AudioCaptureError, record_until_silence
-from .config import DEFAULT_CONFIG, load_config
+from .config import load_config
 from .intent import route
 from .speech import KokoroSpeaker, SpeechRecognizer
 
@@ -61,18 +61,31 @@ async def run(args):
     stt = SpeechRecognizer(cfg)
     tts = KokoroSpeaker(cfg)
 
-    # Keep one recognizer/model instance for the entire process. Persistent
-    # mode warms it before the first utterance; --once stays lazy unless --warm.
+    # Persistent mode warms both local models before the first utterance.
+    # --once stays lazy unless --warm is requested.
     should_warm = args.warm or not args.once
     if should_warm:
-        print("Loading local speech model into memory…", flush=True)
+        print("Loading local speech recognition model…", flush=True)
         started = time.perf_counter()
         await asyncio.to_thread(stt.load)
         print(
-            f"Speech model ready in {time.perf_counter() - started:.2f}s. "
-            "No network fallback is configured.",
+            f"Speech recognition ready in {time.perf_counter() - started:.2f}s.",
             flush=True,
         )
+
+        print("Loading local Kokoro voice…", flush=True)
+        tts_started = time.perf_counter()
+        try:
+            await asyncio.to_thread(tts.load)
+            print(
+                f"Kokoro voice ready in {time.perf_counter() - tts_started:.2f}s. "
+                "Both speech models stay loaded for this session.",
+                flush=True,
+            )
+        except Exception as exc:
+            # Keep listening/transcription usable even if local TTS setup fails.
+            print(f"Local voice could not be preloaded: {exc}", flush=True)
+            print("AL will still listen; spoken output may be unavailable.", flush=True)
 
     if args.once:
         await listen_once(cfg, stt, tts)
@@ -93,7 +106,7 @@ def main():
     parser.add_argument(
         "--warm",
         action="store_true",
-        help="Load speech model before listening (automatic in persistent mode)",
+        help="Load local speech recognition and Kokoro models before listening",
     )
     parser.add_argument("--once", action="store_true", help="Record and process one utterance")
     args = parser.parse_args()
