@@ -25,7 +25,7 @@ def route(text: str) -> tuple[str, str]:
         "hey al what can i do for you", "hey what can i do for you",
         "can you help me can you help me",
     }:
-        return ("reply", "I can answer the time, date, and local system status. More desktop skills are coming next.")
+        return ("reply", "I can check time, date, and system status.")
 
     if normalized in {"stop", "cancel", "never mind", "nevermind"}:
         return ("reply", "Cancelled.")
