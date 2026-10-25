@@ -30,12 +30,13 @@ beam_size = 1
 vad_filter = false
 
 [tts]
-# Set to an installed Piper voice model path. Empty disables speech output until configured.
-model = ""
-executable = "piper"
-# Relaxed delivery: values above 1.0 slow speech; sentence_silence adds pauses.
-length_scale = 1.08
-sentence_silence = 0.35
+# Local Kokoro ONNX model and voice bundle. Download both files before enabling TTS.
+model = "/home/REPLACE_WITH_YOUR_USERNAME/.local/share/al/kokoro/kokoro-v1.0.onnx"
+voices = "/home/REPLACE_WITH_YOUR_USERNAME/.local/share/al/kokoro/voices-v1.0.bin"
+# af_heart is the selected English female voice.
+voice = "af_heart"
+# 1.0 is natural default pacing; try 0.95 for slightly slower delivery.
+speed = 1.0
 
 [ui]
 # Future Quickshell HUD colors, inspired by the uploaded teal DNA-analysis reference.
