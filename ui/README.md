@@ -1,27 +1,43 @@
-# AL Quickshell HUD preview
+# AL Quickshell HUD
 
-This is the first visual shell for AL on Arch Linux + Hyprland. It is intentionally a UI prototype: chat messages are local demo state, and the voice/runtime bridge is not connected yet.
+A cinematic, local-first desktop HUD for Arch Linux + Hyprland. The UI uses native Quickshell/QML components rather than a browser-based React stack, keeping it lightweight and desktop-native.
 
-## Install and run
+## Run
 
-Install Quickshell from your configured Arch repositories/AUR using your preferred package manager. Then, from the repository root:
+From the repository root:
 
 ```fish
 quickshell -p ui/quickshell
 ```
 
-If your installed Quickshell version uses a different CLI syntax, check `quickshell --help`.
+If your installed Quickshell version uses different CLI syntax, check `quickshell --help`.
 
-## Controls
+## Current interface
 
-- `Ctrl+Space`: expand the HUD and toggle the preview listening indicator.
-- `Escape`: collapse the HUD.
-- Type into the chat box and press Enter to preview message layout.
+- Compact top-edge island with an animated AL core and state indicator.
+- Expandable workspace with Overview, Chat, Capabilities, Activity, and Settings.
+- Overview with quick navigation, an animated core visualization, and honest runtime status labels.
+- Local-only chat preview with success/error feedback. Messages are not sent to an AI model yet.
+- Capabilities page that distinguishes existing CLI speech features from work not yet integrated into the HUD.
+- Session activity stream and a clear-log action.
+- Keyboard state previews: Ctrl+1 through Ctrl+6.
+- Ctrl+Space toggles the expanded state and preview listening indicator; Escape collapses the workspace.
 
-## Design and safety boundaries
+## Important truth about functionality
 
-- Near-black glass panels with restrained cyan highlights.
-- Compact core header and expandable conversation panel.
-- Demo replies are not AI output.
-- No microphone capture, shell execution, or desktop actions are wired into this UI.
-- The next integration step is a documented local IPC contract with explicit runtime states and validated skill requests.
+This is a UI layer and preview, not a connected assistant workspace yet. It does not start microphone capture, invoke the AI runtime, execute shell commands, or control the desktop. The state buttons only preview the HUD states. The capability labels identify that boundary rather than pretending integrations exist.
+
+## Design intent
+
+- Near-black, graphite, and restrained cyan/teal with occasional amber status.
+- A distinctive animated core, compact typography, layered surfaces, and clear state hierarchy.
+- Keyboard-first navigation and scrollable content to avoid clipping at smaller sizes.
+- Native QML motion and controls instead of adding a web framework to Quickshell.
+
+## Next integration work
+
+1. Define a local IPC contract between the Python runtime and HUD.
+2. Send real IDLE/LISTENING/THINKING/SPEAKING/ACTION/ERROR state updates to the HUD.
+3. Connect conversation requests to a local model through a validated request interface.
+4. Add permission-gated desktop skills and real system telemetry.
+5. Test sizing, keyboard focus, accessibility, and performance on the target Hyprland session.
