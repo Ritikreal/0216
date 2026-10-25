@@ -26,7 +26,7 @@ model = "base.en"
 device = "cpu"
 compute_type = "int8"
 language = "en"
-beam_size = 1
+beam_size = 3
 vad_filter = false
 
 [tts]
