@@ -8,6 +8,34 @@ class AudioCaptureError(RuntimeError):
     pass
 
 
+def resolve_input_device(configured_name: str | None):
+    """Resolve a preferred input by name so changing device indices is harmless."""
+    if not configured_name:
+        return None
+    try:
+        devices = sd.query_devices()
+    except Exception as e:
+        raise AudioCaptureError(f"Could not list audio devices: {e}") from e
+
+    matches = [
+        (index, device)
+        for index, device in enumerate(devices)
+        if int(device.get("max_input_channels", 0)) > 0
+        and configured_name.casefold() in str(device.get("name", "")).casefold()
+    ]
+    if not matches:
+        available = [
+            str(device.get("name", "unknown"))
+            for device in devices
+            if int(device.get("max_input_channels", 0)) > 0
+        ]
+        raise AudioCaptureError(
+            f"Configured microphone not found: {configured_name}. "
+            f"Available inputs: {', '.join(available) or 'none'}"
+        )
+    return matches[0][0]
+
+
 async def record_until_silence(cfg: dict) -> np.ndarray:
     """Capture one utterance locally, using a short noise calibration."""
     a = cfg["audio"]
@@ -17,6 +45,8 @@ async def record_until_silence(cfg: dict) -> np.ndarray:
     silence_limit = float(a["silence_seconds"])
     max_duration = float(a["max_record_seconds"])
     configured_threshold = float(a["energy_threshold"])
+    device_name = a.get("input_device_name", "").strip()
+    input_device = resolve_input_device(device_name or None)
 
     loop = asyncio.get_running_loop()
     queue: asyncio.Queue[np.ndarray] = asyncio.Queue(maxsize=16)
@@ -35,13 +65,15 @@ async def record_until_silence(cfg: dict) -> np.ndarray:
     chunks: list[np.ndarray] = []
     try:
         with sd.InputStream(
+            device=input_device,
             samplerate=rate,
             channels=1,
             dtype="float32",
             blocksize=block,
             callback=callback,
         ):
-            # Calibrate before asking the user to speak.
+            if device_name:
+                print(f"Using microphone: {device_name}", flush=True)
             print("Calibrating microphone — please stay quiet for a moment…",
                   flush=True)
             calibration = []
