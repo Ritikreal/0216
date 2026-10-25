@@ -13,10 +13,10 @@ max_record_seconds = 15.0
 min_speech_seconds = 0.12
 # Use PipeWire's input route so it can resample to 16 kHz.
 input_device_name = "pipewire"
-# The configured floor prevents very quiet noise from triggering speech detection.
-energy_threshold = 0.00015
-# Adaptive threshold = max(energy_threshold, median calibration RMS * multiplier).
-threshold_multiplier = 1.5
+# A conservative floor rejects low-level room noise; tune only after testing.
+energy_threshold = 0.00025
+# Adaptive threshold = max(energy_threshold, lower-quartile calibration RMS * multiplier).
+threshold_multiplier = 2.0
 # Set true temporarily to print per-block RMS/peak levels while diagnosing the mic.
 debug_levels = false
 
