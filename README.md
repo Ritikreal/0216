@@ -59,7 +59,7 @@ The first model download is a setup step. Once the selected model is cached, the
 
 `config/settings.toml` defaults to the `base.en` model, CPU, and int8 compute. `tiny.en` may reduce latency at some cost to accuracy; `small.en` may improve accuracy at a higher resource cost. Benchmark on the target laptop before changing defaults.
 
-Set `tts.model` to the absolute path of a local Piper `.onnx` voice file to enable speech output. A matching `.onnx.json` sidecar may also be required.
+To enable local spoken output, follow [the Piper voice setup guide](docs/VOICE_SETUP.md). It installs Piper in the project venv and downloads a voice model explicitly; runtime TTS does not need cloud access.
 
 ## Current limitations
 
