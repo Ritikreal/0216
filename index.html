@@ -140,15 +140,36 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 .home-game-hint{margin-left:auto;color:#8d6879}
 .game-art{max-width:none;margin:0;background:#211320;position:relative}
 .game-art svg{width:100%;max-height:520px;display:block}
-.home-room-view{animation:roomReveal .65s cubic-bezier(.2,.75,.2,1) both}
+.home-room-view{animation:roomReveal .8s cubic-bezier(.18,.75,.25,1) both;transform-origin:center}
 .home-room-view.active{display:block!important}
-@keyframes roomReveal{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}
-.cabin-exterior{animation:windowGlow 3s ease-in-out infinite alternate}
-@keyframes windowGlow{from{filter:brightness(.92)}to{filter:brightness(1.13)}}
-.candle-flame{transform-origin:center bottom;animation:candleDance 1.8s ease-in-out infinite alternate}
-@keyframes candleDance{from{opacity:.8;transform:scale(.98) rotate(-1deg)}to{opacity:1;transform:scale(1.04) rotate(1deg)}}
-.bob-play{transform-origin:365px 280px;animation:bobBounce 1.8s ease-in-out infinite}
+@keyframes roomReveal{0%{opacity:0;transform:scale(1.035);filter:brightness(.72)}65%{opacity:1;filter:brightness(1.08)}100%{opacity:1;transform:scale(1);filter:brightness(1)}}
+.cabin-exterior{animation:windowGlow 3s ease-in-out infinite alternate;transform-origin:center}
+@keyframes windowGlow{from{filter:brightness(.88) drop-shadow(0 0 1px #ffcb91)}to{filter:brightness(1.18) drop-shadow(0 0 9px #ffcb91)}}
+.candle-flame{transform-box:fill-box;transform-origin:center bottom;animation:candleDance 1.35s ease-in-out infinite alternate}
+.candle-two{animation-delay:-.7s}.candle-one{animation-duration:1.1s}
+@keyframes candleDance{0%{opacity:.78;transform:scale(.92,1.04) rotate(-3deg)}45%{opacity:1;transform:scale(1.08,.96) rotate(2deg)}100%{opacity:.9;transform:scale(.96,1.1) rotate(-1deg)}}
+.bob-play{transform-box:fill-box;transform-origin:center;animation:bobBounce 1.8s ease-in-out infinite}
 @keyframes bobBounce{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-7px) rotate(-2deg)}}
+.date-window{filter:drop-shadow(0 0 15px #c38aa233)}
+.fairy-lights circle{animation:fairyTwinkle 2.2s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.fairy-lights circle:nth-child(2n){animation-delay:-1.1s}.fairy-lights circle:nth-child(3n){animation-delay:-.6s}
+@keyframes fairyTwinkle{from{opacity:.38;filter:brightness(.8)}to{opacity:1;filter:brightness(1.5) drop-shadow(0 0 5px #f6d8a3)}}
+.date-person-left{animation:leanIn 4.8s ease-in-out infinite}
+.date-person-right{animation:leanInRight 4.8s ease-in-out infinite}
+@keyframes leanIn{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+@keyframes leanInRight{0%,100%{transform:translateX(0)}50%{transform:translateX(-3px)}}
+.date-heart{transform-box:fill-box;transform-origin:center;animation:heartBeat 2s ease-in-out infinite}
+@keyframes heartBeat{0%,100%{opacity:.65;transform:scale(.92)}50%{opacity:1;transform:scale(1.12)}}
+.bob-date-nap{transform-box:fill-box;transform-origin:center;animation:bobNap 3.2s ease-in-out infinite}
+@keyframes bobNap{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
+.bob-zs text{animation:floatZ 2.5s ease-in-out infinite;opacity:0}
+.bob-zs text:nth-child(2){animation-delay:.7s}.bob-zs text:nth-child(3){animation-delay:1.4s}
+@keyframes floatZ{0%{opacity:0;transform:translateY(8px)}35%{opacity:.85}100%{opacity:0;transform:translateY(-12px)}}
+.home-game-btn,.home-room-btn{backdrop-filter:blur(8px)}
+.home-room-btn.active{box-shadow:0 0 22px #e8a8b82b}
+.game-art svg{filter:saturate(1.06)}
+@media(max-width:600px){.game-art svg{min-height:240px}.home-note{padding-left:14px;padding-right:14px}}
+@media(prefers-reduced-motion:reduce){.home-room-view,.cabin-exterior,.candle-flame,.bob-play,.fairy-lights circle,.date-person-left,.date-person-right,.date-heart,.bob-date-nap,.bob-zs text{animation:none!important}}
 .home-scene-caption{position:absolute;left:0;right:0;bottom:0;padding:38px 14px 12px;text-align:center;color:#f4d8e1;font:italic 14px 'Playfair Display',serif;background:linear-gradient(transparent,#170b16dd);pointer-events:none}
 .home-game-controls{padding:18px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;background:#1a0d17}
 .home-game-btn,.home-room-btn{border:1px solid #e8a8b866;border-radius:99px;padding:12px 19px;background:transparent;color:#f4d8e1;font-size:10px;letter-spacing:.09em;cursor:pointer;transition:background .25s,transform .25s,border-color .25s}
@@ -311,16 +332,104 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
      <g fill="#f6d5df"><path d="M250 92 C230 72 207 99 250 128 C293 99 270 72 250 92Z"/><path d="M510 180 C497 166 481 185 510 205 C539 185 523 166 510 180Z"/></g>
      <text x="380" y="405" text-anchor="middle" fill="#f4d8e1" font-family="Georgia,serif" font-size="14" font-style="italic">home is wherever we are together ♡</text>
     </g>
-    <g class="home-room-view" data-room-view="date" style="display:none">
-     <rect width="760" height="430" rx="12" fill="#1a101b"/><path d="M0 0 H760 V300 H0Z" fill="#342033"/><path d="M0 300 H760 V430 H0Z" fill="#583147"/>
-     <rect x="58" y="35" width="215" height="200" rx="5" fill="#1b101b" stroke="#a86b81" stroke-width="9"/><rect x="72" y="49" width="187" height="172" fill="#201527"/><circle cx="211" cy="85" r="24" fill="#edc4d0" opacity=".85"/><circle cx="220" cy="78" r="24" fill="#201527"/><g fill="#f9e6eb"><circle cx="111" cy="80" r="2"/><circle cx="159" cy="117" r="1.5"/><circle cx="238" cy="143" r="1.4"/></g><path d="M165 49 V221 M72 136 H259" stroke="#855068" stroke-width="5"/>
-     <ellipse cx="380" cy="350" rx="235" ry="48" fill="#281322" opacity=".55"/><rect x="214" y="259" width="332" height="97" rx="22" fill="#70405a" stroke="#bd879a" stroke-width="3"/><rect x="235" y="242" width="290" height="60" rx="20" fill="#98617a"/>
-     <g opacity=".8" fill="#140b14"><ellipse cx="330" cy="258" rx="27" ry="36"/><path d="M303 254 Q293 216 325 211 Q354 213 357 246 L350 237 L338 226 Q325 241 303 238Z"/><path d="M301 290 L286 329 H359 L350 287Z"/><ellipse cx="419" cy="256" rx="28" ry="36"/><path d="M391 251 Q390 217 419 215 Q448 217 447 247 L438 237 L425 228 Q412 240 391 238Z"/><path d="M392 289 L379 329 H450 L445 287Z"/></g>
-     <g><ellipse cx="375" cy="278" rx="34" ry="25" fill="#d99b5f"/><path d="M348 267 L344 244 L361 256 M389 256 L407 244 L402 270" fill="#d99b5f" stroke="#8e533f" stroke-width="3"/><ellipse cx="375" cy="279" rx="20" ry="16" fill="#f6e2c5"/><circle cx="368" cy="274" r="3" fill="#281621"/><circle cx="383" cy="274" r="3" fill="#281621"/><ellipse cx="375" cy="281" rx="4" ry="3" fill="#281621"/></g>
-     <g class="candle-flame"><circle cx="170" cy="302" r="72" fill="url(#candleGlow)"/><rect x="160" y="285" width="20" height="42" rx="5" fill="#f8dfb2"/><path d="M170 284 C154 270 171 254 172 251 C187 269 183 279 170 284Z" fill="#ffbd6e"/><path d="M170 279 C164 271 173 263 174 261 C181 271 176 277 170 279Z" fill="#fff2c8"/></g>
-     <g class="candle-flame"><circle cx="591" cy="300" r="72" fill="url(#candleGlow)"/><rect x="581" y="285" width="20" height="42" rx="5" fill="#f8dfb2"/><path d="M591 284 C575 270 592 254 593 251 C608 269 604 279 591 284Z" fill="#ffbd6e"/></g>
-     <path d="M302 232 Q325 205 350 231 M396 231 Q421 205 444 231" fill="none" stroke="#dca1b2" stroke-width="4" stroke-linecap="round"/>
-     <text x="380" y="405" text-anchor="middle" fill="#f4d8e1" font-family="Georgia,serif" font-size="14" font-style="italic">one candlelit evening, just us ♡</text>
+    <g class="home-room-view date-room" data-room-view="date" style="display:none">
+     <rect width="760" height="430" rx="12" fill="#160d19"/>
+     <rect width="760" height="285" fill="#342034"/>
+     <path d="M0 285 H760 V430 H0Z" fill="url(#gameFloor)"/>
+     <path d="M0 0 H760 V20 H0Z" fill="#9a5c70" opacity=".45"/>
+     <path d="M24 22 H736" stroke="#d5a0ad" stroke-width="2" opacity=".28"/>
+     <g class="date-window">
+      <rect x="46" y="35" width="190" height="188" rx="4" fill="#160d1b" stroke="#bd8499" stroke-width="8"/>
+      <rect x="58" y="47" width="166" height="164" fill="#172039"/>
+      <circle cx="177" cy="81" r="22" fill="#f4dfc9"/>
+      <circle cx="187" cy="73" r="22" fill="#172039"/>
+      <g fill="#fff0e2"><circle cx="85" cy="74" r="2"/><circle cx="126" cy="102" r="1.6"/><circle cx="202" cy="131" r="1.7"/><circle cx="99" cy="145" r="1.2"/><circle cx="151" cy="59" r="1.3"/></g>
+      <path d="M58 180 Q89 144 119 178 T180 172 T224 177 V211 H58Z" fill="#263047"/>
+      <path d="M58 196 Q89 170 123 197 T182 190 T224 195 V211 H58Z" fill="#17241f"/>
+      <path d="M141 47 V211 M58 130 H224" stroke="#855068" stroke-width="4"/>
+      <path d="M40 28 Q25 75 42 132 Q49 168 38 229 L64 229 V28Z" fill="#81415e" opacity=".9"/>
+      <path d="M238 28 Q254 80 239 138 Q232 174 246 229 L222 229 V28Z" fill="#81415e" opacity=".9"/>
+      <path d="M40 30 Q51 48 64 30 M222 30 Q235 48 246 30" stroke="#d8a4b3" stroke-width="4" fill="none"/>
+     </g>
+     <g opacity=".7"><path d="M282 47 H430" stroke="#b87c91" stroke-width="2"/><path d="M282 55 H402" stroke="#b87c91" stroke-width="1" opacity=".5"/></g>
+     <g class="wall-art">
+      <rect x="514" y="40" width="128" height="110" rx="2" fill="#21131f" stroke="#b98296" stroke-width="5"/>
+      <rect x="524" y="50" width="108" height="90" fill="#48243a"/>
+      <path d="M536 121 Q557 65 578 105 T620 70" stroke="#dba0ad" stroke-width="3" fill="none"/>
+      <path d="M536 130 Q565 91 592 124 T620 105" stroke="#f0c5b7" stroke-width="2" fill="none" opacity=".8"/>
+     </g>
+     <g class="fairy-lights" fill="#f6d8a3">
+      <circle cx="270" cy="34" r="4"/><circle cx="307" cy="34" r="4"/><circle cx="344" cy="34" r="4"/><circle cx="381" cy="34" r="4"/><circle cx="418" cy="34" r="4"/><circle cx="455" cy="34" r="4"/><circle cx="492" cy="34" r="4"/>
+     </g>
+     <ellipse cx="379" cy="372" rx="254" ry="34" fill="#160b15" opacity=".55"/>
+     <rect x="220" y="267" width="326" height="99" rx="24" fill="#5b3049" stroke="#bb8297" stroke-width="3"/>
+     <rect x="239" y="250" width="288" height="65" rx="21" fill="#925d77"/>
+     <path d="M248 302 Q380 324 518 302" stroke="#d4a0b2" stroke-width="2" opacity=".6" fill="none"/>
+     <!-- two people sitting close together, their hands meeting -->
+     <g class="date-couple">
+      <g class="date-person date-person-left">
+       <path d="M286 262 Q265 229 278 190 Q288 160 315 168 Q340 179 333 220 L343 275Z" fill="#201622"/>
+       <ellipse cx="307" cy="187" rx="25" ry="29" fill="#dba38c"/>
+       <path d="M282 188 Q276 155 307 151 Q335 155 334 181 L324 173 L311 164 Q300 179 282 175Z" fill="#231521"/>
+       <path d="M276 227 Q306 209 333 228 L357 298 H262Z" fill="#c77894"/>
+       <path d="M326 244 Q348 268 377 255" stroke="#dba38c" stroke-width="12" fill="none" stroke-linecap="round"/>
+       <path d="M286 294 L277 330 M327 294 L341 330" stroke="#32202d" stroke-width="16" stroke-linecap="round"/>
+       <path d="M297 189 Q302 193 307 189" stroke="#5b3039" stroke-width="2" fill="none" stroke-linecap="round"/>
+       <circle cx="318" cy="187" r="2.2" fill="#39202a"/>
+      </g>
+      <g class="date-person date-person-right">
+       <path d="M421 260 Q399 225 410 189 Q420 159 448 168 Q473 180 462 220 L474 276Z" fill="#211722"/>
+       <ellipse cx="438" cy="187" rx="25" ry="29" fill="#c98f76"/>
+       <path d="M413 185 Q410 155 439 152 Q468 155 466 181 L455 173 L442 164 Q431 178 413 174Z" fill="#17121a"/>
+       <path d="M406 228 Q437 209 463 228 L490 298 H392Z" fill="#77928b"/>
+       <path d="M414 244 Q397 265 378 255" stroke="#c98f76" stroke-width="12" fill="none" stroke-linecap="round"/>
+       <path d="M416 294 L405 330 M458 294 L472 330" stroke="#32202d" stroke-width="16" stroke-linecap="round"/>
+       <circle cx="429" cy="187" r="2.2" fill="#39202a"/>
+       <path d="M435 197 Q441 202 447 197" stroke="#75443b" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="hands-together"><circle cx="378" cy="255" r="10" fill="#e5b39c"/><path d="M370 255 Q378 263 386 255" stroke="#9d5c70" stroke-width="2" fill="none"/></g>
+      <path d="M348 220 C339 209 328 224 348 239 C368 224 357 209 348 220Z" fill="#f1b7c8" class="date-heart"/>
+     </g>
+     <!-- candlelit table in the foreground -->
+     <g class="date-table">
+      <path d="M265 334 Q380 316 495 334 L478 355 H282Z" fill="#8c5369" stroke="#c58da0" stroke-width="2"/>
+      <path d="M293 351 L287 388 M466 351 L473 388" stroke="#5b3047" stroke-width="8" stroke-linecap="round"/>
+      <g class="candle-flame candle-one">
+       <circle cx="330" cy="316" r="54" fill="url(#candleGlow)"/>
+       <ellipse cx="330" cy="332" rx="12" ry="5" fill="#f3d7b2"/>
+       <rect x="324" y="304" width="12" height="28" rx="3" fill="#f8e5c7"/>
+       <path d="M330 304 C315 289 331 274 332 271 C347 288 344 299 330 304Z" fill="#ffb957"/>
+       <path d="M330 299 C324 291 333 283 333 282 C340 291 335 297 330 299Z" fill="#fff3cf"/>
+      </g>
+      <g class="candle-flame candle-two">
+       <circle cx="430" cy="316" r="54" fill="url(#candleGlow)"/>
+       <ellipse cx="430" cy="332" rx="12" ry="5" fill="#f3d7b2"/>
+       <rect x="424" y="304" width="12" height="28" rx="3" fill="#f8e5c7"/>
+       <path d="M430 304 C415 289 431 274 432 271 C447 288 444 299 430 304Z" fill="#ffb957"/>
+       <path d="M430 299 C424 291 433 283 433 282 C440 291 435 297 430 299Z" fill="#fff3cf"/>
+      </g>
+      <g fill="#d97991"><circle cx="370" cy="328" r="4"/><circle cx="383" cy="331" r="4"/><circle cx="396" cy="328" r="4"/></g>
+     </g>
+     <!-- Bob is settled in his own cosy corner, not between the couple -->
+     <g class="bob-corner-bed">
+      <ellipse cx="650" cy="355" rx="75" ry="19" fill="#170c16" opacity=".6"/>
+      <path d="M579 350 Q578 310 620 307 H676 Q716 311 716 350Z" fill="#70415b" stroke="#c38a9e" stroke-width="3"/>
+      <path d="M591 346 Q596 320 625 320 H672 Q700 321 704 346Z" fill="#d5a0af"/>
+      <path d="M579 349 Q649 371 716 349" fill="none" stroke="#e5b6c3" stroke-width="4"/>
+      <g class="bob-date-nap">
+       <ellipse cx="650" cy="321" rx="35" ry="23" fill="#d99b5f"/>
+       <path d="M624 310 L617 284 L640 300 M665 300 L687 283 L680 314" fill="#d99b5f" stroke="#8e533f" stroke-width="3" stroke-linejoin="round"/>
+       <ellipse cx="650" cy="321" rx="22" ry="15" fill="#f6e2c5"/>
+       <path d="M640 319 Q644 316 648 319 M655 319 Q659 316 663 319" stroke="#281621" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+       <ellipse cx="650" cy="325" rx="4" ry="3" fill="#281621"/>
+       <path d="M641 330 Q650 337 659 330" stroke="#75443b" stroke-width="2" fill="none" stroke-linecap="round"/>
+       <path d="M680 330 Q699 335 696 320" stroke="#d99b5f" stroke-width="9" fill="none" stroke-linecap="round"/>
+      </g>
+      <text x="650" y="388" text-anchor="middle" fill="#f4d8e1" font-family="Georgia,serif" font-size="11" letter-spacing="2">BOB’S CORNER</text>
+      <g class="bob-zs" fill="#f2c5d2" font-family="Georgia,serif" font-style="italic"><text x="688" y="270" font-size="18">z</text><text x="704" y="254" font-size="13">z</text><text x="714" y="241" font-size="10">z</text></g>
+     </g>
+     <g fill="#f5c5d5" opacity=".9"><path d="M245 100 C233 88 219 104 245 123 C271 104 257 88 245 100Z"/><path d="M473 135 C463 125 451 139 473 155 C495 139 483 125 473 135Z"/></g>
+     <text x="380" y="414" text-anchor="middle" fill="#f7dfe5" font-family="Georgia,serif" font-size="13" font-style="italic">a little candlelight, your hand in mine, and Bob dreaming nearby ♡</text>
     </g>
     <g class="home-room-view" data-room-view="bob" style="display:none">
      <rect width="760" height="430" rx="12" fill="#302039"/><path d="M0 0 H760 V286 H0Z" fill="#59364f"/><path d="M0 286 H760 V430 H0Z" fill="url(#gameFloor)"/>
