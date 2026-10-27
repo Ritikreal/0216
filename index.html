@@ -272,6 +272,109 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 @keyframes lampGlow{0%,100%{opacity:.85}50%{opacity:1}}
 @media(max-width:560px){.home-scrapbook-photos{grid-template-columns:1fr 1fr}.home-scrapbook-photos figure:last-child{display:none}.home-scrapbook h3{font-size:24px}.home-activity-row button{font-size:10px;padding:8px 9px}}
 @media(prefers-reduced-motion:reduce){.home-art .weather-overlay *, .home-art .bed-couple,.home-art .bed-bob,.home-art .bedroom-zs,.home-art .shared-blanket{animation:none!important}}
+
+/* Cabin layout repair: keep narrative copy in its own space instead of over the illustration. */
+.game-home{position:relative;isolation:isolate;overflow:hidden}
+.game-art{width:100%;overflow:hidden}
+.game-art svg{width:100%;height:auto;max-height:none;aspect-ratio:76/43;overflow:hidden}
+.home-scene-caption{position:relative;inset:auto;min-height:58px;display:flex;align-items:center;justify-content:center;padding:16px clamp(16px,4vw,34px);background:linear-gradient(110deg,#21101c,#2c1424 50%,#21101c);border-top:1px solid #e8a8b82a;color:#f4d8e1;font:italic clamp(13px,1.8vw,16px)/1.65 'Playfair Display',serif;text-wrap:pretty;overflow-wrap:anywhere}
+.home-note{min-height:0;height:auto;padding:16px clamp(16px,4vw,28px) 22px;line-height:1.8;overflow-wrap:anywhere;text-wrap:pretty}
+.home-game-hud{min-width:0;flex-wrap:wrap;row-gap:7px;line-height:1.5}
+#homeRoomLabel{min-width:0;overflow-wrap:anywhere}
+.home-game-hint{white-space:nowrap}
+.home-decor-display{width:clamp(94px,17%,138px);max-width:calc(100% - 24px);top:12%;right:4%;z-index:4}
+.home-decor-frame{min-width:0;overflow:hidden;padding:8px 7px 9px;gap:6px}
+.home-decor-title,.home-decor-subtitle{display:block;width:100%;max-width:100%;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-wrap:pretty}
+.home-decor-title{font-size:clamp(8px,.9vw,10px);line-height:1.35}
+.home-decor-subtitle{font-size:clamp(8px,.85vw,10px);line-height:1.35}
+.home-mini-photo{flex:0 1 25px;min-width:0}
+.home-game-controls{align-items:stretch;gap:12px}
+.home-game-btn{flex:0 0 auto;max-width:100%;white-space:normal;line-height:1.45}
+.home-room-options{flex:1 1 100%;min-width:0}
+.home-room-btn{max-width:100%;white-space:normal;line-height:1.4}
+.home-interact-panel,.bob-pet-panel{min-width:0;overflow:hidden}
+.home-panel-heading{flex-wrap:wrap;line-height:1.6;letter-spacing:.16em}
+.home-panel-heading small{line-height:1.6}
+.home-interact-row{align-items:center;min-width:0}
+.home-interact-row label{flex:0 0 94px}
+.home-interact-row select{flex:1 1 180px;min-width:0}
+.home-interact-row button{max-width:100%;white-space:normal;line-height:1.4}
+#homeDecorStatus{flex:1 1 160px;min-width:0;overflow-wrap:anywhere;font-size:11px;line-height:1.6;color:#d8a6b7}
+.home-weather-note,.home-activity-message{line-height:1.75;overflow-wrap:anywhere;text-wrap:pretty}
+.home-activity-row{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.home-activity-row>span{flex:0 0 100%;text-align:center}
+.home-activity-row button{max-width:100%;white-space:normal;line-height:1.4}
+.home-scrapbook{position:fixed;inset:clamp(12px,4vh,40px) clamp(12px,4vw,48px);width:auto;max-width:1000px;margin:auto;max-height:92vh;overflow:auto;overscroll-behavior:contain;z-index:130;padding:clamp(18px,3vw,32px);animation:scrapbook-arrive .42s cubic-bezier(.2,.8,.2,1) both}
+.home-scrapbook[hidden]{display:none}
+.home-scrapbook:before{content:"";position:fixed;inset:0;z-index:-1;background:#08030bbd;backdrop-filter:blur(8px);pointer-events:none}
+.home-scrapbook h3{line-height:1.2;overflow-wrap:anywhere}
+.home-scrapbook>p{line-height:1.7}
+.home-scrapbook-photos figure{min-width:0;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s}
+.home-scrapbook-photos figure:hover{transform:translateY(-6px) rotate(0) scale(1.015);box-shadow:0 16px 30px #0006}
+.home-scrapbook-photos figcaption{line-height:1.55;overflow-wrap:anywhere;text-wrap:pretty}
+.home-scrapbook-close{z-index:2;box-shadow:0 5px 18px #0004}
+@keyframes scrapbook-arrive{from{opacity:0;transform:translateY(18px) scale(.985);filter:blur(5px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+/* Rich, layered cabin motion using transform/opacity rather than expensive layout animation. */
+.game-art:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:5;background:linear-gradient(115deg,transparent 25%,#fff1 48%,transparent 68%);transform:translateX(-120%);animation:cabin-glass-sheen 13s ease-in-out infinite}
+@keyframes cabin-glass-sheen{0%,68%,100%{transform:translateX(-120%)}82%{transform:translateX(120%)}}
+.home-room-view.active{animation:roomReveal .75s cubic-bezier(.18,.75,.25,1) both}
+.cabin-exterior{animation:cabin-breathe 5.5s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center bottom}
+@keyframes cabin-breathe{from{transform:translateY(0) scale(1);filter:brightness(.96)}to{transform:translateY(-1.5px) scale(1.006);filter:brightness(1.06)}}
+.couple-art,.date-couple,.bed-couple{transform-box:fill-box;transform-origin:center bottom;animation:couple-sway 5.8s ease-in-out infinite}
+.rithwik-character,.prapthi-character,.date-person,.bed-rithwik,.bed-prapthi{transform-box:fill-box;transform-origin:center bottom;animation:person-breathe 3.8s ease-in-out infinite}
+.prapthi-character,.date-person-right,.bed-prapthi{animation-delay:-1.9s}
+@keyframes couple-sway{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(.35deg)}}
+@keyframes person-breathe{0%,100%{translate:0 0}50%{translate:0 -1.8px}}
+.bob-pup,.bob-play,.bed-bob,.bob-date-nap{transform-box:fill-box;transform-origin:center bottom;animation:bob-dream-bounce 3.2s ease-in-out infinite}
+@keyframes bob-dream-bounce{0%,100%{transform:translateY(0) rotate(0)}35%{transform:translateY(-3px) rotate(-1deg)}65%{transform:translateY(-1px) rotate(1deg)}}
+.shared-blanket{transform-box:fill-box;transform-origin:center;animation:blanket-rise 3.8s ease-in-out infinite}
+@keyframes blanket-rise{0%,100%{transform:scaleY(1) translateY(0)}50%{transform:scaleY(1.012) translateY(-.7px)}}
+.bedside-lamp{transform-box:fill-box;transform-origin:center;animation:lamp-warmth 3.4s ease-in-out infinite alternate}
+@keyframes lamp-warmth{from{opacity:.78;filter:brightness(.96)}to{opacity:1;filter:brightness(1.12)}}
+.date-heart{transform-box:fill-box;transform-origin:center;animation:heart-float 3s ease-in-out infinite}
+@keyframes heart-float{0%,100%{transform:translateY(0) scale(.96);opacity:.72}50%{transform:translateY(-5px) scale(1.08);opacity:1}}
+.bedroom-zs,.bob-zs{animation:zzz-drift 3.5s ease-in-out infinite}
+@keyframes zzz-drift{0%,100%{opacity:.45;translate:0 4px}50%{opacity:1;translate:2px -5px}}
+.date-window,.bedroom-window{animation:window-shimmer 7s ease-in-out infinite alternate}
+@keyframes window-shimmer{from{filter:brightness(.92)}to{filter:brightness(1.13)}}
+.fairy-lights circle,.bedroom-fairy-lights circle{animation:fairyTwinkle 1.8s ease-in-out infinite alternate;will-change:opacity}
+.weather-snowflakes circle,.window-snow circle{animation:snow-drift 8s ease-in-out infinite alternate}
+.weather-snowflakes circle:nth-child(2n),.window-snow circle:nth-child(2n){animation-delay:-3s}
+@keyframes snow-drift{from{translate:-4px -5px;opacity:.55}to{translate:5px 9px;opacity:1}}
+.weather-rain-drops line,.window-rain line{animation:rain-shimmer .65s linear infinite}
+@keyframes rain-shimmer{from{opacity:.35;translate:0 -4px}to{opacity:.9;translate:0 5px}}
+.home-game-btn.primary{position:relative;overflow:hidden;isolation:isolate;box-shadow:0 0 0 0 #e8a8b833;animation:home-button-glow 3.8s ease-in-out infinite}
+.home-game-btn.primary:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 25%,#fff8 48%,transparent 70%);transform:translateX(-130%);animation:home-button-sheen 5s ease-in-out infinite}
+@keyframes home-button-glow{0%,100%{box-shadow:0 0 0 0 #e8a8b800,0 4px 18px #d99aae12}50%{box-shadow:0 0 0 5px #e8a8b814,0 5px 24px #d99aae25}}
+@keyframes home-button-sheen{0%,65%,100%{transform:translateX(-130%)}82%{transform:translateX(130%)}}
+.home-room-btn.active{box-shadow:0 0 18px #e8a8b822;transition:box-shadow .35s,background .3s}
+@media(max-width:700px){
+ .home-scene-caption{padding:14px 16px;min-height:64px;font-size:13px}
+ .home-decor-display{top:8%;right:3%;width:clamp(86px,25%,118px)}
+ .home-decor-frame{border-width:3px}
+ .home-decor-art{font-size:24px;min-height:27px}
+ .home-interact-row label{flex-basis:100%;margin-bottom:2px}
+ .home-interact-row select{flex:1 1 150px}
+ .home-interact-row button{flex:1 1 auto}
+ .home-scrapbook-photos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .home-scrapbook-photos figure:last-child{grid-column:1/-1;width:min(70%,260px);justify-self:center}
+ .home-scrapbook h3{font-size:clamp(24px,6vw,30px)}
+}
+@media(max-width:420px){
+ .home-game-hud{align-items:flex-start}
+ #homeRoomLabel{flex:1 1 65%;font-size:8px}
+ .home-decor-display{width:92px;top:7%;right:3%}
+ .home-decor-frame{padding:6px 5px}
+ .home-decor-title,.home-decor-subtitle{font-size:8px}
+ .home-scene-caption{font-size:12px}
+ .home-scrapbook-photos{grid-template-columns:1fr 1fr}
+ .home-scrapbook-photos figure:last-child{grid-column:auto;width:auto}
+ .home-scrapbook-photos figcaption{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ .game-art:after,.cabin-exterior,.couple-art,.date-couple,.bed-couple,.rithwik-character,.prapthi-character,.date-person,.bed-rithwik,.bed-prapthi,.bob-pup,.bob-play,.bed-bob,.bob-date-nap,.shared-blanket,.bedside-lamp,.date-heart,.bedroom-zs,.bob-zs,.date-window,.bedroom-window,.weather-snowflakes circle,.window-snow circle,.weather-rain-drops line,.window-rain line,.home-game-btn.primary,.home-game-btn.primary:after{animation:none!important}
+}
+
 </style>
 </head>
 <body class="locked">
@@ -654,7 +757,7 @@ const targetMonth=10,targetDay=24;let bobMidnightTriggered=false;function countd
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.13});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 function floatHearts(n){for(let i=0;i<n;i++){const h=document.createElement('span');h.className='float-heart';h.textContent=['♡','♥','✧','❤'][Math.floor(Math.random()*4)];h.style.left=(Math.random()*100)+'vw';h.style.fontSize=(12+Math.random()*20)+'px';h.style.setProperty('--dur',(4+Math.random()*4)+'s');document.body.appendChild(h);setTimeout(()=>h.remove(),8500)}}
 let last=0;window.addEventListener('pointerdown',e=>{if(Date.now()-last>700&&Math.random()>.55){last=Date.now();const h=document.createElement('span');h.className='float-heart';h.textContent='♡';h.style.left=e.clientX+'px';h.style.bottom=(innerHeight-e.clientY)+'px';h.style.setProperty('--dur','3.5s');document.body.appendChild(h);setTimeout(()=>h.remove(),4000)}},{passive:true});
-const canvas=$('stars'),ctx=canvas.getContext('2d');let w,h,stars=[];function resize(){w=canvas.width=innerWidth*devicePixelRatio;h=canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';stars=Array.from({length:Math.min(150,Math.floor(innerWidth/8))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.3,a:Math.random(),v:Math.random()*.006+.002}))}function draw(){ctx.clearRect(0,0,w,h);for(const s of stars){s.a+=s.v;if(s.a>1||s.a<.15)s.v*=-1;ctx.fillStyle='rgba(248,218,225,'+Math.max(.15,Math.min(.8,s.a))+')';ctx.beginPath();ctx.arc(s.x,s.y,s.r*devicePixelRatio,0,Math.PI*2);ctx.fill()}requestAnimationFrame(draw)}resize();draw();addEventListener('resize',resize,{passive:true});
+const canvas=$('stars'),ctx=canvas.getContext('2d',{alpha:true});let w=0,h=0,stars=[],starFrame=0;const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');function resize(){const dpr=Math.min(devicePixelRatio||1,1.5);w=canvas.width=Math.round(innerWidth*dpr);h=canvas.height=Math.round(innerHeight*dpr);canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';stars=Array.from({length:Math.min(115,Math.floor(innerWidth/10))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.35,a:Math.random(),v:Math.random()*.006+.002}));if(!document.hidden&&!reducedMotion.matches&&!starFrame)starFrame=requestAnimationFrame(draw);else if(reducedMotion.matches)drawStarsStatic()}function drawStarsStatic(){ctx.clearRect(0,0,w,h);for(const s of stars){ctx.fillStyle='rgba(248,218,225,.55)';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}}function draw(){starFrame=0;if(document.hidden||reducedMotion.matches){if(reducedMotion.matches)drawStarsStatic();return}ctx.clearRect(0,0,w,h);for(const s of stars){s.a+=s.v;if(s.a>1||s.a<.15)s.v*=-1;ctx.fillStyle='rgba(248,218,225,'+Math.max(.15,Math.min(.8,s.a))+')';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}starFrame=requestAnimationFrame(draw)}function syncStars(){if(starFrame){cancelAnimationFrame(starFrame);starFrame=0}if(document.hidden)return;if(reducedMotion.matches){drawStarsStatic();return}starFrame=requestAnimationFrame(draw)}resize();document.addEventListener('visibilitychange',syncStars);reducedMotion.addEventListener?.('change',syncStars);addEventListener('resize',resize,{passive:true});
 })();
 </script>
 
