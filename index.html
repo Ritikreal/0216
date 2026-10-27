@@ -20,6 +20,36 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 @keyframes rise{to{opacity:1;transform:translateY(0)}}@keyframes orbit{to{transform:rotate(360deg)}}@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}@keyframes heartbeat{0%,100%{transform:scale(1)}8%{transform:scale(1.09)}16%{transform:scale(1)}24%{transform:scale(1.05)}32%{transform:scale(1)}}@keyframes scrollline{0%,100%{transform:scaleY(.65);transform-origin:top;opacity:.5}50%{transform:scaleY(1);opacity:1}}@keyframes heart-rise{to{transform:translateY(-115vh) rotate(35deg);opacity:0}}@keyframes letteropen{from{opacity:0;transform:rotateX(-12deg) translateY(-15px)}to{opacity:1;transform:none}}
 @media(max-width:700px){.nav{padding:17px 20px}.nav a{font-size:9px}.hero{padding-top:120px}.orbit{width:86vw}.subtitle{font-size:16px}.section{padding:85px 20px}section{padding:85px 20px}.memory-head{display:block}.memory-head p{margin-top:18px}.memory-grid{grid-template-columns:1fr;gap:12px}.memory-card,.memory-card:nth-child(2),.memory-card:nth-child(3){min-height:210px;transform:none}.memory-card:nth-child(2):hover{transform:translateY(-8px)}.countdown{gap:20px}.time{min-width:58px}.time strong{font-size:38px}.letter p{font-size:15px}.intro p{font-size:17px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+
+/* Bannana Bob's midnight visit */
+.bob-scene{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 60%,rgba(100,36,60,.7),rgba(15,5,12,.97) 72%);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .65s,visibility .65s;overflow:hidden}
+.bob-scene.active{opacity:1;visibility:visible;pointer-events:auto}
+.bob-scene:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#ffe5ed 1px,transparent 1.5px),radial-gradient(#e5a6b8 1px,transparent 1.5px);background-size:71px 71px,113px 113px;background-position:10px 20px,40px 65px;opacity:.35;animation:bob-stars 18s linear infinite}
+.bob-card{position:relative;z-index:1;width:min(720px,100%);text-align:center;padding:clamp(22px,5vw,48px);border:1px solid #dca2b84a;border-radius:30px;background:linear-gradient(150deg,#3a1727eF,#1b0b15f2);box-shadow:0 25px 100px #0008;transform:translateY(18px) scale(.97);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.bob-scene.active .bob-card{transform:translateY(0) scale(1)}
+.bob-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#e7a5b8}
+.bob-title{font:400 clamp(31px,6vw,54px)/1.1 'Playfair Display',serif;margin:13px 0 8px;color:#fff0f3}
+.bob-copy{max-width:510px;margin:0 auto;color:#e4c7d0;font:italic clamp(15px,2.5vw,19px)/1.8 'Playfair Display',serif}
+.bob-dog-stage{height:clamp(165px,27vw,230px);display:flex;align-items:center;justify-content:center;position:relative;margin:10px auto 18px;overflow:hidden}
+.bob-dog-stage:after{content:"";position:absolute;width:190px;height:20px;bottom:17px;left:50%;transform:translateX(-50%);background:#0005;filter:blur(10px);border-radius:50%}
+.bob-dog{width:clamp(165px,34vw,245px);height:auto;position:relative;z-index:1;transform:translateX(-115vw);filter:drop-shadow(0 12px 16px #09030977)}
+.bob-scene.active .bob-dog{animation:bob-arrive 2.15s cubic-bezier(.18,.78,.22,1) .15s forwards,bob-breathe 2.8s ease-in-out 2.35s infinite}
+.bob-scene.active .bob-dog .bob-tail{transform-origin:174px 103px;animation:bob-tail .28s ease-in-out 2.2s infinite alternate}
+.bob-scene.active .bob-dog .bob-leg{transform-box:fill-box;transform-origin:top center;animation:bob-step .22s ease-in-out 0s 8 alternate}
+.bob-bubble{opacity:0;transform:translateY(9px);transition:opacity .6s,transform .6s}
+.bob-scene.active .bob-bubble{animation:bob-bubble-in .7s ease 1.8s forwards}
+.bob-close{margin-top:22px;border:1px solid #dca2b87a;border-radius:99px;padding:12px 19px;background:#f1b8c9;color:#2a101b;letter-spacing:.12em;text-transform:uppercase;font-size:10px;cursor:pointer}
+.bob-close:hover{background:#fff0f3}
+.bob-hint{font-size:10px;color:#bd9ba7;margin-top:12px}
+@keyframes bob-arrive{0%{transform:translateX(-115vw) translateY(8px) rotate(-5deg)}65%{transform:translateX(8px) translateY(-5px) rotate(2deg)}82%{transform:translateX(-4px) translateY(1px) rotate(-1deg)}100%{transform:translateX(0) translateY(0) rotate(0)}}
+@keyframes bob-breathe{0%,100%{translate:0 0}50%{translate:0 -5px}}
+@keyframes bob-tail{from{rotate:-20deg}to{rotate:20deg}}
+@keyframes bob-step{from{rotate:-13deg}to{rotate:13deg}}
+@keyframes bob-bubble-in{to{opacity:1;transform:translateY(0)}}
+@keyframes bob-stars{to{background-position:81px 120px,-73px 165px}}
+@media(max-width:520px){.bob-card{border-radius:22px}.bob-dog-stage{height:170px}.bob-copy{line-height:1.65}}
+@media(prefers-reduced-motion:reduce){.bob-scene:before{animation:none}.bob-scene.active .bob-dog{animation:none;transform:translateX(0)}.bob-scene.active .bob-bubble{animation:none;opacity:1;transform:none}.bob-scene.active .bob-dog .bob-tail,.bob-scene.active .bob-dog .bob-leg{animation:none}}
+
 </style>
 </head>
 <body class="locked">
@@ -30,6 +60,56 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 <main>
 <section class="intro reveal"><div class="section-kicker">A note for Prapthi</div><h2 class="section-title">Some people feel like<br><em>coming home.</em></h2><p>Prapthi, you are that feeling for me. The little details about you that stay in my mind, the moments I replay when I miss you, and the way an ordinary day becomes special just because you’re in it. You have a place in my heart that no one else could ever fill.</p></section>
 <section class="countdown-section reveal"><div class="section-kicker">A date I keep close</div><h2 class="section-title">Counting down to <em>us.</em></h2><div class="countdown" aria-label="Countdown to November 24"><div class="time"><strong id="days">000</strong><span>days</span></div><div class="time"><strong id="hours">00</strong><span>hours</span></div><div class="time"><strong id="minutes">00</strong><span>minutes</span></div><div class="time"><strong id="seconds">00</strong><span>seconds</span></div></div><p class="tiny-note" id="countNote">Every second is one more reason to smile.</p></section>
+
+<div class="bob-scene" id="bobScene" role="dialog" aria-modal="true" aria-labelledby="bobTitle" aria-hidden="true">
+  <div class="bob-card">
+    <div class="bob-eyebrow">A little visitor from our future</div>
+    <div class="bob-dog-stage" aria-label="Bannana Bob the Shiba Inu runs over to you">
+      <svg class="bob-dog" viewBox="0 0 250 180" role="img" aria-label="A happy little Shiba Inu with a curled tail">
+        <defs>
+          <linearGradient id="bobFur" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#f7c77e"/><stop offset="1" stop-color="#d98c49"/></linearGradient>
+          <linearGradient id="bobCream" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4df"/><stop offset="1" stop-color="#e9d2b5"/></linearGradient>
+        </defs>
+        <g stroke="#9b5d37" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+          <path class="bob-tail" d="M174 99 C207 103 211 65 190 61 C177 58 173 76 185 80" fill="none" stroke="#d99550" stroke-width="17"/>
+          <path d="M64 98 Q42 89 40 110 Q40 126 60 126 L80 120Z" fill="url(#bobFur)"/>
+          <path d="M63 95 Q61 65 84 60 L155 62 Q181 76 183 107 L174 132 L69 132 Q58 117 63 95Z" fill="url(#bobFur)"/>
+          <path d="M81 112 Q115 94 154 111 L163 132 L73 132Z" fill="url(#bobCream)" stroke="none"/>
+          <path class="bob-leg" d="M78 123 L76 150 Q76 159 89 159 L100 158 L99 132Z" fill="url(#bobFur)"/>
+          <path class="bob-leg" d="M143 126 L145 151 Q146 159 158 158 L168 157 L165 127Z" fill="url(#bobFur)"/>
+          <path d="M73 48 L64 12 Q62 5 71 11 L100 34Z" fill="url(#bobFur)"/>
+          <path d="M145 34 L170 12 Q178 5 176 17 L171 53Z" fill="url(#bobFur)"/>
+          <path d="M72 47 L70 20 L91 39Z" fill="#b96845" stroke="none"/>
+          <path d="M151 39 L170 20 L164 48Z" fill="#b96845" stroke="none"/>
+          <path d="M65 46 Q88 26 119 35 Q154 31 173 55 Q187 76 174 98 Q163 119 130 119 Q91 122 70 101 Q51 79 65 46Z" fill="url(#bobFur)"/>
+          <path d="M66 80 Q81 67 99 82 Q113 94 128 82 Q149 67 174 82 Q170 108 142 115 Q111 124 82 109 Q69 101 66 80Z" fill="url(#bobCream)" stroke="none"/>
+          <path d="M94 76 Q100 69 107 76" fill="none" stroke="#593526" stroke-width="3.5"/>
+          <path d="M137 76 Q144 69 150 76" fill="none" stroke="#593526" stroke-width="3.5"/>
+          <ellipse cx="102" cy="81" rx="3.5" ry="4.5" fill="#2d1b1b" stroke="none"/>
+          <ellipse cx="143" cy="81" rx="3.5" ry="4.5" fill="#2d1b1b" stroke="none"/>
+          <circle cx="103" cy="79" r="1.2" fill="white" stroke="none"/>
+          <circle cx="144" cy="79" r="1.2" fill="white" stroke="none"/>
+          <ellipse cx="123" cy="93" rx="7" ry="5" fill="#593526" stroke="none"/>
+          <path d="M123 97 Q119 104 113 100 M123 97 Q128 104 134 100" fill="none" stroke="#593526" stroke-width="2"/>
+          <ellipse cx="85" cy="91" rx="7" ry="4" fill="#e99a9b" opacity=".65" stroke="none"/>
+          <ellipse cx="157" cy="91" rx="7" ry="4" fill="#e99a9b" opacity=".65" stroke="none"/>
+          <path d="M106 113 Q124 121 141 112" fill="none" stroke="#d4b99b" stroke-width="2"/>
+        </g>
+        <path d="M110 133 Q123 139 136 133 L132 144 Q123 150 114 144Z" fill="#a84365" stroke="#f2c1ce" stroke-width="1.5"/>
+        <circle cx="124" cy="139" r="3" fill="#f8d7df"/>
+        <path d="M58 58 Q44 64 49 75 M180 57 Q194 62 190 73" fill="none" stroke="#f1b7c8" stroke-width="3" stroke-linecap="round"/>
+        <path d="M90 20 l-4 -8 M120 16 l0 -9 M150 21 l4 -8" stroke="#f1b7c8" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="bob-bubble">
+      <h2 class="bob-title" id="bobTitle">Mommy, don’t give up on our dream. ♡</h2>
+      <p class="bob-copy">It’s me, Bannana Bob! One day, I want to run around our little home in the woods, with you and Daddy right there beside me. We’ll have our quiet mornings, our cozy nights, and all the love in the world. Please don’t give up on the dream, Mommy. We’re going to keep trying, face every obstacle together, and make our little family real — one day at a time. I’m already saving you the biggest Shiba hugs. 🐾</p>
+    </div>
+    <button class="bob-close" id="bobClose" type="button">Come here, Bannana Bob ♡</button>
+    <div class="bob-hint">A tiny reminder from your future little family</div>
+  </div>
+</div>
+
 <section class="memories"><div class="memory-head reveal"><div><div class="section-kicker">The little things</div><h2 class="section-title">Our kind of <em>magic.</em></h2></div><p>Not every beautiful thing needs a photograph. Some of the best memories live quietly in the heart.</p></div><div class="memory-grid">
 <article class="memory-card reveal"><span class="memory-number">01 / 6:00 AM</span><div class="memory-icon">☀</div><div><h3>The sunrise on the hill</h3><p>Taking you up that hill and confessing my feelings around six in the morning, with the sun coming up. I’ll always remember the beginning of us.</p></div></article>
 <article class="memory-card reveal"><span class="memory-number">02 / JUST US</span><div class="memory-icon">☾</div><div><h3>The walk to Tata Promount</h3><p>That cold, quiet night, walking beside you with nobody else around. Just you and me talking, with nowhere more important to be. That was the best part.</p></div></article>
@@ -53,8 +133,8 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 </main>
 <footer><span class="heart">♥</span><p>Made with all my heart for Prapthi · November 24 · just us</p></footer>
 <script>
-(()=>{const $=id=>document.getElementById(id);const gate=$('gate');$('openSite').addEventListener('click',()=>{gate.classList.add('gone');document.body.classList.remove('locked');setTimeout(()=>floatHearts(12),450);});function wireLetter(buttonId,letterId){$(buttonId).addEventListener('click',()=>{const letter=$(letterId),button=$(buttonId),opened=letter.classList.toggle('open');button.style.display=opened?'none':'grid';button.setAttribute('aria-expanded',String(opened));if(opened){setTimeout(()=>letter.scrollIntoView({behavior:'smooth',block:'center'}),150);floatHearts(8)}})}wireLetter('envelope','loveLetter');wireLetter('apologyEnvelope','apologyLetter');$('surpriseBtn').addEventListener('click',()=>{const el=$('surprise');el.classList.toggle('show');$('surpriseBtn').textContent=el.classList.contains('show')?'you’re my favorite surprise ♡':'One last little surprise ♡';floatHearts(18)});
-const targetMonth=10,targetDay=24;function countdown(){const now=new Date();let target=new Date(now.getFullYear(),targetMonth,targetDay,0,0,0);if(now>=target)target=new Date(now.getFullYear()+1,targetMonth,targetDay,0,0,0);const diff=target-now;const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);$('days').textContent=String(d).padStart(3,'0');$('hours').textContent=String(h).padStart(2,'0');$('minutes').textContent=String(m).padStart(2,'0');$('seconds').textContent=String(s).padStart(2,'0');$('countNote').textContent=(now.getMonth()===targetMonth&&now.getDate()===targetDay)?'Today is our day. Hold it close.':'Every second is one more reason to smile.'}countdown();setInterval(countdown,1000);
+(()=>{const $=id=>document.getElementById(id);function showBob(){const scene=$('bobScene');scene.classList.add('active');scene.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>$('bobClose').focus({preventScroll:true}),450);floatHearts(24)}function hideBob(){const scene=$('bobScene');scene.classList.remove('active');scene.setAttribute('aria-hidden','true');document.body.style.overflow=''}$('bobClose').addEventListener('click',hideBob);$('bobScene').addEventListener('click',e=>{if(e.target===$('bobScene'))hideBob()});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('bobScene').classList.contains('active'))hideBob()});const TEST_KEY_ENABLED=true;/* TEST ONLY: press K to preview Bannana Bob; set false before sharing the final site. */window.addEventListener('keydown',e=>{if(TEST_KEY_ENABLED&&e.key.toLowerCase()==='k'&&!e.repeat&&!/input|textarea|select/i.test(document.activeElement.tagName)){e.preventDefault();showBob()}});const gate=$('gate');$('openSite').addEventListener('click',()=>{gate.classList.add('gone');document.body.classList.remove('locked');setTimeout(()=>floatHearts(12),450);});function wireLetter(buttonId,letterId){$(buttonId).addEventListener('click',()=>{const letter=$(letterId),button=$(buttonId),opened=letter.classList.toggle('open');button.style.display=opened?'none':'grid';button.setAttribute('aria-expanded',String(opened));if(opened){setTimeout(()=>letter.scrollIntoView({behavior:'smooth',block:'center'}),150);floatHearts(8)}})}wireLetter('envelope','loveLetter');wireLetter('apologyEnvelope','apologyLetter');$('surpriseBtn').addEventListener('click',()=>{const el=$('surprise');el.classList.toggle('show');$('surpriseBtn').textContent=el.classList.contains('show')?'you’re my favorite surprise ♡':'One last little surprise ♡';floatHearts(18)});
+const targetMonth=10,targetDay=24;let bobMidnightTriggered=false;function countdown(){const now=new Date();let target=new Date(now.getFullYear(),targetMonth,targetDay,0,0,0);if(now>=target){const anniversaryMoment=now.getMonth()===targetMonth&&now.getDate()===targetDay&&now.getHours()===0;if(anniversaryMoment&&!bobMidnightTriggered){bobMidnightTriggered=true;showBob()}target=new Date(now.getFullYear()+1,targetMonth,targetDay,0,0,0)}const diff=target-now;const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);$('days').textContent=String(d).padStart(3,'0');$('hours').textContent=String(h).padStart(2,'0');$('minutes').textContent=String(m).padStart(2,'0');$('seconds').textContent=String(s).padStart(2,'0');$('countNote').textContent=(now.getMonth()===targetMonth&&now.getDate()===targetDay)?'Today is our day. Hold it close.':'Every second is one more reason to smile.'}countdown();setInterval(countdown,1000);
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.13});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 function floatHearts(n){for(let i=0;i<n;i++){const h=document.createElement('span');h.className='float-heart';h.textContent=['♡','♥','✧','❤'][Math.floor(Math.random()*4)];h.style.left=(Math.random()*100)+'vw';h.style.fontSize=(12+Math.random()*20)+'px';h.style.setProperty('--dur',(4+Math.random()*4)+'s');document.body.appendChild(h);setTimeout(()=>h.remove(),8500)}}
 let last=0;window.addEventListener('pointerdown',e=>{if(Date.now()-last>700&&Math.random()>.55){last=Date.now();const h=document.createElement('span');h.className='float-heart';h.textContent='♡';h.style.left=e.clientX+'px';h.style.bottom=(innerHeight-e.clientY)+'px';h.style.setProperty('--dur','3.5s');document.body.appendChild(h);setTimeout(()=>h.remove(),4000)}},{passive:true});
