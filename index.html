@@ -389,7 +389,29 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 .nov24-trees{position:absolute;inset:auto 0 0;height:66%;background:linear-gradient(135deg,transparent 0 7%,#101b19 7% 13%,transparent 13% 20%,#14201d 20% 29%,transparent 29% 35%,#101a18 35% 43%,transparent 43% 53%,#13201c 53% 62%,transparent 62% 69%,#101a18 69% 78%,transparent 78%);clip-path:polygon(0 100%,0 38%,8% 0,17% 100%,25% 30%,34% 100%,43% 12%,53% 100%,63% 28%,73% 100%,82% 8%,92% 100%,100% 35%,100% 100%)}
 .nov24-cabin{position:relative;z-index:1;width:min(330px,70%);height:160px;margin-top:65px;background:linear-gradient(135deg,#7a4552,#3c2636);border:2px solid #d8a5a5;clip-path:polygon(50% 0,100% 40%,94% 40%,94% 100%,6% 100%,6% 40%,0 40%);filter:drop-shadow(0 0 22px #e8a2a255)}
 .nov24-cabin:before{content:"";position:absolute;left:42%;top:42%;width:48px;height:70px;background:linear-gradient(#ffe7b0,#b96c79);box-shadow:0 0 40px 12px #ffcf8b77}
-.nov24-bob{position:relative;z-index:2;font-size:58px;filter:drop-shadow(0 8px 18px #0008);animation:nov24Bob 2.4s ease-in-out infinite;margin-top:-12px}
+.nov24-bob{position:absolute;z-index:3;left:7%;bottom:17px;font-size:clamp(48px,7vw,66px);line-height:1;filter:drop-shadow(0 8px 12px #0009);transform-origin:50% 85%;animation:nov24DogAdventure 7.8s cubic-bezier(.2,.7,.25,1) both}
+.nov24-bob:after{content:"";position:absolute;left:50%;bottom:-7px;width:10px;height:5px;border-radius:50%;background:#f2d5d8;box-shadow:-24px 7px 0 -1px #f2d5d8,24px 7px 0 -1px #f2d5d8;opacity:0;animation:nov24Paws 7.8s ease both}
+.nov24-door{position:absolute;z-index:2;left:calc(50% - 24px);bottom:0;width:48px;height:73px;border:2px solid #d9a5a2;border-bottom:0;border-radius:5px 5px 0 0;background:linear-gradient(90deg,#452b39,#6e3d4b);transform-origin:left center;box-shadow:inset 5px 0 9px #1b1018;animation:nov24Door 7.8s ease both}
+.nov24-door:after{content:"";position:absolute;right:7px;top:37px;width:4px;height:4px;border-radius:50%;background:#f9dba1}
+.nov24-scene:after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:23%;background:linear-gradient(transparent,#10100f99);pointer-events:none}
+@keyframes nov24DogAdventure{
+  0%{left:5%;transform:translateY(0) rotate(0) scaleX(1)}
+  7%{transform:translateY(-5px) rotate(-5deg) scaleX(1)}
+  17%{left:24%;transform:translateY(0) rotate(0) scaleX(1)}
+  29%{left:42%;transform:translateY(0) rotate(0) scaleX(1)}
+  35%{left:42%;transform:translateY(-5px) rotate(-8deg) scaleX(1)}
+  43%{left:42%;transform:translateY(0) rotate(5deg) scaleX(1)}
+  50%{left:42%;transform:translateY(-58px) rotate(-12deg) scaleX(1)}
+  56%{left:42%;transform:translateY(0) rotate(8deg) scaleX(1)}
+  63%{left:42%;transform:translateY(-18px) rotate(0) scaleX(1)}
+  69%{left:42%;transform:translateY(0) rotate(0) scaleX(1)}
+  77%{left:58%;transform:translateY(-36px) rotate(18deg) scaleX(-1)}
+  83%{left:65%;transform:translateY(0) rotate(0) scaleX(-1)}
+  90%{left:57%;transform:translateY(-24px) rotate(-12deg) scaleX(1)}
+  100%{left:59%;transform:translateY(0) rotate(0) scaleX(1)}
+}
+@keyframes nov24Door{0%,42%{transform:perspective(160px) rotateY(0)}50%,69%{transform:perspective(160px) rotateY(-68deg)}77%,100%{transform:perspective(160px) rotateY(0)}}
+@keyframes nov24Paws{0%,17%{opacity:0}22%,38%{opacity:.8}45%,100%{opacity:0}}
 .nov24-envelope{font-size:30px;display:inline-grid;place-items:center;width:62px;height:62px;border-radius:50%;background:#f7d9dc;color:#6c3549;box-shadow:0 0 35px #f3b6c677;margin:0 auto 15px;animation:nov24Float 3s ease-in-out infinite}
 .nov24-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
 .nov24-btn{border:1px solid #f0c2cf66;background:#f2d4dc;color:#422132;padding:14px 24px;border-radius:999px;font:600 11px 'DM Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:transform .25s,background .25s}
@@ -694,7 +716,7 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
  <div class="nov24-shell">
   <section class="nov24-panel active" data-nov24-panel="intro">
    <div class="nov24-kicker">November 24 · a little something for you</div>
-   <div class="nov24-scene" aria-hidden="true"><div class="nov24-moon"></div><div class="nov24-trees"></div><div class="nov24-cabin"></div><div class="nov24-bob">🐕</div></div>
+   <div class="nov24-scene" aria-hidden="true"><div class="nov24-moon"></div><div class="nov24-trees"></div><div class="nov24-cabin"></div><div class="nov24-door"></div><div class="nov24-bob">🐕</div></div>
    <div class="nov24-envelope" aria-hidden="true">✉</div>
    <h1 class="nov24-title" id="nov24MainTitle">Someone has been waiting all year <em>to celebrate us.</em></h1>
    <p class="nov24-copy">Bannana Bob has a tiny delivery. He says the cabin is ready, the lights are warm, and there are a few memories he wants to show you.</p>
