@@ -13,6 +13,8 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;overflow-x:hidden}body.locked{overflow:hidden}::selection{background:#d77d99;color:#17080f}
 a{color:inherit}button{font:inherit}.grain{position:fixed;inset:0;pointer-events:none;z-index:10;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E")}
 #stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.65}.nav{position:fixed;top:0;left:0;right:0;z-index:9;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(18px,5vw,70px);background:linear-gradient(#17080fe8,transparent);backdrop-filter:blur(8px)}.brand{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--rose)}.nav a{text-decoration:none;font-size:11px;letter-spacing:.12em;color:#f8e9e1b8}.nav a:hover{color:white}
+.hero-line-mask{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
+.hero-line-mask>span{display:inline-block;will-change:auto}
 .hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:130px 22px 90px;position:relative;isolation:isolate;background:radial-gradient(ellipse at 50% 48%,#70243d66 0,transparent 50%),radial-gradient(ellipse at 20% 80%,#4a122c44 0,transparent 45%)}.orbit{position:absolute;width:min(70vw,520px);aspect-ratio:1;border:1px solid #e8a8b81f;border-radius:50%;animation:orbit 38s linear infinite;pointer-events:none}.orbit:before,.orbit:after{content:'✦';position:absolute;color:var(--gold);font-size:12px}.orbit:before{top:14%;left:15%}.orbit:after{bottom:20%;right:8%;color:var(--rose)}.hero-inner{position:relative;max-width:850px;z-index:1}.eyebrow{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin:0 0 26px;opacity:0;animation:rise 1s .2s forwards}.hero h1{font:400 clamp(48px,10vw,112px)/.98 'Playfair Display',serif;letter-spacing:-.055em;margin:0}.hero h1 em{font-weight:400;color:var(--rose)}.subtitle{max-width:470px;margin:28px auto 0;color:#f8e9e1b8;font:italic 18px/1.7 'Playfair Display',serif}.date-pill{display:inline-flex;gap:12px;align-items:center;margin-top:38px;border:1px solid #e8a8b84c;border-radius:999px;padding:12px 19px;color:var(--rose);font-size:10px;letter-spacing:.22em;text-transform:uppercase}.date-pill span{color:var(--gold)}.scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:#c5a5ad;display:grid;gap:10px;justify-items:center}.scroll-cue:after{content:'';width:1px;height:34px;background:linear-gradient(var(--rose),transparent);animation:scrollline 1.8s ease-in-out infinite}
 section{padding:120px clamp(20px,7vw,110px);position:relative}.section-kicker{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}.section-title{font:400 clamp(38px,6vw,70px)/1.08 'Playfair Display',serif;letter-spacing:-.04em;margin:0}.section-title em{color:var(--rose);font-weight:400}.intro{max-width:750px;margin:auto;text-align:center}.intro p{font:italic clamp(17px,2vw,22px)/1.9 'Playfair Display',serif;color:#f8e9e1b5;max-width:620px;margin:30px auto 0}
 .countdown-section{text-align:center;background:linear-gradient(180deg,transparent,#2a0c1a 45%,#2a0c1a 55%,transparent)}.countdown{display:flex;justify-content:center;gap:clamp(12px,4vw,44px);margin:48px auto 18px;flex-wrap:wrap}.time{min-width:75px}.time strong{display:block;font:400 clamp(36px,7vw,66px)/1 'Playfair Display',serif;color:var(--rose);font-variant-numeric:tabular-nums}.time span{display:block;margin-top:12px;color:#c5a5ad;font-size:9px;letter-spacing:.25em;text-transform:uppercase}.tiny-note{color:#c5a5ad;font-size:11px;letter-spacing:.08em}
@@ -84,6 +86,13 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 @keyframes bob-card-hug{0%,100%{box-shadow:0 25px 100px #0008}35%{box-shadow:0 25px 100px #0008,0 0 50px #e8a8b866}}
 @keyframes bob-heart-pop{0%{opacity:0;translate:0 12px;scale:.55}35%{opacity:1;translate:0 -7px;scale:1.15}100%{opacity:0;translate:0 -32px;scale:1.3}}
 @keyframes bob-stars{to{background-position:81px 120px,-73px 165px}}
+/* UPGRADED: stop decorative loops outside the viewport; no visual content is removed */
+.motion-paused *,.motion-paused *:before,.motion-paused *:after{animation-play-state:paused!important}
+@media(max-width:700px){
+ .grain{opacity:.045}
+ .game-art:after{animation:none!important}
+ .home-game-btn.primary:after{animation:none!important}
+}
 @media(max-width:520px){.bob-card{border-radius:22px}.bob-dog-stage{height:170px}.bob-copy{line-height:1.65}}
 @media(prefers-reduced-motion:reduce){.bob-scene:before{animation:none}.bob-scene.active .bob-dog{animation:none;transform:translateX(0)}.bob-scene.active .bob-bubble{animation:none;opacity:1;transform:none}.bob-scene.active .bob-dog .bob-tail,.bob-scene.active .bob-dog .bob-leg{animation:none}.bob-scene.cuddle .bob-dog,.bob-scene.cuddle .bob-card,.bob-scene.cuddle .bob-dog-stage:before{animation:none!important}}
 
@@ -388,30 +397,35 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 .nov24-scene{min-height:250px;display:grid;place-items:center;position:relative;margin:12px auto 28px;overflow:hidden;border:1px solid #f3c8d52b;border-radius:18px;background:linear-gradient(180deg,#201728aa,#120e18dd),radial-gradient(ellipse at 50% 100%,#a45b6b66,transparent 65%);box-shadow:0 24px 90px #0006}
 .nov24-moon{position:absolute;width:74px;height:74px;border-radius:50%;background:#f6d9dc;box-shadow:0 0 55px #f4c9d977;right:13%;top:13%}
 .nov24-trees{position:absolute;inset:auto 0 0;height:66%;background:linear-gradient(135deg,transparent 0 7%,#101b19 7% 13%,transparent 13% 20%,#14201d 20% 29%,transparent 29% 35%,#101a18 35% 43%,transparent 43% 53%,#13201c 53% 62%,transparent 62% 69%,#101a18 69% 78%,transparent 78%);clip-path:polygon(0 100%,0 38%,8% 0,17% 100%,25% 30%,34% 100%,43% 12%,53% 100%,63% 28%,73% 100%,82% 8%,92% 100%,100% 35%,100% 100%)}
-.nov24-cabin{position:relative;z-index:1;width:min(330px,70%);height:160px;margin-top:65px;background:linear-gradient(135deg,#7a4552,#3c2636);border:2px solid #d8a5a5;clip-path:polygon(50% 0,100% 40%,94% 40%,94% 100%,6% 100%,6% 40%,0 40%);filter:drop-shadow(0 0 22px #e8a2a255)}
-.nov24-cabin:before{content:"";position:absolute;left:42%;top:42%;width:48px;height:70px;background:linear-gradient(#ffe7b0,#b96c79);box-shadow:0 0 40px 12px #ffcf8b77}
-.nov24-bob{position:absolute;z-index:3;left:7%;bottom:17px;font-size:clamp(48px,7vw,66px);line-height:1;filter:drop-shadow(0 8px 12px #0009);transform-origin:50% 85%;animation:nov24DogAdventure 7.8s cubic-bezier(.2,.7,.25,1) both}
-.nov24-bob:after{content:"";position:absolute;left:50%;bottom:-7px;width:10px;height:5px;border-radius:50%;background:#f2d5d8;box-shadow:-24px 7px 0 -1px #f2d5d8,24px 7px 0 -1px #f2d5d8;opacity:0;animation:nov24Paws 7.8s ease both}
-.nov24-door{position:absolute;z-index:2;left:calc(50% - 24px);bottom:0;width:48px;height:73px;border:2px solid #d9a5a2;border-bottom:0;border-radius:5px 5px 0 0;background:linear-gradient(90deg,#452b39,#6e3d4b);transform-origin:left center;box-shadow:inset 5px 0 9px #1b1018;animation:nov24Door 7.8s ease both}
-.nov24-door:after{content:"";position:absolute;right:7px;top:37px;width:4px;height:4px;border-radius:50%;background:#f9dba1}
+/* UPGRADED: stable cabin geometry; the door is a true child of the cabin */
+.nov24-scene{container-type:inline-size}
+.nov24-cabin{position:relative;z-index:1;width:min(330px,70%);height:145px;margin-top:80px;background:linear-gradient(135deg,#7a4552,#3c2636);border:2px solid #d8a5a5;border-radius:3px 3px 0 0;filter:drop-shadow(0 0 22px #e8a2a255);perspective:700px;transform-style:preserve-3d}
+.nov24-cabin:before{content:"";position:absolute;z-index:1;left:42%;top:31px;width:48px;height:55px;border:3px solid #d8a5a5;background:linear-gradient(#ffe7b0,#b96c79);box-shadow:0 0 34px 10px #ffcf8b77}
+.nov24-cabin:after{content:"";position:absolute;z-index:3;left:-13px;right:-13px;top:-72px;height:78px;background:linear-gradient(135deg,#7a4552,#3c2636);clip-path:polygon(50% 0,100% 88%,96% 100%,4% 100%,0 88%);border-bottom:2px solid #d8a5a5;pointer-events:none}
+.nov24-door{position:absolute;z-index:2;left:calc(50% - 24px);bottom:0;width:48px;height:82px;border:2px solid #d9a5a2;border-bottom:0;border-radius:5px 5px 0 0;background:linear-gradient(90deg,#452b39,#6e3d4b);transform-origin:left center;transform:rotateY(0);backface-visibility:hidden;box-shadow:inset 5px 0 9px #1b1018;animation:nov24Door 7.8s var(--ease-in-out) both}
+.nov24-door:after{content:"";position:absolute;right:7px;top:39px;width:5px;height:5px;border-radius:50%;background:#f9dba1;box-shadow:0 0 8px #f9dba1}
+.nov24-door span{position:absolute;inset:5px 5px 0;border:1px solid #d9a5a244;border-radius:2px 2px 0 0;pointer-events:none}
+.nov24-bob{position:absolute;z-index:4;left:7%;bottom:17px;font-size:clamp(48px,7vw,66px);line-height:1;filter:drop-shadow(0 8px 12px #0009);transform-origin:50% 85%;animation:nov24DogAdventure 7.8s var(--ease-out) both}
+.nov24-bob:after{content:"";position:absolute;left:50%;bottom:-7px;width:10px;height:5px;border-radius:50%;background:#f2d5d8;box-shadow:-24px 7px 0 -1px #f2d5d8,24px 7px 0 -1px #f2d5d8;opacity:0;animation:nov24Paws 7.8s var(--ease-in-out) both}
 .nov24-scene:after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:23%;background:linear-gradient(transparent,#10100f99);pointer-events:none}
+/* UPGRADED: Bob travels with compositor transforms, not animated left offsets */
 @keyframes nov24DogAdventure{
-  0%{left:5%;transform:translateY(0) rotate(0) scaleX(1)}
-  7%{transform:translateY(-5px) rotate(-5deg) scaleX(1)}
-  17%{left:24%;transform:translateY(0) rotate(0) scaleX(1)}
-  29%{left:42%;transform:translateY(0) rotate(0) scaleX(1)}
-  35%{left:42%;transform:translateY(-5px) rotate(-8deg) scaleX(1)}
-  43%{left:42%;transform:translateY(0) rotate(5deg) scaleX(1)}
-  50%{left:42%;transform:translateY(-58px) rotate(-12deg) scaleX(1)}
-  56%{left:42%;transform:translateY(0) rotate(8deg) scaleX(1)}
-  63%{left:42%;transform:translateY(-18px) rotate(0) scaleX(1)}
-  69%{left:42%;transform:translateY(0) rotate(0) scaleX(1)}
-  77%{left:58%;transform:translateY(-36px) rotate(18deg) scaleX(-1)}
-  83%{left:65%;transform:translateY(0) rotate(0) scaleX(-1)}
-  90%{left:57%;transform:translateY(-24px) rotate(-12deg) scaleX(1)}
-  100%{left:59%;transform:translateY(0) rotate(0) scaleX(1)}
+  0%{transform:translate3d(0,0,0) rotate(0) scaleX(1)}
+  7%{transform:translate3d(0,-5px,0) rotate(-5deg) scaleX(1)}
+  17%{transform:translate3d(17cqw,0,0) rotate(0) scaleX(1)}
+  29%{transform:translate3d(35cqw,0,0) rotate(0) scaleX(1)}
+  35%{transform:translate3d(35cqw,-5px,0) rotate(-8deg) scaleX(1)}
+  43%{transform:translate3d(35cqw,0,0) rotate(5deg) scaleX(1)}
+  50%{transform:translate3d(35cqw,-58px,0) rotate(-12deg) scaleX(1)}
+  56%{transform:translate3d(35cqw,0,0) rotate(8deg) scaleX(1)}
+  63%{transform:translate3d(35cqw,-18px,0) rotate(0) scaleX(1)}
+  69%{transform:translate3d(35cqw,0,0) rotate(0) scaleX(1)}
+  77%{transform:translate3d(51cqw,-36px,0) rotate(18deg) scaleX(-1)}
+  83%{transform:translate3d(58cqw,0,0) rotate(0) scaleX(-1)}
+  90%{transform:translate3d(50cqw,-24px,0) rotate(-12deg) scaleX(1)}
+  100%{transform:translate3d(52cqw,0,0) rotate(0) scaleX(1)}
 }
-@keyframes nov24Door{0%,42%{transform:perspective(160px) rotateY(0)}50%,69%{transform:perspective(160px) rotateY(-68deg)}77%,100%{transform:perspective(160px) rotateY(0)}}
+@keyframes nov24Door{0%,42%{transform:rotateY(0)}48%,72%{transform:rotateY(-76deg)}80%,100%{transform:rotateY(0)}}
 @keyframes nov24Paws{0%,17%{opacity:0}22%,38%{opacity:.8}45%,100%{opacity:0}}
 .nov24-envelope{font-size:30px;display:inline-grid;place-items:center;width:62px;height:62px;border-radius:50%;background:#f7d9dc;color:#6c3549;box-shadow:0 0 35px #f3b6c677;margin:0 auto 15px;animation:nov24Float 3s ease-in-out infinite}
 .nov24-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
@@ -434,6 +448,16 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
  --motion-fast:250ms;
  --motion-base:700ms;
  --motion-slow:1.3s;
+}
+/* UPGRADED: consistent motion defaults, tactile states, and focus visibility */
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+button,a,[role="button"]{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
+button:active{transform:translate3d(0,1px,0) scale(.985)}
+a{text-underline-offset:4px}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto!important}
+ *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
 }
 html{scroll-behavior:auto}
 :focus-visible{outline:2px solid var(--gold);outline-offset:4px}
@@ -477,7 +501,7 @@ img{height:auto}
 <canvas id="stars" aria-hidden="true"></canvas><div class="grain"></div>
 <div class="intro-gate" id="gate"><div class="gate-content"><div class="gate-star">✦</div><p class="section-kicker">For Prapthi, my love</p><h2>A little world, just for you.</h2><p>I made this little corner of the universe for you. Come in, my love , there’s a piece of my heart waiting here.</p><button class="open-btn" id="openSite">Come in, Munchkin ♡</button></div></div>
 <nav class="nav"><div class="brand">for Prapthi, my love ♡</div><a href="#letter">A little letter ↗</a></nav>
-<header class="hero" id="home"><div class="orbit"></div><div class="hero-inner"><p class="eyebrow">November 24 · for Prapthi, always</p><h1>In every<br><em>universe,</em><br>it’s you.</h1><p class="subtitle">Prapthi, my love , if I had a thousand lifetimes, I think my heart would still find its way to you. In every version of this life, I would choose you.</p><div class="date-pill">✦ <span>November 24</span> ✦ <span>always, us</span></div></div><div class="scroll-cue">keep going</div></header>
+<header class="hero" id="home"><div class="orbit"></div><div class="hero-inner"><p class="eyebrow">November 24 · for Prapthi, always</p><h1><span class="hero-line-mask"><span>In every</span></span><br><span class="hero-line-mask"><span><em>universe,</em></span></span><br><span class="hero-line-mask"><span>it’s you.</span></span></h1><p class="subtitle">Prapthi, my love , if I had a thousand lifetimes, I think my heart would still find its way to you. In every version of this life, I would choose you.</p><div class="date-pill">✦ <span>November 24</span> ✦ <span>always, us</span></div></div><div class="scroll-cue">keep going</div></header>
 <main>
 <section class="intro reveal"><div class="section-kicker">A note for Prapthi</div><h2 class="section-title">Some people feel like<br><em>coming home.</em></h2><p>Prapthi, you are that feeling for me. The little details about you that stay in my mind, the moments I replay when I miss you, and the way an ordinary day becomes special just because you’re in it. You have a place in my heart that no one else could ever fill.</p></section>
 <section class="countdown-section reveal"><div class="section-kicker">A date I keep close</div><h2 class="section-title">Counting down to <em>us.</em></h2><div class="countdown" aria-label="Countdown to November 24"><div class="time"><strong id="days">000</strong><span>days</span></div><div class="time"><strong id="hours">00</strong><span>hours</span></div><div class="time"><strong id="minutes">00</strong><span>minutes</span></div><div class="time"><strong id="seconds">00</strong><span>seconds</span></div></div><p class="tiny-note" id="countNote">Every second is one more reason to smile.</p></section>
@@ -509,7 +533,7 @@ img{height:auto}
   <div class="photo-scrapbook reveal">
     <div class="scrapbook-title">A few more little pieces of you and us ♡</div>
     <div class="photo-grid">
-      <figure class="photo-scrap" style="--tilt:-3deg"><img src="/0216/photos/WhatsApp%20Image%202026-10-27%20at%209.31.34%20PM.jpeg" alt="A little memory saved in a photograph" loading="lazy" decoding="async" width="900" height="1200" loading="lazy" decoding="async"><figcaption>The day you came to my farewell. I was so captivated by your dance that I kept recording you, completely caught up in the moment. I still remember every little detail of that day. It was fucking beautiful. ♡</figcaption></figure>
+      <figure class="photo-scrap" style="--tilt:-3deg"><img src="/0216/photos/WhatsApp%20Image%202026-10-27%20at%209.31.34%20PM.jpeg" alt="A little memory saved in a photograph" width="900" height="1200" loading="lazy" decoding="async"><figcaption>The day you came to my farewell. I was so captivated by your dance that I kept recording you, completely caught up in the moment. I still remember every little detail of that day. It was fucking beautiful. ♡</figcaption></figure>
       <figure class="photo-scrap" style="--tilt:2deg"><img src="/0216/photos/WhatsApp%20Image%202026-10-27%20at%209.32.07%20PM.jpeg" alt="Another favourite moment together" loading="lazy" decoding="async" width="900" height="1200" loading="lazy" decoding="async"><figcaption>Our first movie date, keeping a promise to each other and sharing our first kiss. That day felt magical, and it was the best. ♡</figcaption></figure>
       <figure class="photo-scrap" style="--tilt:-1deg"><img src="/0216/photos/WhatsApp%20Image%202026-10-27%20at%209.32.07%20PM%281%29.jpeg" alt="A moment I want to keep close" loading="lazy" decoding="async" width="900" height="1200" loading="lazy" decoding="async"><figcaption>Our movie date to watch Michael (MJ) was so fucking fun. You cried like a tiny baby, my tiny cutie, and then we finally started spamming pictures because we needed photos of each other. Little things, forever. ♡</figcaption></figure>
       <figure class="photo-scrap" style="--tilt:3deg"><img src="/0216/photos/WhatsApp%20Image%202026-10-27%20at%209.32.46%20PM.jpeg" alt="One more piece of our story" loading="lazy" decoding="async" width="900" height="1200" loading="lazy" decoding="async"><figcaption>Our little trauma-bonding day. Somehow, this felt like the most natural picture we had of each other. No posing, no trying, just us being us. Love you. ♡</figcaption></figure>
@@ -762,7 +786,7 @@ img{height:auto}
  <div class="nov24-shell">
   <section class="nov24-panel active" data-nov24-panel="intro">
    <div class="nov24-kicker">November 24 · a little something for you</div>
-   <div class="nov24-scene" aria-hidden="true"><div class="nov24-moon"></div><div class="nov24-trees"></div><div class="nov24-cabin"></div><div class="nov24-door"></div><div class="nov24-bob">🐕</div></div>
+   <div class="nov24-scene" aria-hidden="true"><div class="nov24-moon"></div><div class="nov24-trees"></div><div class="nov24-cabin"><div class="nov24-door" aria-hidden="true"><span></span></div></div><div class="nov24-bob">🐕</div></div>
    <div class="nov24-envelope" aria-hidden="true">✉</div>
    <h1 class="nov24-title" id="nov24MainTitle">Someone has been waiting all year <em>to celebrate us.</em></h1>
    <p class="nov24-copy">Bannana Bob has a tiny delivery. He says the cabin is ready, the lights are warm, and there are a few memories he wants to show you.</p>
@@ -843,14 +867,14 @@ const scrapbook=document.getElementById('homeScrapbook');document.getElementById
 function updateCabinTime(){const hour=new Date().getHours();homeArt.classList.remove('time-dawn','time-day','time-sunset','time-night');const period=hour>=5&&hour<9?'dawn':hour>=9&&hour<16?'day':hour>=16&&hour<19?'sunset':'night';homeArt.classList.add('time-'+period);if(period==='dawn'&&homeInteractionState.weather==='clear')homeArt.classList.add('weather-dawn')}updateCabinTime();
 document.getElementById('finaleOpen').addEventListener('click',()=>{const letter=document.getElementById('finaleLetter'),opened=letter.classList.toggle('open');document.getElementById('finaleOpen').textContent=opened?'Keep this close to your heart ♡':'Open our last little letter ♡';if(opened){letter.scrollIntoView({behavior:'smooth',block:'center'});floatHearts(22)}});
 
-const targetMonth=10,targetDay=24;const nov24=document.getElementById('nov24Experience');let nov24Started=false;function openNov24(){if(nov24Started)return;nov24Started=true;nov24.classList.add('active');nov24.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';floatHearts(30)}function closeNov24(){nov24.classList.remove('active');nov24.setAttribute('aria-hidden','true');document.body.style.overflow='';try{localStorage.setItem('0216-nov24-seen','yes')}catch(e){}}function setNov24Panel(name){nov24.querySelectorAll('[data-nov24-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.nov24Panel===name));nov24.scrollTop=0;const heading=nov24.querySelector('[data-nov24-panel="'+name+'"] h1, [data-nov24-panel="'+name+'"] h2');if(heading)heading.focus?.({preventScroll:true})}nov24.querySelectorAll('[data-nov24-next]').forEach(button=>button.addEventListener('click',()=>setNov24Panel(button.dataset.nov24Next)));nov24.querySelectorAll('[data-nov24-back]').forEach(button=>button.addEventListener('click',()=>setNov24Panel(button.dataset.nov24Back)));document.getElementById('nov24Finish').addEventListener('click',()=>{closeNov24();document.getElementById('future-home').scrollIntoView({behavior:'smooth',block:'start'});floatHearts(22)});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&nov24.classList.contains('active')){e.preventDefault();setNov24Panel('future')}});window.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='k'&&!e.repeat&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!/input|textarea|select/i.test(document.activeElement.tagName)){e.preventDefault();nov24Started=false;setNov24Panel('intro');openNov24()}});function countdown(){const now=new Date();let target=new Date(now.getFullYear(),targetMonth,targetDay,0,0,0);if(now>=target)target=new Date(now.getFullYear()+1,targetMonth,targetDay,0,0,0);const diff=target-now;const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),sec=Math.floor(diff%60000/1000);$('days').textContent=String(d).padStart(3,'0');$('hours').textContent=String(h).padStart(2,'0');$('minutes').textContent=String(m).padStart(2,'0');$('seconds').textContent=String(sec).padStart(2,'0');$('countNote').textContent=(now.getMonth()===targetMonth&&now.getDate()===targetDay)?'Today is our day. Hold it close.':'Every second is one more reason to smile.';if(now.getMonth()===targetMonth&&now.getDate()===targetDay){let seen=false;try{seen=localStorage.getItem('0216-nov24-seen')==='yes'}catch(e){}if(!seen&&!sessionStorage.getItem('0216-nov24-opened')){sessionStorage.setItem('0216-nov24-opened','yes');openNov24()}}}countdown();setInterval(countdown,1000);const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.13,rootMargin:'0px 0px -6% 0px'});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const targetMonth=10,targetDay=24;const nov24=document.getElementById('nov24Experience');let nov24Started=false;function openNov24(){if(nov24Started)return;nov24Started=true;nov24.classList.add('active');nov24.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';floatHearts(30)}function closeNov24(){nov24.classList.remove('active');nov24.setAttribute('aria-hidden','true');document.body.style.overflow='';try{localStorage.setItem('0216-nov24-seen','yes')}catch(e){}}function setNov24Panel(name){nov24.querySelectorAll('[data-nov24-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.nov24Panel===name));nov24.scrollTop=0;const heading=nov24.querySelector('[data-nov24-panel="'+name+'"] h1, [data-nov24-panel="'+name+'"] h2');if(heading)heading.focus?.({preventScroll:true})}nov24.querySelectorAll('[data-nov24-next]').forEach(button=>button.addEventListener('click',()=>setNov24Panel(button.dataset.nov24Next)));nov24.querySelectorAll('[data-nov24-back]').forEach(button=>button.addEventListener('click',()=>setNov24Panel(button.dataset.nov24Back)));document.getElementById('nov24Finish').addEventListener('click',()=>{closeNov24();document.getElementById('future-home').scrollIntoView({behavior:'smooth',block:'start'});floatHearts(22)});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&nov24.classList.contains('active')){e.preventDefault();setNov24Panel('future')}});window.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='k'&&!e.repeat&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!/input|textarea|select/i.test(document.activeElement.tagName)){e.preventDefault();nov24Started=false;setNov24Panel('intro');openNov24()}});function countdown(){const now=new Date();let target=new Date(now.getFullYear(),targetMonth,targetDay,0,0,0);if(now>=target)target=new Date(now.getFullYear()+1,targetMonth,targetDay,0,0,0);const diff=target-now;const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),sec=Math.floor(diff%60000/1000);$('days').textContent=String(d).padStart(3,'0');$('hours').textContent=String(h).padStart(2,'0');$('minutes').textContent=String(m).padStart(2,'0');$('seconds').textContent=String(sec).padStart(2,'0');$('countNote').textContent=(now.getMonth()===targetMonth&&now.getDate()===targetDay)?'Today is our day. Hold it close.':'Every second is one more reason to smile.';if(now.getMonth()===targetMonth&&now.getDate()===targetDay){let seen=false;try{seen=localStorage.getItem('0216-nov24-seen')==='yes'}catch(e){}if(!seen&&!sessionStorage.getItem('0216-nov24-opened')){sessionStorage.setItem('0216-nov24-opened','yes');openNov24()}}}countdown();let countdownTimer=window.setInterval(countdown,1000);document.addEventListener("visibilitychange",()=>{if(document.hidden){window.clearInterval(countdownTimer)}else{countdown();window.clearInterval(countdownTimer);countdownTimer=window.setInterval(countdown,1000)}});const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.13,rootMargin:'0px 0px -6% 0px'});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 /* UPGRADED: once-only staggered reveal for existing gallery and card groups */
 document.querySelectorAll('.memory-grid,.photo-grid,.home-scrapbook-photos,.open-when-grid').forEach(group=>{const items=[...group.children];items.forEach((item,index)=>{item.style.setProperty('--reveal-delay',(Math.min(index,6)*85)+'ms');item.classList.add('motion-stagger')});});
 function floatHearts(n){for(let i=0;i<n;i++){const h=document.createElement('span');h.className='float-heart';h.textContent=['♡','♥','✧','❤'][Math.floor(Math.random()*4)];h.style.left=(Math.random()*100)+'vw';h.style.fontSize=(12+Math.random()*20)+'px';h.style.setProperty('--dur',(4+Math.random()*4)+'s');document.body.appendChild(h);setTimeout(()=>h.remove(),8500)}}
 let last=0;window.addEventListener('pointerdown',e=>{if(matchMedia('(hover: hover) and (pointer: fine)').matches&&Date.now()-last>700&&Math.random()>.55){last=Date.now();const h=document.createElement('span');h.className='float-heart';h.textContent='♡';h.style.left=e.clientX+'px';h.style.bottom=(innerHeight-e.clientY)+'px';h.style.setProperty('--dur','3.5s');document.body.appendChild(h);setTimeout(()=>h.remove(),4000)}},{passive:true});
 const canvas=$('stars'),ctx=canvas.getContext('2d',{alpha:true});let w=0,h=0,stars=[],starFrame=0,lastStarPaint=0;const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');function resize(){const dpr=Math.min(devicePixelRatio||1,1.5);w=canvas.width=Math.round(innerWidth*dpr);h=canvas.height=Math.round(innerHeight*dpr);canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';stars=Array.from({length:Math.min(innerWidth<600?28:115,Math.floor(innerWidth/(innerWidth<600?18:10)))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.35,a:Math.random(),v:Math.random()*.006+.002}));if(!document.hidden&&!reducedMotion.matches&&!starFrame)starFrame=requestAnimationFrame(draw);else if(reducedMotion.matches)drawStarsStatic()}function drawStarsStatic(){ctx.clearRect(0,0,w,h);for(const s of stars){ctx.fillStyle='rgba(248,218,225,.55)';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}}function draw(timestamp=0){starFrame=0;if(document.hidden||reducedMotion.matches){if(reducedMotion.matches)drawStarsStatic();return}if(timestamp-lastStarPaint<32){starFrame=requestAnimationFrame(draw);return}lastStarPaint=timestamp;ctx.clearRect(0,0,w,h);for(const s of stars){s.a+=s.v;if(s.a>1||s.a<.15)s.v*=-1;ctx.fillStyle='rgba(248,218,225,'+Math.max(.15,Math.min(.8,s.a))+')';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}starFrame=requestAnimationFrame(draw)}function syncStars(){if(starFrame){cancelAnimationFrame(starFrame);starFrame=0}if(document.hidden)return;if(reducedMotion.matches){drawStarsStatic();return}starFrame=requestAnimationFrame(draw)}resize();document.addEventListener('visibilitychange',syncStars);reducedMotion.addEventListener?.('change',syncStars);addEventListener('resize',resize,{passive:true});
 })();
-/* UPGRADED: Lenis and GSAP share one ticker; no scroll-event animation loop */
+/* UPGRADED: Lenis and GSAP share one ticker; native scroll remains the mobile fallback */
 (function(){
  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  const light=window.matchMedia('(max-width: 700px)').matches || (navigator.deviceMemory && navigator.deviceMemory<=4);
@@ -860,15 +884,47 @@ const canvas=$('stars'),ctx=canvas.getContext('2d',{alpha:true});let w=0,h=0,sta
  lenis.on('scroll',ScrollTrigger.update);
  const lenisRaf=time=>lenis.raf(time*1000);
  gsap.ticker.add(lenisRaf);
- gsap.ticker.lagSmoothing(0);
+ gsap.ticker.lagSmoothing(500,33);
  window.__0216Lenis=lenis;
- // A restrained hero depth shift, scrubbed by ScrollTrigger.
+
+ // Hero title reveals line-by-line, once, without changing the displayed copy.
+ const heroLines=gsap.utils.toArray('.hero-line-mask>span');
+ if(heroLines.length) gsap.fromTo(heroLines,{yPercent:115,autoAlpha:0},{yPercent:0,autoAlpha:1,duration:1.15,stagger:.1,ease:'power3.out',delay:.12});
+
+ // Restrained scroll depth and a lerped desktop-only pointer drift.
  const orbit=document.querySelector('.hero .orbit');
- if(orbit) gsap.to(orbit,{y:48,rotation:14,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
- // Reveal groups are one-shot; transforms and opacity only.
- gsap.utils.toArray('.motion-stagger').forEach((el)=>gsap.fromTo(el,{y:22,autoAlpha:0},{y:0,autoAlpha:1,duration:.8,delay:parseFloat(getComputedStyle(el).getPropertyValue('--reveal-delay'))/1000,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}}));
+ if(orbit){
+  gsap.to(orbit,{y:48,rotation:14,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+  const moveX=gsap.quickTo(orbit,'x',{duration:.85,ease:'power3.out'});
+  const moveY=gsap.quickTo(orbit,'y',{duration:.85,ease:'power3.out'});
+  const hero=document.querySelector('.hero');
+  hero?.addEventListener('pointermove',event=>{
+   if(event.pointerType!=='mouse')return;
+   const rect=hero.getBoundingClientRect();
+   const nx=(event.clientX-rect.left)/rect.width-.5;
+   const ny=(event.clientY-rect.top)/rect.height-.5;
+   moveX(nx*18);moveY(48+ny*12);
+  },{passive:true});
+  hero?.addEventListener('pointerleave',()=>{moveX(0);moveY(48)},{passive:true});
+ }
+
+ // One-shot reveals use transforms and opacity only.
+ gsap.utils.toArray('.motion-stagger').forEach(el=>{
+  const delay=parseFloat(getComputedStyle(el).getPropertyValue('--reveal-delay'))/1000||0;
+  gsap.fromTo(el,{y:22,autoAlpha:0},{y:0,autoAlpha:1,duration:.8,delay,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}});
+ });
+ window.addEventListener('load',()=>ScrollTrigger.refresh(),{once:true});
+
+ // Pause decorative CSS loops while their owning section is off-screen.
+ const motionTargets=document.querySelectorAll('header.hero,section.special-section,section#future-home,.nov24-scene');
+ if('IntersectionObserver' in window){
+  const motionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+   entry.target.classList.toggle('motion-paused',!entry.isIntersecting);
+  }),{rootMargin:'140px 0px',threshold:0});
+  motionTargets.forEach(target=>motionObserver.observe(target));
+ }
  window.addEventListener('pagehide',()=>{gsap.ticker.remove(lenisRaf);lenis.destroy()},{once:true});
-})();
+})();;
 
 </script>
 
