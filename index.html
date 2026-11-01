@@ -375,6 +375,34 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
  .game-art:after,.cabin-exterior,.couple-art,.date-couple,.bed-couple,.rithwik-character,.prapthi-character,.date-person,.bed-rithwik,.bed-prapthi,.bob-pup,.bob-play,.bed-bob,.bob-date-nap,.shared-blanket,.bedside-lamp,.date-heart,.bedroom-zs,.bob-zs,.date-window,.bedroom-window,.weather-snowflakes circle,.window-snow circle,.weather-rain-drops line,.window-rain line,.home-game-btn.primary,.home-game-btn.primary:after{animation:none!important}
 }
 
+
+/* November 24: the cabin reveal, our little museum, and a letter from the future */
+.nov24-experience{position:fixed;inset:0;z-index:10050;display:none;overflow-y:auto;background:radial-gradient(ellipse at 50% 15%,#63334b 0%,#241522 48%,#100d14 100%);color:#f9e9e8;padding:clamp(18px,4vw,54px);}
+.nov24-experience.active{display:grid;place-items:center;animation:nov24Fade .9s ease both}
+.nov24-shell{width:min(920px,100%);margin:auto;text-align:center;position:relative;padding:clamp(20px,4vw,48px) 0 38px}
+.nov24-kicker{font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#e6aabd;margin-bottom:22px}
+.nov24-title{font:400 clamp(36px,7vw,76px)/1.08 'Playfair Display',serif;letter-spacing:-.045em;margin:0 auto 18px;max-width:820px}
+.nov24-title em{color:#f0aabd;font-weight:400}
+.nov24-copy{font:italic clamp(16px,2vw,20px)/1.9 'Playfair Display',serif;color:#f2dce2bF;max-width:650px;margin:0 auto 30px}
+.nov24-scene{min-height:250px;display:grid;place-items:center;position:relative;margin:12px auto 28px;overflow:hidden;border:1px solid #f3c8d52b;border-radius:18px;background:linear-gradient(180deg,#201728aa,#120e18dd),radial-gradient(ellipse at 50% 100%,#a45b6b66,transparent 65%);box-shadow:0 24px 90px #0006}
+.nov24-moon{position:absolute;width:74px;height:74px;border-radius:50%;background:#f6d9dc;box-shadow:0 0 55px #f4c9d977;right:13%;top:13%}
+.nov24-trees{position:absolute;inset:auto 0 0;height:66%;background:linear-gradient(135deg,transparent 0 7%,#101b19 7% 13%,transparent 13% 20%,#14201d 20% 29%,transparent 29% 35%,#101a18 35% 43%,transparent 43% 53%,#13201c 53% 62%,transparent 62% 69%,#101a18 69% 78%,transparent 78%);clip-path:polygon(0 100%,0 38%,8% 0,17% 100%,25% 30%,34% 100%,43% 12%,53% 100%,63% 28%,73% 100%,82% 8%,92% 100%,100% 35%,100% 100%)}
+.nov24-cabin{position:relative;z-index:1;width:min(330px,70%);height:160px;margin-top:65px;background:linear-gradient(135deg,#7a4552,#3c2636);border:2px solid #d8a5a5;clip-path:polygon(50% 0,100% 40%,94% 40%,94% 100%,6% 100%,6% 40%,0 40%);filter:drop-shadow(0 0 22px #e8a2a255)}
+.nov24-cabin:before{content:"";position:absolute;left:42%;top:42%;width:48px;height:70px;background:linear-gradient(#ffe7b0,#b96c79);box-shadow:0 0 40px 12px #ffcf8b77}
+.nov24-bob{position:relative;z-index:2;font-size:58px;filter:drop-shadow(0 8px 18px #0008);animation:nov24Bob 2.4s ease-in-out infinite;margin-top:-12px}
+.nov24-envelope{font-size:30px;display:inline-grid;place-items:center;width:62px;height:62px;border-radius:50%;background:#f7d9dc;color:#6c3549;box-shadow:0 0 35px #f3b6c677;margin:0 auto 15px;animation:nov24Float 3s ease-in-out infinite}
+.nov24-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
+.nov24-btn{border:1px solid #f0c2cf66;background:#f2d4dc;color:#422132;padding:14px 24px;border-radius:999px;font:600 11px 'DM Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:transform .25s,background .25s}
+.nov24-btn:hover{transform:translateY(-3px);background:#fff0f2}.nov24-btn.secondary{background:transparent;color:#f6dce3}
+.nov24-panel{display:none;animation:nov24Fade .7s ease both}.nov24-panel.active{display:block}
+.nov24-exhibits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;text-align:left;margin:28px 0}
+.nov24-exhibit{border:1px solid #f2c4d02b;background:linear-gradient(150deg,#ffffff0d,#ffffff04);border-radius:14px;padding:22px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
+.nov24-exhibit span{font-size:10px;letter-spacing:.2em;color:#e6aabd}.nov24-exhibit h3{font:400 25px/1.2 'Playfair Display',serif;margin:18px 0 10px}.nov24-exhibit p{font-size:13px;line-height:1.8;color:#e9cfd6b8;margin:0}
+.nov24-letter{max-width:690px;margin:28px auto 0;padding:clamp(24px,5vw,52px);text-align:left;background:linear-gradient(145deg,#f6e8e1,#e8cbd0);color:#48283a;border-radius:4px;box-shadow:0 28px 90px #0006;position:relative}
+.nov24-letter:before{content:"";position:absolute;inset:9px;border:1px solid #9b647466;pointer-events:none}.nov24-letter h3{font:400 clamp(28px,4vw,42px)/1.2 'Playfair Display',serif;margin:12px 0 22px}.nov24-letter p{font:15px/2 'Playfair Display',serif;color:#68495a}.nov24-sign{font:italic 22px 'Playfair Display',serif;margin-top:28px;color:#98546c}
+@keyframes nov24Fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}@keyframes nov24Bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}@keyframes nov24Float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+@media(max-width:700px){.nov24-exhibits{grid-template-columns:1fr}.nov24-exhibit{min-height:0}.nov24-scene{min-height:220px}.nov24-experience{padding:14px}}
+@media(prefers-reduced-motion:reduce){.nov24-experience *{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body class="locked">
@@ -385,55 +413,6 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 <main>
 <section class="intro reveal"><div class="section-kicker">A note for Prapthi</div><h2 class="section-title">Some people feel like<br><em>coming home.</em></h2><p>Prapthi, you are that feeling for me. The little details about you that stay in my mind, the moments I replay when I miss you, and the way an ordinary day becomes special just because you’re in it. You have a place in my heart that no one else could ever fill.</p></section>
 <section class="countdown-section reveal"><div class="section-kicker">A date I keep close</div><h2 class="section-title">Counting down to <em>us.</em></h2><div class="countdown" aria-label="Countdown to November 24"><div class="time"><strong id="days">000</strong><span>days</span></div><div class="time"><strong id="hours">00</strong><span>hours</span></div><div class="time"><strong id="minutes">00</strong><span>minutes</span></div><div class="time"><strong id="seconds">00</strong><span>seconds</span></div></div><p class="tiny-note" id="countNote">Every second is one more reason to smile.</p></section>
-
-<div class="bob-scene" id="bobScene" role="dialog" aria-modal="true" aria-labelledby="bobTitle" aria-hidden="true">
-  <div class="bob-card">
-    <div class="bob-eyebrow">A little visitor from our future</div>
-    <div class="bob-dog-stage" aria-label="Bannana Bob the Shiba Inu runs over to you">
-      <svg class="bob-dog" viewBox="0 0 250 180" role="img" aria-label="A happy little Shiba Inu with a curled tail">
-        <defs>
-          <linearGradient id="bobFur" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#f7c77e"/><stop offset="1" stop-color="#d98c49"/></linearGradient>
-          <linearGradient id="bobCream" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4df"/><stop offset="1" stop-color="#e9d2b5"/></linearGradient>
-        </defs>
-        <g stroke="#9b5d37" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
-          <path class="bob-tail" d="M174 99 C207 103 211 65 190 61 C177 58 173 76 185 80" fill="none" stroke="#d99550" stroke-width="17"/>
-          <path d="M64 98 Q42 89 40 110 Q40 126 60 126 L80 120Z" fill="url(#bobFur)"/>
-          <path d="M63 95 Q61 65 84 60 L155 62 Q181 76 183 107 L174 132 L69 132 Q58 117 63 95Z" fill="url(#bobFur)"/>
-          <path d="M81 112 Q115 94 154 111 L163 132 L73 132Z" fill="url(#bobCream)" stroke="none"/>
-          <path class="bob-leg" d="M78 123 L76 150 Q76 159 89 159 L100 158 L99 132Z" fill="url(#bobFur)"/>
-          <path class="bob-leg" d="M143 126 L145 151 Q146 159 158 158 L168 157 L165 127Z" fill="url(#bobFur)"/>
-          <path d="M73 48 L64 12 Q62 5 71 11 L100 34Z" fill="url(#bobFur)"/>
-          <path d="M145 34 L170 12 Q178 5 176 17 L171 53Z" fill="url(#bobFur)"/>
-          <path d="M72 47 L70 20 L91 39Z" fill="#b96845" stroke="none"/>
-          <path d="M151 39 L170 20 L164 48Z" fill="#b96845" stroke="none"/>
-          <path d="M65 46 Q88 26 119 35 Q154 31 173 55 Q187 76 174 98 Q163 119 130 119 Q91 122 70 101 Q51 79 65 46Z" fill="url(#bobFur)"/>
-          <path d="M66 80 Q81 67 99 82 Q113 94 128 82 Q149 67 174 82 Q170 108 142 115 Q111 124 82 109 Q69 101 66 80Z" fill="url(#bobCream)" stroke="none"/>
-          <path d="M94 76 Q100 69 107 76" fill="none" stroke="#593526" stroke-width="3.5"/>
-          <path d="M137 76 Q144 69 150 76" fill="none" stroke="#593526" stroke-width="3.5"/>
-          <ellipse cx="102" cy="81" rx="3.5" ry="4.5" fill="#2d1b1b" stroke="none"/>
-          <ellipse cx="143" cy="81" rx="3.5" ry="4.5" fill="#2d1b1b" stroke="none"/>
-          <circle cx="103" cy="79" r="1.2" fill="white" stroke="none"/>
-          <circle cx="144" cy="79" r="1.2" fill="white" stroke="none"/>
-          <ellipse cx="123" cy="93" rx="7" ry="5" fill="#593526" stroke="none"/>
-          <path d="M123 97 Q119 104 113 100 M123 97 Q128 104 134 100" fill="none" stroke="#593526" stroke-width="2"/>
-          <ellipse cx="85" cy="91" rx="7" ry="4" fill="#e99a9b" opacity=".65" stroke="none"/>
-          <ellipse cx="157" cy="91" rx="7" ry="4" fill="#e99a9b" opacity=".65" stroke="none"/>
-          <path d="M106 113 Q124 121 141 112" fill="none" stroke="#d4b99b" stroke-width="2"/>
-        </g>
-        <path d="M110 133 Q123 139 136 133 L132 144 Q123 150 114 144Z" fill="#a84365" stroke="#f2c1ce" stroke-width="1.5"/>
-        <circle cx="124" cy="139" r="3" fill="#f8d7df"/>
-        <path d="M58 58 Q44 64 49 75 M180 57 Q194 62 190 73" fill="none" stroke="#f1b7c8" stroke-width="3" stroke-linecap="round"/>
-        <path d="M90 20 l-4 -8 M120 16 l0 -9 M150 21 l4 -8" stroke="#f1b7c8" stroke-width="2.5" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <div class="bob-bubble">
-      <h2 class="bob-title" id="bobTitle">Mommy, don’t give up on our dream. ♡</h2>
-      <p class="bob-copy">It’s me, Bannana Bob! One day, I want to run around our little home in the woods, with you and Daddy right there beside me. We’ll have our quiet mornings, our cozy nights, and all the love in the world. Please don’t give up on the dream, Mommy. We’re going to keep trying, face every obstacle together, and make our little family real , one day at a time. I’m already saving you the biggest Shiba hugs, Munchkin. 🐾</p>
-    </div>
-    <button class="bob-close" id="bobClose" type="button">Come here, Bannana Bob ♡</button>
-    <div class="bob-hint">A tiny reminder from your future little family</div>
-  </div>
-</div>
 
 <section class="memories"><div class="memory-head reveal"><div><div class="section-kicker">The little things</div><h2 class="section-title">Our kind of <em>magic.</em></h2></div><p>Not every beautiful thing needs a photograph. Some of the best memories live quietly in the heart.</p></div><div class="memory-grid">
 <article class="memory-card reveal"><span class="memory-number">01 / 6:00 AM</span><div class="memory-icon">☀</div><div><h3>The sunrise on the hill</h3><p>Taking you up that hill and confessing my feelings around six in the morning, with the sun coming up. I’ll always remember the beginning of us.</p></div></article>
@@ -710,8 +689,48 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 </main>
 <aside class="music-player" id="musicPlayer" aria-label="Background music player"><audio id="backgroundAudio" preload="metadata" playsinline></audio><div class="music-top"><div class="music-cover-wrap"><img class="music-cover" src="/0216/photos/this-pic-changed-my-whole-idea.jpg" alt="Prapthi"></div><div class="music-meta"><div class="music-title" id="musicTitle">Reflections</div><div class="music-artist" id="musicArtist">The Neighbourhood</div></div><button class="music-btn primary" id="musicPlay" type="button" aria-label="Play music" title="Play or pause">▶</button><button class="music-btn music-toggle" id="musicMute" type="button" aria-label="Mute audio" title="Mute audio">♫</button><button class="music-btn music-expand" id="musicExpand" type="button" aria-label="Expand music player" aria-expanded="false" title="More controls">⌃</button></div><div class="music-details"><div class="music-details-inner"><div class="music-kicker">our little soundtrack ♡</div><div class="music-progress"><span id="musicCurrent">0:00</span><input class="music-seek" id="musicSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek through song"><span id="musicDuration">0:00</span></div><div class="music-controls"><button class="music-btn" id="musicPrev" type="button" aria-label="Previous song" title="Previous song">|◀</button><button class="music-btn" id="musicBack" type="button" aria-label="Back ten seconds" title="Back 10 seconds">↶10</button><button class="music-btn primary" id="musicPlayExpanded" type="button" aria-label="Play music" title="Play or pause">▶</button><button class="music-btn" id="musicForward" type="button" aria-label="Forward ten seconds" title="Forward 10 seconds">10↷</button><button class="music-btn" id="musicNext" type="button" aria-label="Next song" title="Next song">▶|</button></div><select class="music-track-select" id="musicTrackSelect" aria-label="Choose a song"></select><div class="music-bottom"><span class="music-status" id="musicStatus" aria-live="polite">Tap play to start ♡</span><div class="music-volume"><span aria-hidden="true">◖</span><input id="musicVolume" type="range" min="0" max="1" value="0.65" step="0.01" aria-label="Volume"></div></div></div></div></aside>
 <footer><span class="heart">♥</span><p>Made with all my heart for Prapthi · November 24 · just us</p></footer>
+
+<div class="nov24-experience" id="nov24Experience" role="dialog" aria-modal="true" aria-labelledby="nov24MainTitle" aria-hidden="true">
+ <div class="nov24-shell">
+  <section class="nov24-panel active" data-nov24-panel="intro">
+   <div class="nov24-kicker">November 24 · a little something for you</div>
+   <div class="nov24-scene" aria-hidden="true"><div class="nov24-moon"></div><div class="nov24-trees"></div><div class="nov24-cabin"></div><div class="nov24-bob">🐕</div></div>
+   <div class="nov24-envelope" aria-hidden="true">✉</div>
+   <h1 class="nov24-title" id="nov24MainTitle">Someone has been waiting all year <em>to celebrate us.</em></h1>
+   <p class="nov24-copy">Bannana Bob has a tiny delivery. He says the cabin is ready, the lights are warm, and there are a few memories he wants to show you.</p>
+   <div class="nov24-actions"><button class="nov24-btn" type="button" data-nov24-next="museum">Follow Bob inside ♡</button></div>
+  </section>
+  <section class="nov24-panel" data-nov24-panel="museum">
+   <div class="nov24-kicker">The little museum of us</div>
+   <h2 class="nov24-title">A whole world, made of <em>little moments.</em></h2>
+   <p class="nov24-copy">Some moments are loud. The ones I keep closest are often the quiet ones. These are a few rooms in the story I never want to forget.</p>
+   <div class="nov24-exhibits">
+    <article class="nov24-exhibit"><span>EXHIBIT 01 · THE BEGINNING</span><div><h3>Six in the morning.</h3><p>That hill, the sunrise, and me finally telling you how I felt. The sky was waking up, and so was a part of my life I didn't know I was waiting for.</p></div></article>
+    <article class="nov24-exhibit"><span>EXHIBIT 02 · THE QUIET</span><div><h3>Tata Promount.</h3><p>That cold walk, the quiet around us, and having nowhere more important to be than right there beside you. Ordinary minutes that became ours.</p></div></article>
+    <article class="nov24-exhibit"><span>EXHIBIT 03 · THE DREAM</span><div><h3>A home in the woods.</h3><p>A warm window, trees outside, slow mornings, and one very spoiled Shiba named Bannana Bob. Not a perfect life. A kind one, built together.</p></div></article>
+   </div>
+   <p class="nov24-copy">And the best part? We are still making the story. These aren't the only rooms. They are just the ones I wanted you to walk through tonight.</p>
+   <div class="nov24-actions"><button class="nov24-btn secondary" type="button" data-nov24-back="intro">Back to Bob</button><button class="nov24-btn" type="button" data-nov24-next="future">There's one more room ♡</button></div>
+  </section>
+  <section class="nov24-panel" data-nov24-panel="future">
+   <div class="nov24-kicker">A letter from somewhere ahead</div>
+   <h2 class="nov24-title">To us, <em>when we get there.</em></h2>
+   <p class="nov24-copy">I don't know exactly what our future looks like. But I know the kind of home I hope we make.</p>
+   <article class="nov24-letter">
+    <div class="nov24-kicker" style="color:#98546c">A note from our future</div>
+    <h3>My Munchkin,</h3>
+    <p>I hope you are reading this somewhere warm, with the trees moving outside our window and Bannana Bob taking up far more of the sofa than his tiny body should allow.</p>
+    <p>I hope we still find reasons to laugh at the smallest things. I hope ordinary mornings still feel special because we get to share them. Maybe there are muddy paw prints near the door, two cups left on the table, a song playing softly, and absolutely no rush to be anywhere else.</p>
+    <p>We won't get every day right. There will be difficult days, changes, and things we have to figure out as we go. But I hope we keep choosing patience, honesty, kindness, and the same team. Not a perfect story. A real one, that we keep writing together.</p>
+    <p>Thank you for being part of my story, and for letting me imagine all these little tomorrows with you. I don't need to know every detail yet. I just hope we keep building a life that feels like home to both of us.</p>
+    <div class="nov24-sign">With all my love, always,<br>Rithwik ♡</div>
+   </article>
+   <div class="nov24-actions"><button class="nov24-btn secondary" type="button" data-nov24-back="museum">Walk through again</button><button class="nov24-btn" type="button" id="nov24Finish">Stay in our little world ♡</button></div>
+  </section>
+ </div>
+</div>
 <script>
-(()=>{const $=id=>document.getElementById(id);let bobHugCount=0;const bobOriginalTitle=$('bobTitle').textContent,bobOriginalCopy=$('bobScene').querySelector('.bob-copy').textContent;function showBob(){const scene=$('bobScene');scene.classList.remove('cuddle');bobHugCount=0;$('bobTitle').textContent=bobOriginalTitle;$('bobScene').querySelector('.bob-copy').textContent=bobOriginalCopy;$('bobClose').textContent='Come here, Bannana Bob ♡';$('bobScene').querySelector('.bob-hint').textContent='A tiny reminder from your future little family';scene.classList.add('active');scene.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>$('bobClose').focus({preventScroll:true}),450);floatHearts(24)}function hideBob(){const scene=$('bobScene');scene.classList.remove('active','cuddle');scene.setAttribute('aria-hidden','true');document.body.style.overflow=''}$('bobClose').addEventListener('click',()=>{const scene=$('bobScene');bobHugCount++;scene.classList.remove('cuddle');void scene.offsetWidth;scene.classList.add('cuddle');$('bobTitle').textContent='Hug delivered, Mommy. ♡';$('bobScene').querySelector('.bob-copy').textContent='Bannana Bob has officially claimed his cuddle. One day, this hug will be real, with tiny paws padding around our home in the woods and our little family all together. Until then, here is a big Shiba hug from the future. I love you, Munchkin. 🐾';$('bobClose').textContent='One more hug, Bob ♡';$('bobScene').querySelector('.bob-hint').textContent=bobHugCount===1?'He ran all this way just to cuddle you.':'Bob says there is no such thing as too many hugs.';floatHearts(28)});$('bobScene').addEventListener('click',e=>{if(e.target===$('bobScene'))hideBob()});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('bobScene').classList.contains('active'))hideBob()});const TEST_KEY_ENABLED=true;/* TEST ONLY: press K to preview Bannana Bob; set false before sharing the final site. */window.addEventListener('keydown',e=>{if(TEST_KEY_ENABLED&&e.key.toLowerCase()==='k'&&!e.repeat&&!/input|textarea|select/i.test(document.activeElement.tagName)){e.preventDefault();showBob()}});const gate=$('gate');$('openSite').addEventListener('click',()=>{gate.classList.add('gone');document.body.classList.remove('locked');setTimeout(()=>floatHearts(12),450);});function wireLetter(buttonId,letterId){$(buttonId).addEventListener('click',()=>{const letter=$(letterId),button=$(buttonId),opened=letter.classList.toggle('open');button.style.display=opened?'none':'grid';button.setAttribute('aria-expanded',String(opened));if(opened){setTimeout(()=>letter.scrollIntoView({behavior:'smooth',block:'center'}),150);floatHearts(8)}})}wireLetter('envelope','loveLetter');wireLetter('apologyEnvelope','apologyLetter');$('surpriseBtn').addEventListener('click',()=>{const el=$('surprise');el.classList.toggle('show');$('surpriseBtn').textContent=el.classList.contains('show')?'you’re my favorite surprise ♡':'One last little surprise ♡';floatHearts(18)});
+(()=>{const $=id=>document.getElementById(id);const gate=$('gate');$('openSite').addEventListener('click',()=>{gate.classList.add('gone');document.body.classList.remove('locked');setTimeout(()=>floatHearts(12),450);});function wireLetter(buttonId,letterId){$(buttonId).addEventListener('click',()=>{const letter=$(letterId),button=$(buttonId),opened=letter.classList.toggle('open');button.style.display=opened?'none':'grid';button.setAttribute('aria-expanded',String(opened));if(opened){setTimeout(()=>letter.scrollIntoView({behavior:'smooth',block:'center'}),150);floatHearts(8)}})}wireLetter('envelope','loveLetter');wireLetter('apologyEnvelope','apologyLetter');$('surpriseBtn').addEventListener('click',()=>{const el=$('surprise');el.classList.toggle('show');$('surpriseBtn').textContent=el.classList.contains('show')?'you’re my favorite surprise ♡':'One last little surprise ♡';floatHearts(18)});
 
 const openWhenCopy={
  miss:['When you miss me','I wish I could be there to pull you close, kiss your forehead, and let the world be quiet for a bit. Until I can, remember that you’re part of my everyday thoughts, even when we’re doing completely different things. I miss you too, Munchkin. This distance or this moment won’t change how glad I am that it’s you. ♡'],
@@ -753,8 +772,7 @@ const scrapbook=document.getElementById('homeScrapbook');document.getElementById
 function updateCabinTime(){const hour=new Date().getHours();homeArt.classList.remove('time-dawn','time-day','time-sunset','time-night');const period=hour>=5&&hour<9?'dawn':hour>=9&&hour<16?'day':hour>=16&&hour<19?'sunset':'night';homeArt.classList.add('time-'+period);if(period==='dawn'&&homeInteractionState.weather==='clear')homeArt.classList.add('weather-dawn')}updateCabinTime();
 document.getElementById('finaleOpen').addEventListener('click',()=>{const letter=document.getElementById('finaleLetter'),opened=letter.classList.toggle('open');document.getElementById('finaleOpen').textContent=opened?'Keep this close to your heart ♡':'Open our last little letter ♡';if(opened){letter.scrollIntoView({behavior:'smooth',block:'center'});floatHearts(22)}});
 
-const targetMonth=10,targetDay=24;let bobMidnightTriggered=false;function countdown(){const now=new Date();let target=new Date(now.getFullYear(),targetMonth,targetDay,0,0,0);if(now>=target){const anniversaryMoment=now.getMonth()===targetMonth&&now.getDate()===targetDay&&now.getHours()===0;if(anniversaryMoment&&!bobMidnightTriggered){bobMidnightTriggered=true;showBob()}target=new Date(now.getFullYear()+1,targetMonth,targetDay,0,0,0)}const diff=target-now;const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);$('days').textContent=String(d).padStart(3,'0');$('hours').textContent=String(h).padStart(2,'0');$('minutes').textContent=String(m).padStart(2,'0');$('seconds').textContent=String(s).padStart(2,'0');$('countNote').textContent=(now.getMonth()===targetMonth&&now.getDate()===targetDay)?'Today is our day. Hold it close.':'Every second is one more reason to smile.'}countdown();setInterval(countdown,1000);
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.13});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const targetMonth=10,targetDay=24;const nov24=document.getElementById('nov24Experience');let nov24Started=false;function openNov24(){if(nov24Started)return;nov24Started=true;nov24.classList.add('active');nov24.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';floatHearts(30)}function closeNov24(){nov24.classList.remove('active');nov24.setAttribute('aria-hidden','true');document.body.style.overflow='';try{localStorage.setItem('0216-nov24-seen','yes')}catch(e){}}function setNov24Panel(name){nov24.querySelectorAll('[data-nov24-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.nov24Panel===name));nov24.scrollTop=0;const heading=nov24.querySelector('[data-nov24-panel="'+name+'"] h1, [data-nov24-panel="'+name+'"] h2');if(heading)heading.focus?.({preventScroll:true})}nov24.querySelectorAll('[data-nov24-next]').forEach(button=>button.addEventListener('click',()=>setNov24Panel(button.dataset.nov24Next)));nov24.querySelectorAll('[data-nov24-back]').forEach(button=>button.addEventListener('click',()=>setNov24Panel(button.dataset.nov24Back)));document.getElementById('nov24Finish').addEventListener('click',()=>{closeNov24();document.getElementById('future-home').scrollIntoView({behavior:'smooth',block:'start'});floatHearts(22)});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&nov24.classList.contains('active')){e.preventDefault();setNov24Panel('future')}});function countdown(){const now=new Date();let target=new Date(now.getFullYear(),targetMonth,targetDay,0,0,0);if(now>=target)target=new Date(now.getFullYear()+1,targetMonth,targetDay,0,0,0);const diff=target-now;const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),sec=Math.floor(diff%60000/1000);$('days').textContent=String(d).padStart(3,'0');$('hours').textContent=String(h).padStart(2,'0');$('minutes').textContent=String(m).padStart(2,'0');$('seconds').textContent=String(sec).padStart(2,'0');$('countNote').textContent=(now.getMonth()===targetMonth&&now.getDate()===targetDay)?'Today is our day. Hold it close.':'Every second is one more reason to smile.';if(now.getMonth()===targetMonth&&now.getDate()===targetDay){let seen=false;try{seen=localStorage.getItem('0216-nov24-seen')==='yes'}catch(e){}if(!seen&&!sessionStorage.getItem('0216-nov24-opened')){sessionStorage.setItem('0216-nov24-opened','yes');openNov24()}}}countdown();setInterval(countdown,1000);const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.13});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 function floatHearts(n){for(let i=0;i<n;i++){const h=document.createElement('span');h.className='float-heart';h.textContent=['♡','♥','✧','❤'][Math.floor(Math.random()*4)];h.style.left=(Math.random()*100)+'vw';h.style.fontSize=(12+Math.random()*20)+'px';h.style.setProperty('--dur',(4+Math.random()*4)+'s');document.body.appendChild(h);setTimeout(()=>h.remove(),8500)}}
 let last=0;window.addEventListener('pointerdown',e=>{if(Date.now()-last>700&&Math.random()>.55){last=Date.now();const h=document.createElement('span');h.className='float-heart';h.textContent='♡';h.style.left=e.clientX+'px';h.style.bottom=(innerHeight-e.clientY)+'px';h.style.setProperty('--dur','3.5s');document.body.appendChild(h);setTimeout(()=>h.remove(),4000)}},{passive:true});
 const canvas=$('stars'),ctx=canvas.getContext('2d',{alpha:true});let w=0,h=0,stars=[],starFrame=0;const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');function resize(){const dpr=Math.min(devicePixelRatio||1,1.5);w=canvas.width=Math.round(innerWidth*dpr);h=canvas.height=Math.round(innerHeight*dpr);canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';stars=Array.from({length:Math.min(115,Math.floor(innerWidth/10))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.35,a:Math.random(),v:Math.random()*.006+.002}));if(!document.hidden&&!reducedMotion.matches&&!starFrame)starFrame=requestAnimationFrame(draw);else if(reducedMotion.matches)drawStarsStatic()}function drawStarsStatic(){ctx.clearRect(0,0,w,h);for(const s of stars){ctx.fillStyle='rgba(248,218,225,.55)';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}}function draw(){starFrame=0;if(document.hidden||reducedMotion.matches){if(reducedMotion.matches)drawStarsStatic();return}ctx.clearRect(0,0,w,h);for(const s of stars){s.a+=s.v;if(s.a>1||s.a<.15)s.v*=-1;ctx.fillStyle='rgba(248,218,225,'+Math.max(.15,Math.min(.8,s.a))+')';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}starFrame=requestAnimationFrame(draw)}function syncStars(){if(starFrame){cancelAnimationFrame(starFrame);starFrame=0}if(document.hidden)return;if(reducedMotion.matches){drawStarsStatic();return}starFrame=requestAnimationFrame(draw)}resize();document.addEventListener('visibilitychange',syncStars);reducedMotion.addEventListener?.('change',syncStars);addEventListener('resize',resize,{passive:true});
