@@ -445,6 +445,9 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 .nov24-btn:hover{transform:translateY(-3px);background:#fff0f2}.nov24-btn.secondary{background:transparent;color:#f6dce3}
 .nov24-panel{display:none;opacity:0;transform:translate3d(0,22px,0) scale(.985);transform-origin:50% 45%}
 .nov24-panel.active{display:block;animation:nov24PanelIn .85s cubic-bezier(.16,1,.3,1) both}
+/* Visibility fallback: the active anniversary panel must remain visible without animation support. */
+.nov24-panel.active{opacity:1;transform:none}
+
 .nov24-panel.active .nov24-kicker,.nov24-panel.active .nov24-title,.nov24-panel.active .nov24-copy,.nov24-panel.active .nov24-actions{animation:nov24TextIn .75s cubic-bezier(.16,1,.3,1) both}
 .nov24-panel.active .nov24-title{animation-delay:.08s}
 .nov24-panel.active .nov24-copy{animation-delay:.16s}
