@@ -637,6 +637,31 @@ body.locked{overflow:hidden}
 .nov24-flower-play .nov24-flower-caption{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#f6dce3;font:italic clamp(11px,1.6vw,15px) 'Playfair Display',serif;letter-spacing:.04em;text-shadow:0 2px 8px #130916;opacity:0;animation:nov24TextIn .8s ease 3s forwards}
 .nov24-love-notes{display:grid;gap:7px;margin:-8px auto 24px;color:#e8bdca;font:italic clamp(14px,1.8vw,17px)/1.65 'Playfair Display',serif}
 .nov24-love-notes span:first-child{color:#e8a8b8}
+/* Extra life and depth for the bouquet scene */
+.nov24-flower-scene{background:radial-gradient(ellipse at 50% 38%,#553044 0%,#241526 62%,#160e1b 100%);border-color:#f2c5d34a;box-shadow:0 28px 100px #07050c99, inset 0 1px #ffffff12}
+.nov24-flower-art{filter:drop-shadow(0 12px 22px #09060c45)}
+.nov24-flower-play .nov24-maker-boy{animation-duration:5.6s}
+.nov24-flower-play .nov24-maker-girl{animation-duration:5.2s}
+.nov24-flower-play .nov24-reaching-arm{stroke-dasharray:240;stroke-dashoffset:240;animation:bouquet-reach 1s cubic-bezier(.2,.8,.2,1) .9s forwards}
+.nov24-flower-play .nov24-arm-girl{animation-delay:1.08s}
+.nov24-flower-play .nov24-hands path:nth-child(n+3){opacity:0;animation:bouquet-hand-in .45s ease 1.8s forwards}
+.nov24-flower-play .nov24-arm-girl~path:nth-child(4){animation-delay:1.95s}
+.nov24-flower-play .nov24-floating-petals{transform-box:fill-box;transform-origin:center;animation:petals-drift 7s ease-in-out infinite}
+.nov24-flower-play .nov24-floating-petals path:nth-child(2){animation:petal-twirl 6s ease-in-out -2s infinite}
+.nov24-flower-play .nov24-floating-petals path:nth-child(3){animation:petal-twirl 7s ease-in-out -4s infinite}
+.nov24-flower-play .nov24-floating-petals path:nth-child(4){animation:petal-twirl 8s ease-in-out -1s infinite}
+.nov24-flower-play .nov24-bouquet{transform-box:fill-box;transform-origin:50% 100%;animation:bouquet-sway 6s ease-in-out 3.1s infinite}
+.nov24-flower-play .nov24-flower-sparkles path{transform-box:fill-box;transform-origin:center;animation:star-twinkle 2.8s ease-in-out infinite alternate}
+.nov24-flower-play .nov24-flower-sparkles path:nth-child(2){animation-delay:.6s}.nov24-flower-play .nov24-flower-sparkles path:nth-child(3){animation-delay:1.1s}.nov24-flower-play .nov24-flower-sparkles path:nth-child(4){animation-delay:1.7s}
+.nov24-flower-play .nov24-maker-boy>ellipse:nth-of-type(2),.nov24-flower-play .nov24-maker-girl>ellipse:nth-of-type(2){animation:face-blink 5.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.nov24-flower-caption{letter-spacing:.07em;text-shadow:0 2px 8px #130916,0 0 18px #f4b5c9aa}
+@keyframes bouquet-reach{to{stroke-dashoffset:0}}
+@keyframes bouquet-hand-in{to{opacity:1}}
+@keyframes bouquet-sway{0%,100%{rotate:0deg}50%{rotate:1.2deg}}
+@keyframes petals-drift{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes petal-twirl{0%,100%{translate:0 0;rotate:0deg}50%{translate:8px -15px;rotate:35deg}}
+@keyframes star-twinkle{0%{opacity:.2;scale:.78}100%{opacity:.95;scale:1.12}}
+@keyframes face-blink{0%,46%,50%,100%{scale:1 1}48%{scale:1 .08}}
 @keyframes bouquet-stem{to{stroke-dashoffset:0}}
 @keyframes bouquet-bloom{0%{opacity:0;scale:.12;rotate:-18deg}75%{opacity:1;scale:1.12;rotate:5deg}100%{opacity:1;scale:1;rotate:0}}
 @keyframes bouquet-paper{from{opacity:0;translate:0 22px;scale:.94}to{opacity:1;translate:0 0;scale:1}}
@@ -645,7 +670,7 @@ body.locked{overflow:hidden}
 @keyframes bouquet-glow{from{opacity:.45;scale:.96}to{opacity:1;scale:1.05}}
 @keyframes bouquet-sparkles{from{opacity:.12;scale:.85}to{opacity:.8;scale:1.04}}
 @media(max-width:700px){.nov24-flower-scene{margin:12px auto 20px;border-radius:15px}.nov24-flower-caption{bottom:8px}.nov24-love-notes{margin:0 auto 20px}}
-@media(prefers-reduced-motion:reduce){.nov24-maker,.nov24-flower-glow,.nov24-flower-sparkles{animation:none!important}.nov24-bouquet-stem{stroke-dashoffset:0;animation:none}.nov24-bloom,.nov24-bouquet-paper,.nov24-bouquet-ribbon,.nov24-flower-caption{opacity:1;animation:none;transform:none}}
+@media(prefers-reduced-motion:reduce){.nov24-maker,.nov24-flower-glow,.nov24-flower-sparkles,.nov24-floating-petals,.nov24-bouquet{animation:none!important}.nov24-bouquet-stem,.nov24-reaching-arm{stroke-dashoffset:0;animation:none}.nov24-bloom,.nov24-bouquet-paper,.nov24-bouquet-ribbon,.nov24-flower-caption,.nov24-hands path{opacity:1;animation:none;transform:none}}
 </style>
 </head>
 <body class="locked">
@@ -976,7 +1001,7 @@ body.locked{overflow:hidden}
      <g class="nov24-maker nov24-maker-boy">
       <path d="M135 470Q142 350 205 326Q250 308 291 338Q340 373 346 470Z" fill="url(#bouquetBoyCoat)"/>
       <path d="M185 364Q220 387 266 366L284 470H168Z" fill="#e2d5d4" opacity=".8"/>
-      <path d="M178 347Q150 382 185 412L294 370Q309 354 287 338" fill="none" stroke="#d9a17e" stroke-width="27" stroke-linecap="round"/>
+      <!-- Arms are layered in front of the bouquet below so both characters appear to hold it together. -->
       <path d="M200 283Q194 313 212 333Q239 353 267 327Q283 308 275 280Z" fill="#c98765"/>
       <ellipse cx="239" cy="244" rx="70" ry="78" fill="#dca17e"/>
       <path d="M171 243Q155 177 218 164Q283 148 309 209Q314 242 294 267L281 219Q256 225 231 204Q206 228 178 220Z" fill="#30252c"/>
@@ -989,7 +1014,7 @@ body.locked{overflow:hidden}
      <g class="nov24-maker nov24-maker-girl">
       <path d="M455 470Q455 357 510 330Q560 304 611 340Q667 377 669 470Z" fill="url(#bouquetGirlDress)"/>
       <path d="M514 350Q560 378 610 349L627 470H493Z" fill="#e7b2c3" opacity=".23"/>
-      <path d="M490 347Q463 378 491 411L601 371Q621 352 597 337" fill="none" stroke="#c98765" stroke-width="26" stroke-linecap="round"/>
+      
       <path d="M530 281Q526 313 545 332Q573 351 599 326Q614 308 604 280Z" fill="#c98765"/>
       <ellipse cx="570" cy="241" rx="69" ry="77" fill="#e0a17e"/>
       <path d="M504 251Q478 190 527 166Q590 137 632 190Q659 225 631 297L612 335Q593 302 601 250Q566 270 532 241L512 287Z" fill="#30232e"/>
@@ -1021,6 +1046,18 @@ body.locked{overflow:hidden}
       </g>
       <path class="nov24-bouquet-ribbon" d="M361 356Q400 373 439 356L430 389Q400 405 370 389Z" fill="#9b3d5b" stroke="#f2b8c8" stroke-width="2"/>
       <path d="M382 378Q340 365 338 394Q355 407 390 389M418 378Q460 365 462 394Q445 407 410 389" fill="#c45c7c" stroke="#f2b8c8" stroke-width="2"/>
+     </g>
+     <g class="nov24-hands" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path class="nov24-reaching-arm nov24-arm-boy" d="M178 347Q151 378 181 402Q199 416 222 408L337 372" stroke="#d9a17e" stroke-width="27"/>
+      <path class="nov24-reaching-arm nov24-arm-girl" d="M490 347Q517 378 487 402Q469 416 446 408L463 372" stroke="#c98765" stroke-width="26"/>
+      <path d="M329 369Q337 360 346 369Q350 377 341 382Q331 381 329 369Z" fill="#e3ad8d" stroke="none"/>
+      <path d="M454 369Q463 360 471 369Q469 381 459 382Q450 377 454 369Z" fill="#d99a79" stroke="none"/>
+     </g>
+     <g class="nov24-floating-petals" fill="#e99bb2" opacity=".8">
+      <path d="M160 185q-10-15 4-22q15 10-4 22Z"/>
+      <path d="M622 206q-9-14 4-21q14 10-4 21Z"/>
+      <path d="M238 112q-8-12 3-18q12 8-3 18Z"/>
+      <path d="M560 145q-8-12 3-18q12 8-3 18Z"/>
      </g>
      <g fill="#f4d5dd" class="nov24-flower-sparkles"><path d="M130 120l5 13 13 5-13 5-5 13-5-13-13-5 13-5Z"/><path d="M660 100l4 10 10 4-10 4-4 10-4-10-10-4 10-4Z"/><path d="M690 285l3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/><path d="M105 290l3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/></g>
     </svg>
