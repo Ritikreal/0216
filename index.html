@@ -614,6 +614,32 @@ body.locked{overflow:hidden}
 .nov24-panel.active .nov24-kicker,.nov24-panel.active .nov24-title,.nov24-panel.active .nov24-copy,.nov24-panel.active .nov24-actions,.nov24-panel.active .nov24-exhibit,.nov24-letter{animation:none}
 .nov24-moon,.nov24-trees,.nov24-cabin,.nov24-bob{translate:var(--px,0px) var(--py,0px)}
 .nov24-experience.nov24-paused .nov24-filmgrain,.nov24-experience.nov24-paused .nov24-particle{animation-play-state:paused!important}
+/* NOVEMBER 24 BOUQUET STORY — additive intro treatment */
+.nov24-bouquet-panel{max-width:100%;padding-top:4px}
+.nov24-flower-scene{position:relative;width:min(100%,780px);margin:18px auto 25px;overflow:hidden;border:1px solid #f2c5d32c;border-radius:22px;background:#1b1220;box-shadow:0 26px 95px #07050c88;isolation:isolate}
+.nov24-flower-glow{position:absolute;inset:12% 18%;background:radial-gradient(ellipse,#f2a9bf35,transparent 68%);filter:blur(24px);animation:bouquet-glow 5s ease-in-out infinite alternate}
+.nov24-flower-art{position:relative;display:block;width:100%;height:auto;overflow:visible}
+.nov24-maker{transform-box:fill-box;transform-origin:50% 100%;animation:bouquet-makers 4.8s ease-in-out infinite}
+.nov24-maker-girl{animation-delay:-1.8s}
+.nov24-bouquet-stem{stroke-dasharray:260;stroke-dashoffset:260;animation:bouquet-stem 1.15s cubic-bezier(.2,.8,.2,1) forwards}
+.nov24-bouquet-stem:nth-child(2){animation-delay:.24s}.nov24-bouquet-stem:nth-child(3){animation-delay:.38s}.nov24-bouquet-stem:nth-child(4){animation-delay:.52s}.nov24-bouquet-stem:nth-child(5){animation-delay:.66s}.nov24-bouquet-stem:nth-child(6){animation-delay:.8s}.nov24-bouquet-stem:nth-child(7){animation-delay:.94s}
+.nov24-bloom{opacity:0;transform-box:fill-box;transform-origin:center;animation:bouquet-bloom .8s cubic-bezier(.18,1.3,.35,1) forwards}
+.nov24-bloom.bloom-one{animation-delay:1.1s}.nov24-bloom.bloom-two{animation-delay:1.35s}.nov24-bloom.bloom-three{animation-delay:1.6s}.nov24-bloom.bloom-four{animation-delay:1.85s}.nov24-bloom.bloom-five{animation-delay:2.1s}.nov24-bloom.bloom-six{animation-delay:2.35s}.nov24-bloom.bloom-seven{animation-delay:2.6s}
+.nov24-bouquet-paper{opacity:0;transform-origin:400px 405px;animation:bouquet-paper 1s cubic-bezier(.2,.8,.2,1) .75s forwards}
+.nov24-bouquet-ribbon{opacity:0;animation:bouquet-ribbon .8s cubic-bezier(.2,.8,.2,1) 2.75s forwards}
+.nov24-flower-sparkles{opacity:0;animation:bouquet-sparkles 2s ease-in-out 2.7s infinite alternate}
+.nov24-flower-caption{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#f6dce3;font:italic clamp(11px,1.6vw,15px) 'Playfair Display',serif;letter-spacing:.04em;text-shadow:0 2px 8px #130916;opacity:0;animation:nov24TextIn .8s ease 3s forwards}
+.nov24-love-notes{display:grid;gap:7px;margin:-8px auto 24px;color:#e8bdca;font:italic clamp(14px,1.8vw,17px)/1.65 'Playfair Display',serif}
+.nov24-love-notes span:first-child{color:#e8a8b8}
+@keyframes bouquet-stem{to{stroke-dashoffset:0}}
+@keyframes bouquet-bloom{0%{opacity:0;scale:.12;rotate:-18deg}75%{opacity:1;scale:1.12;rotate:5deg}100%{opacity:1;scale:1;rotate:0}}
+@keyframes bouquet-paper{from{opacity:0;translate:0 22px;scale:.94}to{opacity:1;translate:0 0;scale:1}}
+@keyframes bouquet-ribbon{from{opacity:0;scale:.65}to{opacity:1;scale:1}}
+@keyframes bouquet-makers{0%,100%{translate:0 0}50%{translate:0 -3px}}
+@keyframes bouquet-glow{from{opacity:.45;scale:.96}to{opacity:1;scale:1.05}}
+@keyframes bouquet-sparkles{from{opacity:.12;scale:.85}to{opacity:.8;scale:1.04}}
+@media(max-width:700px){.nov24-flower-scene{margin:12px auto 20px;border-radius:15px}.nov24-flower-caption{bottom:8px}.nov24-love-notes{margin:0 auto 20px}}
+@media(prefers-reduced-motion:reduce){.nov24-maker,.nov24-flower-glow,.nov24-flower-sparkles{animation:none!important}.nov24-bouquet-stem{stroke-dashoffset:0;animation:none}.nov24-bloom,.nov24-bouquet-paper,.nov24-bouquet-ribbon,.nov24-flower-caption{opacity:1;animation:none;transform:none}}
 </style>
 </head>
 <body class="locked">
@@ -904,13 +930,100 @@ body.locked{overflow:hidden}
 <div class="nov24-experience" id="nov24Experience" role="dialog" aria-modal="true" aria-labelledby="nov24MainTitle" aria-hidden="true">
  <div class="nov24-letterbox nov24-letterbox-top" aria-hidden="true"></div><div class="nov24-letterbox nov24-letterbox-bottom" aria-hidden="true"></div><div class="nov24-filmgrain" aria-hidden="true"></div><div class="nov24-vignette" aria-hidden="true"></div><div class="nov24-particles" aria-hidden="true"></div>
  <div class="nov24-shell">
-  <section class="nov24-panel active" data-nov24-panel="intro">
-   <div class="nov24-kicker">November 24 · a little something for you</div>
-   <div class="nov24-scene" aria-hidden="true"><div class="nov24-moon"></div><div class="nov24-trees"></div><div class="nov24-cabin"><div class="nov24-door" aria-hidden="true"><span></span></div></div><div class="nov24-bob">🐕</div></div>
-   <div class="nov24-envelope" aria-hidden="true">✉</div>
-   <h1 class="nov24-title" id="nov24MainTitle">Someone has been waiting all year <em>to celebrate us.</em></h1>
-   <p class="nov24-copy">Bannana Bob has a tiny delivery. He says the cabin is ready, the lights are warm, and there are a few memories he wants to show you.</p>
-   <div class="nov24-actions"><button class="nov24-btn" type="button" data-nov24-next="museum">Follow Bob inside ♡</button></div>
+  <section class="nov24-panel active nov24-bouquet-panel" data-nov24-panel="intro">
+   <div class="nov24-kicker">November 24 · made with all my love</div>
+   <div class="nov24-flower-scene" aria-label="An animated storybook illustration of Rithwik and Munchkin making a bouquet together">
+    <div class="nov24-flower-glow"></div>
+    <svg class="nov24-flower-art" viewBox="0 0 800 470" role="img" aria-label="Two illustrated characters carefully making a bouquet of roses and flowers together">
+     <defs>
+      <linearGradient id="bouquetNight" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#3b2038"/><stop offset="1" stop-color="#170f20"/></linearGradient>
+      <linearGradient id="bouquetWindow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f7d8bd"/><stop offset="1" stop-color="#c87991"/></linearGradient>
+      <linearGradient id="bouquetBoyCoat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#52617a"/><stop offset="1" stop-color="#293347"/></linearGradient>
+      <linearGradient id="bouquetGirlDress" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a64f70"/><stop offset="1" stop-color="#58283f"/></linearGradient>
+      <linearGradient id="bouquetPaper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0e5"/><stop offset="1" stop-color="#d9b5b8"/></linearGradient>
+      <filter id="bouquetSoftGlow"><feGaussianBlur stdDeviation="18"/></filter>
+      <g id="bouquetRose">
+       <g class="nov24-petal-ring">
+        <ellipse cx="0" cy="-15" rx="10" ry="16" fill="#e98ba7"/>
+        <ellipse cx="14" cy="-5" rx="10" ry="16" fill="#f3a5b7" transform="rotate(58 14 -5)"/>
+        <ellipse cx="9" cy="12" rx="10" ry="16" fill="#d96c8b" transform="rotate(125 9 12)"/>
+        <ellipse cx="-9" cy="12" rx="10" ry="16" fill="#ee91aa" transform="rotate(235 -9 12)"/>
+        <ellipse cx="-14" cy="-5" rx="10" ry="16" fill="#c95b7b" transform="rotate(300 -14 -5)"/>
+       </g>
+       <circle r="9" fill="#f5c4a4"/><path d="M-5 1Q-1-7 5-2Q1 4-5 1" fill="none" stroke="#b54b69" stroke-width="2"/>
+      </g>
+      <g id="bouquetDaisy">
+       <g fill="#fff1e7">
+        <ellipse cy="-13" rx="6" ry="12"/><ellipse cy="-13" rx="6" ry="12" transform="rotate(45)"/><ellipse cy="-13" rx="6" ry="12" transform="rotate(90)"/><ellipse cy="-13" rx="6" ry="12" transform="rotate(135)"/><ellipse cy="-13" rx="6" ry="12" transform="rotate(180)"/><ellipse cy="-13" rx="6" ry="12" transform="rotate(225)"/><ellipse cy="-13" rx="6" ry="12" transform="rotate(270)"/><ellipse cy="-13" rx="6" ry="12" transform="rotate(315)"/>
+       </g><circle r="7" fill="#e8bd6d"/>
+      </g>
+     </defs>
+     <rect width="800" height="470" rx="18" fill="url(#bouquetNight)"/>
+     <rect x="255" y="28" width="290" height="230" rx="8" fill="#160f20" stroke="#c78b9d" stroke-opacity=".32" stroke-width="5"/>
+     <rect x="270" y="43" width="260" height="200" rx="3" fill="url(#bouquetWindow)"/>
+     <path d="M400 43V243M270 143H530" stroke="#5b3047" stroke-width="8" opacity=".6"/>
+     <circle cx="470" cy="86" r="26" fill="#fff0d5" opacity=".75"/><circle cx="480" cy="77" r="26" fill="#e8b4b9"/>
+     <g fill="#fce5d4" opacity=".65"><circle cx="316" cy="82" r="2"/><circle cx="350" cy="112" r="2"/><circle cx="510" cy="179" r="2"/><circle cx="293" cy="200" r="1.5"/></g>
+     <path d="M0 360Q190 315 400 360T800 350V470H0Z" fill="#211527"/>
+     <ellipse cx="400" cy="390" rx="270" ry="40" fill="#100b18" opacity=".65"/>
+     <!-- Rithwik: warm storybook character, seated and leaning in -->
+     <g class="nov24-maker nov24-maker-boy">
+      <path d="M135 470Q142 350 205 326Q250 308 291 338Q340 373 346 470Z" fill="url(#bouquetBoyCoat)"/>
+      <path d="M185 364Q220 387 266 366L284 470H168Z" fill="#e2d5d4" opacity=".8"/>
+      <path d="M178 347Q150 382 185 412L294 370Q309 354 287 338" fill="none" stroke="#d9a17e" stroke-width="27" stroke-linecap="round"/>
+      <path d="M200 283Q194 313 212 333Q239 353 267 327Q283 308 275 280Z" fill="#c98765"/>
+      <ellipse cx="239" cy="244" rx="70" ry="78" fill="#dca17e"/>
+      <path d="M171 243Q155 177 218 164Q283 148 309 209Q314 242 294 267L281 219Q256 225 231 204Q206 228 178 220Z" fill="#30252c"/>
+      <path d="M178 256Q170 218 194 201Q217 181 244 192Q276 184 297 224L286 270Q272 247 271 229Q236 240 207 218Q195 243 178 256Z" fill="#3b2b32"/>
+      <ellipse cx="216" cy="248" rx="5" ry="7" fill="#3b2730"/><ellipse cx="263" cy="248" rx="5" ry="7" fill="#3b2730"/>
+      <path d="M226 273Q239 283 253 271" fill="none" stroke="#8b4e4c" stroke-width="3" stroke-linecap="round"/>
+      <path d="M173 291Q207 318 281 290" fill="none" stroke="#e9b49a" stroke-width="9" stroke-linecap="round" opacity=".7"/>
+     </g>
+     <!-- Munchkin: long-haired, softly detailed storybook character -->
+     <g class="nov24-maker nov24-maker-girl">
+      <path d="M455 470Q455 357 510 330Q560 304 611 340Q667 377 669 470Z" fill="url(#bouquetGirlDress)"/>
+      <path d="M514 350Q560 378 610 349L627 470H493Z" fill="#e7b2c3" opacity=".23"/>
+      <path d="M490 347Q463 378 491 411L601 371Q621 352 597 337" fill="none" stroke="#c98765" stroke-width="26" stroke-linecap="round"/>
+      <path d="M530 281Q526 313 545 332Q573 351 599 326Q614 308 604 280Z" fill="#c98765"/>
+      <ellipse cx="570" cy="241" rx="69" ry="77" fill="#e0a17e"/>
+      <path d="M504 251Q478 190 527 166Q590 137 632 190Q659 225 631 297L612 335Q593 302 601 250Q566 270 532 241L512 287Z" fill="#30232e"/>
+      <path d="M506 239Q507 180 560 174Q617 172 632 224Q608 244 586 220Q549 240 516 219Z" fill="#3d2936"/>
+      <ellipse cx="547" cy="247" rx="5" ry="7" fill="#3b2730"/><ellipse cx="592" cy="247" rx="5" ry="7" fill="#3b2730"/>
+      <path d="M557 273Q571 282 585 271" fill="none" stroke="#99544f" stroke-width="3" stroke-linecap="round"/>
+      <path d="M513 293Q550 319 614 290" fill="none" stroke="#e9b49a" stroke-width="9" stroke-linecap="round" opacity=".7"/>
+     </g>
+     <!-- The bouquet is assembled between them, stem by stem, bloom by bloom -->
+     <g class="nov24-bouquet">
+      <path class="nov24-bouquet-paper" d="M318 292L398 426L484 291L452 421Q400 449 352 421Z" fill="url(#bouquetPaper)" stroke="#d9a6b4" stroke-width="2"/>
+      <g class="nov24-bouquet-stems" fill="none" stroke-linecap="round">
+       <path class="nov24-bouquet-stem" d="M400 403Q365 310 329 218" stroke="#77936d" stroke-width="7"/>
+       <path class="nov24-bouquet-stem" d="M400 403Q385 302 379 184" stroke="#829c75" stroke-width="7"/>
+       <path class="nov24-bouquet-stem" d="M400 403Q414 300 430 202" stroke="#6d8b66" stroke-width="7"/>
+       <path class="nov24-bouquet-stem" d="M400 403Q350 327 294 255" stroke="#8ba17b" stroke-width="6"/>
+       <path class="nov24-bouquet-stem" d="M400 403Q448 320 500 260" stroke="#77936d" stroke-width="6"/>
+       <path class="nov24-bouquet-stem" d="M400 403Q390 330 350 270" stroke="#77936d" stroke-width="5"/>
+       <path class="nov24-bouquet-stem" d="M400 403Q430 330 460 272" stroke="#77936d" stroke-width="5"/>
+      </g>
+      <g class="nov24-bouquet-blooms">
+       <use href="#bouquetRose" class="nov24-bloom bloom-one" x="329" y="218"/>
+       <use href="#bouquetRose" class="nov24-bloom bloom-two" x="379" y="184" transform="scale(1.08) translate(-28 -12)"/>
+       <use href="#bouquetRose" class="nov24-bloom bloom-three" x="430" y="202"/>
+       <use href="#bouquetDaisy" class="nov24-bloom bloom-four" x="294" y="255" transform="scale(1.2) translate(-50 -50)"/>
+       <use href="#bouquetDaisy" class="nov24-bloom bloom-five" x="500" y="260" transform="scale(1.12) translate(-54 -24)"/>
+       <use href="#bouquetRose" class="nov24-bloom bloom-six" x="350" y="270" transform="scale(.9) translate(40 25)"/>
+       <use href="#bouquetDaisy" class="nov24-bloom bloom-seven" x="460" y="272"/>
+      </g>
+      <path class="nov24-bouquet-ribbon" d="M361 356Q400 373 439 356L430 389Q400 405 370 389Z" fill="#9b3d5b" stroke="#f2b8c8" stroke-width="2"/>
+      <path d="M382 378Q340 365 338 394Q355 407 390 389M418 378Q460 365 462 394Q445 407 410 389" fill="#c45c7c" stroke="#f2b8c8" stroke-width="2"/>
+     </g>
+     <g fill="#f4d5dd" class="nov24-flower-sparkles"><path d="M130 120l5 13 13 5-13 5-5 13-5-13-13-5 13-5Z"/><path d="M660 100l4 10 10 4-10 4-4 10-4-10-10-4 10-4Z"/><path d="M690 285l3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/><path d="M105 290l3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/></g>
+    </svg>
+    <div class="nov24-flower-caption">a little bouquet, made by our little story ♡</div>
+   </div>
+   <h1 class="nov24-title" id="nov24MainTitle">Thank you for <em>believing in us.</em></h1>
+   <p class="nov24-copy">I love you so, so much, Munchkin. Every little flower is a thank you for choosing us, growing with me, and making our story feel like home.</p>
+   <div class="nov24-love-notes"><span>In every lifetime, I'd find you.</span><span>You're my favorite person, my home, my forever. ♡</span></div>
+   <div class="nov24-actions"><button class="nov24-btn" type="button" data-nov24-next="museum">There's more of our story ♡</button></div>
   </section>
   <section class="nov24-panel" data-nov24-panel="museum">
    <div class="nov24-spotlight" aria-hidden="true"></div>
@@ -1002,7 +1115,7 @@ function nov24Kill(){if(nov24Splits?.length){nov24Splits.forEach(split=>split.re
 function nov24Lock(){nov24ScrollY=window.scrollY;nov24LockedStyles={html:document.documentElement.style.cssText,body:document.body.style.cssText};document.documentElement.style.overflow='hidden';document.body.style.position='fixed';document.body.style.top='-'+nov24ScrollY+'px';document.body.style.left='0';document.body.style.right='0';document.body.style.width='100%';document.body.style.overflow='hidden';nov24PreviousFocus=document.activeElement;nov24Inert=[];[...document.body.children].forEach(el=>{if(el!==nov24&&el.tagName!=='SCRIPT'){nov24Inert.push([el,el.inert]);el.inert=true}})}
 function nov24Unlock(){if(nov24LockedStyles){document.documentElement.style.cssText=nov24LockedStyles.html;document.body.style.cssText=nov24LockedStyles.body;window.scrollTo(0,nov24ScrollY);nov24LockedStyles=null}nov24Inert.forEach(([el,value])=>el.inert=value);nov24Inert=[];if(nov24PreviousFocus&&nov24PreviousFocus.isConnected)nov24PreviousFocus.focus({preventScroll:true})}
 function nov24Particles(){const host=nov24.querySelector('.nov24-particles');if(!host||host.childElementCount)return;const count=nov24Lite?7:18;for(let i=0;i<count;i++){const p=document.createElement('i');p.className='nov24-particle';p.style.setProperty('--px',(Math.random()*100)+'%');p.style.setProperty('--py',(Math.random()*100)+'%');p.style.setProperty('--delay',(Math.random()*-12)+'s');p.style.setProperty('--duration',(9+Math.random()*10)+'s');host.appendChild(p)}}
-function nov24AnimateIntro(){nov24Kill();const scene=nov24.querySelector('.nov24-scene'),cabin=nov24.querySelector('.nov24-cabin'),door=nov24.querySelector('.nov24-door'),bob=nov24.querySelector('.nov24-bob'),envelope=nov24.querySelector('.nov24-envelope');if(!window.gsap||nov24Reduced){if(window.gsap){gsap.fromTo(nov24,{opacity:0},{opacity:1,duration:.35});gsap.fromTo(nov24Shell,{opacity:0},{opacity:1,duration:.55,delay:.08})}else nov24Shell.style.opacity='1';return}const distance=scene?Math.min(scene.clientWidth*.48,390):250;nov24Timeline=gsap.timeline({defaults:{ease:'power3.out'},onComplete:()=>nov24.classList.remove('nov24-opening')});nov24Timeline.fromTo(nov24,{opacity:0},{opacity:1,duration:1.1,ease:'power2.out'},0).fromTo(nov24.querySelectorAll('.nov24-letterbox'),{scaleY:0},{scaleY:1,duration:1.05,stagger:.08,ease:'power2.out'},0).set(nov24Shell,{opacity:0,y:18,scale:.985}).to(nov24Shell,{opacity:1,y:0,scale:1,duration:1.15,ease:'power2.out'},0).fromTo(scene,{opacity:0,scale:1.08,filter:'brightness(.45)'},{opacity:1,scale:1,filter:'brightness(1)',duration:1.6},.12).fromTo(nov24.querySelector('.nov24-moon'),{opacity:0,scale:.82},{opacity:1,scale:1,duration:1.5},.35).fromTo(cabin,{filter:'brightness(.72) drop-shadow(0 0 0px #e8a2a200)'},{filter:'brightness(1.12) drop-shadow(0 0 28px #e8a2a266)',duration:1.1},.9).to(cabin,{filter:'brightness(1) drop-shadow(0 0 20px #e8a2a244)',duration:1.1},2).fromTo(door,{rotateY:0},{rotateY:-76,duration:.85,transformOrigin:'left center',ease:'power2.out'},2.05).to(door,{rotateY:0,duration:.55,ease:'power2.inOut'},3.05).set(bob,{x:0,scaleY:1,scaleX:1,transformOrigin:'50% 85%'},2.15).to(bob,{y:-13,scaleY:1.12,scaleX:.9,duration:.18,ease:'power2.out'},2.25).to(bob,{x:distance*.34,y:0,scaleY:.82,scaleX:1.13,duration:.28,ease:'power2.in'},2.43).to(bob,{y:-5,scaleY:1.06,scaleX:.96,duration:.17,ease:'power2.out'},2.71).to(bob,{x:distance*.68,y:0,scaleY:.84,scaleX:1.1,duration:.3,ease:'power2.in'},2.88).to(bob,{y:-3,scaleY:1.04,scaleX:.98,duration:.16,ease:'power2.out'},3.18).to(bob,{x:distance,y:0,scaleY:1,scaleX:1,duration:.45,ease:'power2.out'},3.34).fromTo(envelope,{opacity:0,y:22,scale:.7,rotation:-12},{opacity:1,y:0,scale:1,rotation:0,duration:.85,ease:'back.out(1.7)'},3.85).fromTo(nov24.querySelector('.nov24-kicker'),{opacity:0,y:10},{opacity:1,y:0,duration:.55},.65).fromTo(nov24.querySelector('.nov24-title'),{opacity:0,y:14},{opacity:1,y:0,duration:.8},3.65).fromTo(nov24.querySelector('.nov24-copy'),{opacity:0,y:10},{opacity:1,y:0,duration:.6},4.1).fromTo(nov24.querySelector('.nov24-actions'),{opacity:0,y:10},{opacity:1,y:0,duration:.55},4.45);if(!nov24Lite){nov24Ambient=gsap.to(scene,{x:5,y:-3,duration:5,yoyo:true,repeat:-1,ease:'sine.inOut'})}}
+function nov24AnimateIntro(){nov24Kill();const flowerScene=nov24.querySelector('.nov24-flower-scene');if(window.gsap&&!nov24Reduced){nov24Timeline=gsap.timeline({onComplete:()=>nov24.classList.remove('nov24-opening')}).fromTo(nov24,{opacity:0},{opacity:1,duration:.85,ease:'power2.out'}).fromTo(nov24Shell,{opacity:0,y:18,scale:.99},{opacity:1,y:0,scale:1,duration:1.05,ease:'power3.out'},.08);if(flowerScene&&!nov24Lite)nov24Timeline.fromTo(flowerScene,{filter:'brightness(.72)',scale:.985},{filter:'brightness(1)',scale:1,duration:1.2,ease:'power2.out'},.12)}else{nov24.style.opacity='1';nov24Shell.style.opacity='1';nov24.classList.remove('nov24-opening')}}
 function nov24AnimatePanel(name){const panel=nov24.querySelector('[data-nov24-panel="'+name+'"]');if(!panel)return;const previous=nov24.querySelector('[data-nov24-panel].active');if(previous===panel)return;nov24Kill();nov24Index=nov24Names.indexOf(name);nov24.scrollTop=0;const activate=()=>{nov24Panels.forEach(p=>{p.classList.toggle('active',p===panel);p.setAttribute('aria-hidden',String(p!==panel))});if(!window.gsap||nov24Reduced){if(window.gsap)gsap.fromTo(panel,{opacity:0},{opacity:1,duration:.45});return}nov24Timeline=gsap.timeline({defaults:{ease:'power3.out'}}).fromTo(panel,{opacity:0,y:20,scale:.99},{opacity:1,y:0,scale:1,duration:.8}).fromTo(panel.querySelectorAll('.nov24-kicker,.nov24-title,.nov24-copy'),{opacity:0,y:12},{opacity:1,y:0,duration:.55,stagger:.12},.12);if(name==='museum'){const cards=panel.querySelectorAll('.nov24-exhibit');nov24Timeline.fromTo(cards,{opacity:0,y:24,rotateX:4,scale:.97},{opacity:1,y:0,rotateX:0,scale:1,duration:.75,stagger:.2},.35);if(!nov24Lite)cards.forEach(card=>{card.addEventListener('pointermove',nov24Tilt);card.addEventListener('pointerleave',nov24Untilt)});const spotlight=panel.querySelector('.nov24-spotlight');if(spotlight)nov24Timeline.fromTo(spotlight,{opacity:0,xPercent:-130},{opacity:.28,xPercent:130,duration:1.8,ease:'sine.inOut'},.15)}if(name==='future'){const letter=panel.querySelector('.nov24-letter');nov24Timeline.fromTo(letter,{opacity:0,y:24,scale:.985},{opacity:1,y:0,scale:1,duration:1},.35);const paragraphs=[...panel.querySelectorAll('.nov24-letter p')];if(window.SplitText){gsap.registerPlugin(SplitText);paragraphs.forEach((p,i)=>{const split=new SplitText(p,{type:'lines',linesClass:'nov24-reveal-line'});nov24Splits.push(split);gsap.set(split.lines,{willChange:'transform,opacity'});nov24Timeline.fromTo(split.lines,{opacity:0,y:8},{opacity:1,y:0,duration:.55,stagger:.075,ease:'power2.out'},1.05+i*.75).call(()=>gsap.set(split.lines,{clearProps:'willChange'}),null,'>')})}else nov24Timeline.fromTo(paragraphs,{opacity:0,y:8},{opacity:1,y:0,duration:.6,stagger:.5},1.05);nov24Timeline.fromTo(panel.querySelector('.nov24-sign'),{opacity:0,y:8},{opacity:1,y:0,duration:.65},'>-.1')}nov24Timeline.fromTo(panel.querySelector('.nov24-actions'),{opacity:0,y:8},{opacity:1,y:0,duration:.35},'-=.1')};if(window.gsap&&!nov24Reduced&&previous){nov24Timeline=gsap.timeline({onComplete:activate}).to(previous,{opacity:0,y:-10,scale:.99,duration:.34,ease:'power2.in'})}else{if(previous)previous.classList.remove('active');activate()}}
 let nov24Splits=[];
 function nov24Tilt(e){const r=this.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;gsap.to(this,{rotationY:x*5,rotationX:-y*4,y:-4,duration:.28,overwrite:true})}
