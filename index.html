@@ -52,6 +52,38 @@ footer{padding:50px 20px 70px;text-align:center;border-top:1px solid var(--line)
 
 @keyframes rise{to{opacity:1;transform:translateY(0)}}@keyframes orbit{to{transform:rotate(360deg)}}@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}@keyframes heartbeat{0%,100%{transform:scale(1)}8%{transform:scale(1.09)}16%{transform:scale(1)}24%{transform:scale(1.05)}32%{transform:scale(1)}}@keyframes scrollline{0%,100%{transform:scaleY(.65);transform-origin:top;opacity:.5}50%{transform:scaleY(1);opacity:1}}@keyframes heart-rise{to{transform:translateY(-115vh) rotate(35deg);opacity:0}}@keyframes letteropen{from{opacity:0;transform:rotateX(-12deg) translateY(-15px)}to{opacity:1;transform:none}}
 @media(max-width:700px){.nav{padding:17px 20px}.nav a{font-size:9px}.hero{padding-top:120px}.orbit{width:86vw}.subtitle{font-size:16px}.section{padding:85px 20px}section{padding:85px 20px}.memory-head{display:block}.memory-head p{margin-top:18px}.memory-grid{grid-template-columns:1fr;gap:12px}.memory-card,.memory-card:nth-child(2),.memory-card:nth-child(3){min-height:210px;transform:none}.memory-card:nth-child(2):hover{transform:translateY(-8px)}.countdown{gap:20px}.time{min-width:58px}.time strong{font-size:38px}.letter p{font-size:15px}.intro p{font-size:17px}}
+ 
+/* Cinematic opening + compact chapter navigation polish */
+.intro-gate{isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 50% 48%,#5b1b3452 0,transparent 46%),radial-gradient(ellipse at 50% 110%,#a34b6820 0,transparent 52%),#17080f}
+.intro-gate:before,.intro-gate:after{content:"";position:absolute;inset:-20%;pointer-events:none;z-index:-1}
+.intro-gate:before{background:repeating-conic-gradient(from 8deg at 50% 48%,transparent 0deg 11deg,#e8a8b808 12deg 13deg,transparent 14deg 24deg);mask-image:radial-gradient(ellipse at center,#000 0,transparent 68%);animation:gate-rays 46s linear infinite}
+.intro-gate:after{inset:0;background:radial-gradient(ellipse at center,transparent 35%,#09030988 100%);box-shadow:inset 0 0 140px #080208a8}
+.gate-content{position:relative;z-index:1}
+.gate-star{filter:drop-shadow(0 0 16px #e8a8b8a8);text-shadow:0 0 30px #e8a8b866}
+.gate-content h2{text-wrap:balance}
+.gate-content>p:not(.section-kicker){max-width:390px;margin-inline:auto}
+.open-btn{box-shadow:0 8px 30px #e8a8b822,0 0 0 1px #fff2 inset}
+.open-btn:focus-visible,.nav a:focus-visible,.nav button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+@keyframes gate-rays{to{transform:rotate(360deg)}}
+.nav{display:grid;grid-template-columns:minmax(150px,1fr) minmax(280px,auto) minmax(100px,1fr);gap:24px;padding:14px clamp(18px,5vw,70px);background:linear-gradient(#17080ff2,#17080fbd 72%,transparent);border-bottom:1px solid #ffffff0b;transition:opacity .55s var(--ease-out),transform .55s var(--ease-out),background .3s}
+body:not(.site-open) .nav{opacity:0;pointer-events:none;transform:translateY(-12px)}
+.nav .brand{white-space:nowrap}
+.nav-center{min-width:0;display:grid;gap:8px}
+.nav-links{display:flex;justify-content:center;align-items:center;gap:clamp(12px,2.2vw,30px)}
+.nav-links a{position:relative;padding:5px 0;font-size:9px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;color:#f8e9e18c;transition:color .25s}
+.nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:var(--rose);transition:right .35s var(--ease-out)}
+.nav-links a:hover,.nav-links a.is-active{color:var(--cream)}
+.nav-links a.is-active:after{right:0}
+.nav-progress{height:1px;background:#ffffff18;overflow:hidden}
+.nav-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--rose),var(--gold));box-shadow:0 0 9px #e8a8b877;transition:width .35s var(--ease-out)}
+.nav-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.nav-icon{width:32px;height:32px;border:1px solid #e8a8b83b;border-radius:50%;background:#ffffff08;color:var(--rose);display:grid;place-items:center;cursor:pointer;transition:transform .25s,background .25s,border-color .25s}
+.nav-icon:hover{transform:translateY(-2px);background:#e8a8b820;border-color:#e8a8b899}
+.nav-replay{font-size:16px}
+@media(max-width:760px){.nav{grid-template-columns:1fr auto;gap:8px 12px;padding:12px 16px}.nav-center{grid-column:1/-1;grid-row:2}.nav-links{justify-content:flex-start;gap:20px;overflow-x:auto;scrollbar-width:none;padding:0 1px 3px}.nav-links::-webkit-scrollbar{display:none}.nav-actions{grid-column:2;grid-row:1}.nav .brand{font-size:9px;letter-spacing:.2em}.nav-links a{font-size:8px}.nav-progress{margin-top:0}}
+@media(max-width:380px){.nav-links{gap:15px}.nav-links a{letter-spacing:.1em}.nav-icon{width:29px;height:29px}}
+@media(prefers-reduced-motion:reduce){.intro-gate:before{animation:none}.nav,.nav-links a,.nav-links a:after,.nav-progress span,.nav-icon{transition:none}}
+
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
 
 /* Bannana Bob's midnight visit */
@@ -694,7 +726,22 @@ body.music-reactive .music-atmosphere{opacity:1}
 <body class="locked">
 <canvas id="stars" aria-hidden="true"></canvas><div class="grain"></div><div class="music-atmosphere" id="musicAtmosphere" aria-hidden="true"></div>
 <div class="intro-gate" id="gate"><div class="gate-content"><div class="gate-star">✦</div><p class="section-kicker">For Prapthi, my love</p><h2>A little world, just for you.</h2><p>I made this little corner of the universe for you. Come in, my love , there’s a piece of my heart waiting here.</p><button class="open-btn" id="openSite">Come in, Munchkin ♡</button></div></div>
-<nav class="nav"><div class="brand">for Prapthi, my love ♡</div><a href="#letter">A little letter ↗</a></nav>
+<nav class="nav" aria-label="Story navigation">
+ <a class="brand" href="#home" aria-label="Back to the beginning">for Prapthi, my love ♡</a>
+ <div class="nav-center">
+  <div class="nav-links" aria-label="Chapters">
+   <a href="#home" data-nav-section="home" class="is-active">Beginning</a>
+   <a href="#her-picture" data-nav-section="her-picture">Memories</a>
+   <a href="#open-when" data-nav-section="open-when">Little things</a>
+   <a href="#letter" data-nav-section="letter">Our letter</a>
+  </div>
+  <div class="nav-progress" aria-hidden="true"><span id="navProgressFill"></span></div>
+ </div>
+ <div class="nav-actions">
+  <button class="nav-icon" id="navMusic" type="button" aria-label="Play music" title="Play music">♫</button>
+  <button class="nav-icon nav-replay" id="navReplay" type="button" aria-label="Replay November 24 surprise" title="Replay our surprise">↺</button>
+ </div>
+</nav>
 <header class="hero" id="home"><div class="orbit"></div><div class="hero-inner"><p class="eyebrow">November 24 · for Prapthi, always</p><h1><span class="hero-line-mask"><span>In every</span></span><br><span class="hero-line-mask"><span><em>universe,</em></span></span><br><span class="hero-line-mask"><span>it’s you.</span></span></h1><p class="subtitle">Prapthi, my love , if I had a thousand lifetimes, I think my heart would still find its way to you. In every version of this life, I would choose you.</p><div class="date-pill">✦ <span>November 24</span> ✦ <span>always, us</span></div></div><div class="scroll-cue">keep going</div></header>
 <main>
 <section class="intro reveal"><div class="section-kicker">A note for Prapthi</div><h2 class="section-title">Some people feel like<br><em>coming home.</em></h2><p>Prapthi, you are that feeling for me. The little details about you that stay in my mind, the moments I replay when I miss you, and the way an ordinary day becomes special just because you’re in it. You have a place in my heart that no one else could ever fill.</p></section>
@@ -1121,7 +1168,7 @@ body.music-reactive .music-atmosphere{opacity:1}
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 
 <script>
-(()=>{const $=id=>document.getElementById(id);const gate=$('gate');$('openSite').addEventListener('click',()=>{gate.classList.add('gone');document.body.classList.remove('locked');document.documentElement.style.overflow='';document.body.style.overflow='';setTimeout(()=>floatHearts(12),450);});function wireLetter(buttonId,letterId){$(buttonId).addEventListener('click',()=>{const letter=$(letterId),button=$(buttonId),opened=letter.classList.toggle('open');button.style.display=opened?'none':'grid';button.setAttribute('aria-expanded',String(opened));if(opened){setTimeout(()=>letter.scrollIntoView({behavior:'smooth',block:'center'}),150);floatHearts(8)}})}wireLetter('envelope','loveLetter');wireLetter('apologyEnvelope','apologyLetter');$('surpriseBtn').addEventListener('click',()=>{const el=$('surprise');el.classList.toggle('show');$('surpriseBtn').textContent=el.classList.contains('show')?'you’re my favorite surprise ♡':'One last little surprise ♡';floatHearts(18)});
+(()=>{const $=id=>document.getElementById(id);const gate=$('gate');$('openSite').addEventListener('click',()=>{gate.classList.add('gone');document.body.classList.remove('locked');document.body.classList.add('site-open');document.documentElement.style.overflow='';document.body.style.overflow='';setTimeout(()=>floatHearts(12),450);});function wireLetter(buttonId,letterId){$(buttonId).addEventListener('click',()=>{const letter=$(letterId),button=$(buttonId),opened=letter.classList.toggle('open');button.style.display=opened?'none':'grid';button.setAttribute('aria-expanded',String(opened));if(opened){setTimeout(()=>letter.scrollIntoView({behavior:'smooth',block:'center'}),150);floatHearts(8)}})}wireLetter('envelope','loveLetter');wireLetter('apologyEnvelope','apologyLetter');$('surpriseBtn').addEventListener('click',()=>{const el=$('surprise');el.classList.toggle('show');$('surpriseBtn').textContent=el.classList.contains('show')?'you’re my favorite surprise ♡':'One last little surprise ♡';floatHearts(18)});
 
 const openWhenCopy={
  miss:['When you miss me','I wish I could be there to pull you close, kiss your forehead, and let the world be quiet for a bit. Until I can, remember that you’re part of my everyday thoughts, even when we’re doing completely different things. I miss you too, Munchkin. This distance or this moment won’t change how glad I am that it’s you. ♡'],
@@ -1184,6 +1231,13 @@ function nov24Untilt(){gsap.to(this,{rotationY:0,rotationX:0,y:0,duration:.35,ov
 function setNov24Panel(name){if(!nov24Names.includes(name))return;nov24AnimatePanel(name);const heading=nov24.querySelector('[data-nov24-panel="'+name+'"] h1,[data-nov24-panel="'+name+'"] h2');if(heading)heading.setAttribute('tabindex','-1'),heading.focus({preventScroll:true})}
 function playNov24Intro(){nov24Started=true;nov24Kill();const flowerScene=nov24.querySelector('.nov24-flower-scene');if(flowerScene){flowerScene.classList.remove('nov24-flower-play');void flowerScene.offsetWidth;flowerScene.classList.add('nov24-flower-play')}nov24.classList.add('active','nov24-opening');nov24.setAttribute('aria-hidden','false');nov24Lock();nov24Particles();nov24Panels.forEach((p,i)=>{p.classList.toggle('active',i===0);p.setAttribute('aria-hidden',String(i!==0))});nov24Index=0;nov24.querySelector('.nov24-letter')?.removeAttribute('style');nov24AnimateIntro();const first=nov24.querySelector('.nov24-btn');if(first)requestAnimationFrame(()=>first.focus({preventScroll:true}))}
 function openNov24(){if(nov24Started&&nov24.classList.contains('active'))return;playNov24Intro()}
+const navMusic=document.getElementById('navMusic'),navReplay=document.getElementById('navReplay');
+navMusic?.addEventListener('click',()=>{const play=document.getElementById('musicPlay');if(play)play.click()});
+navReplay?.addEventListener('click',openNov24);
+const navTargets=['home','her-picture','open-when','letter'].map(id=>document.getElementById(id)).filter(Boolean);
+const navLinks=[...document.querySelectorAll('[data-nav-section]')],navProgressFill=document.getElementById('navProgressFill');
+function updateChapterNav(){const max=document.documentElement.scrollHeight-innerHeight;const progress=max>0?Math.max(0,Math.min(1,scrollY/max)):0;if(navProgressFill)navProgressFill.style.width=(progress*100)+'%';let active='home';for(const section of navTargets){if(section.getBoundingClientRect().top<=innerHeight*.42)active=section.id}navLinks.forEach(link=>{const on=link.dataset.navSection===active;link.classList.toggle('is-active',on);if(on)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')})}
+let navTick=false;window.addEventListener('scroll',()=>{if(navTick)return;navTick=true;requestAnimationFrame(()=>{updateChapterNav();navTick=false})},{passive:true});window.addEventListener('resize',updateChapterNav,{passive:true});updateChapterNav();
 function closeNov24(goHome=false){if(!nov24.classList.contains('active'))return;nov24Kill();const finish=()=>{nov24.classList.remove('active','nov24-opening','nov24-closing');nov24.setAttribute('aria-hidden','true');nov24Panels.forEach(p=>p.classList.remove('active'));nov24Unlock();nov24Started=false;if(goHome){if(new Date().getMonth()===targetMonth&&new Date().getDate()===targetDay){try{localStorage.setItem('0216-nov24-seen-'+new Date().getFullYear(),'yes')}catch(e){}}const home=document.getElementById('future-home');if(home)home.scrollIntoView({behavior:nov24Reduced?'auto':'smooth',block:'start'});if(typeof floatHearts==='function')floatHearts(22)}};if(window.gsap&&!nov24Reduced){nov24.classList.add('nov24-closing');gsap.timeline({onComplete:finish}).to(nov24.querySelector('.nov24-letter')||nov24Shell,{opacity:0,scale:.98,duration:.45,ease:'power2.in'}).to(nov24,{opacity:0,duration:.65,ease:'power2.in'},'-=.12')}else finish()}
 function nov24FocusTrap(e){if(e.key!=='Tab'||!nov24.classList.contains('active'))return;const items=[...nov24.querySelectorAll('button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null);if(!items.length)return;const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
 nov24.querySelectorAll('[data-nov24-next]').forEach(button=>button.addEventListener('click',()=>setNov24Panel(button.dataset.nov24Next)));
