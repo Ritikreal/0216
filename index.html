@@ -721,6 +721,68 @@ body.music-reactive .music-atmosphere{opacity:1}
 @keyframes bouquet-sparkles{from{opacity:.12;scale:.85}to{opacity:.8;scale:1.04}}
 @media(max-width:700px){.nov24-flower-scene{margin:12px auto 20px;border-radius:15px}.nov24-flower-caption{bottom:8px}.nov24-love-notes{margin:0 auto 20px}}
 @media(prefers-reduced-motion:reduce){.nov24-maker,.nov24-flower-glow,.nov24-flower-sparkles,.nov24-floating-petals,.nov24-bouquet{animation:none!important}.nov24-bouquet-stem,.nov24-reaching-arm{stroke-dashoffset:0;animation:none}.nov24-bloom,.nov24-bouquet-paper,.nov24-bouquet-ribbon,.nov24-flower-caption,.nov24-hands path{opacity:1;animation:none;transform:none}}
+
+/* 0216 anniversary additions: promise constellation + printable keepsake */
+.promise-world{position:relative;isolation:isolate;overflow:hidden;padding:clamp(78px,10vw,132px) 24px;background:radial-gradient(ellipse at 50% 35%,#54283c 0%,#261522 48%,#130f17 100%);color:#f7e8e7;text-align:center}
+.promise-world:before,.promise-world:after{content:"";position:absolute;pointer-events:none;border-radius:50%;filter:blur(1px);background:#f1c6d0;opacity:.16}
+.promise-world:before{width:3px;height:3px;top:16%;left:14%;box-shadow:120px 70px 0 #f1c6d0,270px 8px 0 #f1c6d0,560px 90px 0 #f1c6d0,820px 20px 0 #f1c6d0,1020px 150px 0 #f1c6d0}
+.promise-world:after{width:5px;height:5px;top:72%;right:15%;box-shadow:-180px -90px 0 #f1c6d0,-420px -20px 0 #f1c6d0}
+.promise-inner{width:min(880px,100%);margin:auto;position:relative;z-index:1}
+.promise-kicker,.keepsake-kicker{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#e4aabd}
+.promise-title{font:400 clamp(36px,6vw,66px)/1.12 'Playfair Display',serif;letter-spacing:-.04em;margin:18px auto}
+.promise-title em{color:#e9a9bd;font-weight:400}
+.promise-intro{max-width:610px;margin:0 auto;color:#ead4d9b8;font:italic 17px/1.85 'Playfair Display',serif}
+.promise-constellation{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 34px;max-width:680px;margin:48px auto 18px;padding:20px 8px}
+.promise-lines{position:absolute;inset:10% 8%;width:84%;height:80%;z-index:-1;overflow:visible}
+.promise-lines path{fill:none;stroke:#e5b4c766;stroke-width:1.2;stroke-dasharray:3 8}
+.promise-star{appearance:none;border:1px solid #edc3d33b;background:linear-gradient(145deg,#ffffff12,#ffffff04);border-radius:18px;min-height:116px;color:#f8e9ec;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;cursor:pointer;transition:transform .28s ease,border-color .28s ease,background .28s ease,box-shadow .28s ease}
+.promise-star:hover,.promise-star:focus-visible{transform:translateY(-4px);border-color:#f2c5d5aa;outline:none;box-shadow:0 12px 38px #0003}
+.promise-star[aria-pressed="true"]{background:linear-gradient(145deg,#e9b6c52b,#fff1f20c);border-color:#f0c1d2;box-shadow:0 0 30px #d77d9b24}
+.star-glyph{font-size:32px;line-height:1;color:#f0c3cf;text-shadow:0 0 20px #efabc8aa;transition:transform .3s ease}
+.promise-star[aria-pressed="true"] .star-glyph{transform:scale(1.25);color:#ffe7c9}
+.star-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#e8d2d9}
+.promise-count{font-size:11px;letter-spacing:.12em;color:#d6aab9;margin:8px 0 22px}
+.promise-message{max-width:580px;min-height:112px;margin:0 auto;padding:24px;border:1px solid #f1c5d22b;border-radius:16px;background:#ffffff08;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.promise-message-star{font-size:20px;color:#f2c8d2}
+.promise-message p{margin:0;color:#f6e6e9;font:italic 17px/1.75 'Playfair Display',serif}
+.promise-finale{margin-top:28px;animation:promiseFade .8s ease both}
+.promise-finale p{font:italic 20px 'Playfair Display',serif;color:#f4d9e1}
+.keepsake-open,.keepsake-action{border:1px solid #e8bacb88;border-radius:999px;padding:13px 22px;background:#f0d5dc;color:#4b2939;font:600 10px 'DM Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:transform .25s ease,background .25s ease}
+.keepsake-open:hover,.keepsake-action:hover{transform:translateY(-2px);background:#fff0f2}
+.keepsake-section{padding:80px 22px 96px;background:linear-gradient(180deg,#1b121d,#100d13);color:#f7e8e7;text-align:center}
+.keepsake-card{position:relative;overflow:hidden;width:min(620px,100%);margin:auto;padding:clamp(34px,7vw,70px) clamp(24px,7vw,66px);background:radial-gradient(ellipse at 50% 0%,#fff9ee,#f0e1d7 70%);color:#472838;border:1px solid #e8c9b7;outline:1px solid #c7a17e;outline-offset:-10px;box-shadow:0 28px 90px #0007;opacity:0;transform:translateY(18px) scale(.985)}
+.keepsake-section.is-revealed .keepsake-card{animation:keepsakeReveal 1s cubic-bezier(.16,1,.3,1) both}
+.keepsake-corner{position:absolute;top:27px;right:32px;font-size:10px;letter-spacing:.2em;color:#a47b6c}
+.keepsake-seal{width:48px;height:48px;display:grid;place-items:center;margin:0 auto 22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#b86a7b,#702f4a);color:#fff0e8;font-size:24px;box-shadow:0 5px 14px #55283c55, inset 0 1px 2px #ffffff80}
+.keepsake-kicker{color:#9a6474}
+.keepsake-card h2{font:400 clamp(42px,8vw,70px)/1 'Playfair Display',serif;margin:10px 0 22px;letter-spacing:-.04em}
+.keepsake-card h2 em{color:#a64f6c;font-weight:400}
+.keepsake-names{font:400 clamp(20px,4vw,28px) 'Playfair Display',serif}
+.keepsake-names span{color:#ad6078;padding:0 8px}
+.keepsake-rule{display:flex;align-items:center;gap:12px;max-width:230px;margin:24px auto;color:#a96d7e}
+.keepsake-rule:before,.keepsake-rule:after{content:"";height:1px;flex:1;background:#cda9a0}
+.keepsake-date{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#956b69}
+.keepsake-note{max-width:420px;margin:26px auto;color:#694b53;font:italic 17px/1.9 'Playfair Display',serif}
+.keepsake-sign{font:italic 15px/1.8 'Playfair Display',serif;color:#805263;margin:28px 0}
+.keepsake-sign strong{font-size:22px;font-weight:400;color:#5b3145}
+.keepsake-footer{font-size:9px;letter-spacing:.23em;color:#a47d7c}
+.keepsake-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:24px auto 0}
+.keepsake-action{background:transparent;color:#f1dce3}
+.keepsake-action.primary{background:#f0d5dc;color:#4b2939}
+@keyframes promiseFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes keepsakeReveal{0%{opacity:0;transform:translateY(22px) scale(.97);filter:blur(5px)}100%{opacity:1;transform:none;filter:none}}
+@media(max-width:640px){.promise-world{padding:70px 18px}.promise-constellation{gap:12px;margin:34px auto 14px;padding:12px 0}.promise-star{min-height:96px;border-radius:14px}.star-glyph{font-size:27px}.star-label{font-size:8px;letter-spacing:.08em}.promise-message{padding:20px}.keepsake-section{padding:60px 16px 72px}}
+@media(prefers-reduced-motion:reduce){.promise-star,.star-glyph,.keepsake-open,.keepsake-action{transition:none!important}.promise-finale,.keepsake-section.is-revealed .keepsake-card{animation:none!important}.keepsake-card{opacity:1;transform:none}}
+[hidden]{display:none!important}
+@media print{
+ @page{size:A4;margin:16mm}
+ body *{visibility:hidden!important}
+ #keepsake,#keepsake *{visibility:visible!important}
+ #keepsake{display:block!important;position:absolute;inset:0;padding:0;background:#fff!important}
+ #keepsake .keepsake-card{opacity:1!important;transform:none!important;box-shadow:none!important;margin:20mm auto;border:1px solid #c7a17e;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ #keepsake .keepsake-actions{display:none!important}
+}
+
 </style>
 </head>
 <body class="locked">
@@ -734,6 +796,7 @@ body.music-reactive .music-atmosphere{opacity:1}
    <a href="#her-picture" data-nav-section="her-picture">Memories</a>
    <a href="#open-when" data-nav-section="open-when">Little things</a>
    <a href="#letter" data-nav-section="letter">Our letter</a>
+   <a href="#promises" data-nav-section="promises">Promises</a>
   </div>
   <div class="nav-progress" aria-hidden="true"><span id="navProgressFill"></span></div>
  </div>
@@ -1020,6 +1083,46 @@ body.music-reactive .music-atmosphere{opacity:1}
 <section class="final-finale reveal" id="anniversary-finale"><div class="section-kicker">A last little thing, kept safe for you</div><h2 class="section-title">When you’re ready,<br><em>open the last page.</em></h2><p>This isn’t a test, and there’s no password. Just one more letter for the girl I keep choosing, in all the ordinary days after the special ones.</p><button class="finale-lock" id="finaleOpen" type="button">Open our last little letter ♡</button><article class="finale-letter" id="finaleLetter"><div class="section-kicker">November 24, and every day after</div><h3>To my Munchkin, my favourite person.</h3><p>If you’ve made it all the way here, I hope you felt how much thought I put into this little world. Every picture, every song, every small detail is my way of saying that the moments we share matter to me.</p><p>I can’t promise that life will always be easy or that we’ll never have a difficult day. I can promise that I want to keep learning how to love you well, to listen when you need to be heard, and to remember that it’s never you against me. It’s us, facing the problem together.</p><p>One day, I hope there’s a quiet home in the woods, a Shiba Inu named Bannana Bob stealing our space, and you beside me while nothing much happens at all. Until then, I’m grateful for every sunrise, every walk, every laugh, every photo, and every chance to choose you again.</p><p>Happy us-day, Prapthi. You’re my favourite person to photograph, my soft place to land, and the person I want to keep making memories with.</p><div class="signature">Always yours. ♡</div></article></section>
 
 </main>
+
+<section class="promise-world" id="promises" aria-labelledby="promiseTitle">
+ <div class="promise-inner">
+  <div class="promise-kicker">A sky full of little promises · 0216</div>
+  <h2 class="promise-title" id="promiseTitle">Six stars. <em>A lifetime of choosing you.</em></h2>
+  <p class="promise-intro">Munchkin, tap each little star. Each one holds something I want to keep promising you, not just today, but in all the ordinary days that come after.</p>
+  <div class="promise-constellation" aria-label="Six interactive promise stars">
+   <button class="promise-star" type="button" data-promise="0" aria-pressed="false"><span class="star-glyph">✦</span><span class="star-label">Choose you</span></button>
+   <button class="promise-star" type="button" data-promise="1" aria-pressed="false"><span class="star-glyph">✧</span><span class="star-label">Listen closely</span></button>
+   <button class="promise-star" type="button" data-promise="2" aria-pressed="false"><span class="star-glyph">✦</span><span class="star-label">Cheer you on</span></button>
+   <button class="promise-star" type="button" data-promise="3" aria-pressed="false"><span class="star-glyph">✧</span><span class="star-label">Find adventures</span></button>
+   <button class="promise-star" type="button" data-promise="4" aria-pressed="false"><span class="star-glyph">✦</span><span class="star-label">Build a home</span></button>
+   <button class="promise-star" type="button" data-promise="5" aria-pressed="false"><span class="star-glyph">✧</span><span class="star-label">Keep learning</span></button>
+   <svg class="promise-lines" viewBox="0 0 600 250" preserveAspectRatio="none" aria-hidden="true"><path d="M72 55L226 28L365 70L520 35L430 190L225 205L72 55"/></svg>
+  </div>
+  <p class="promise-count" id="promiseCount" aria-live="polite">0 of 6 promises discovered</p>
+  <div class="promise-message" id="promiseMessage" role="status" aria-live="polite"><span class="promise-message-star">✦</span><p>Choose a star, my love. There's a little promise waiting inside.</p></div>
+  <div class="promise-finale" id="promiseFinale" hidden>
+   <p>Six little promises, and a lifetime to keep them.</p>
+   <button class="keepsake-open" id="openKeepsake" type="button">Open our little keepsake ♡</button>
+  </div>
+ </div>
+</section>
+
+<section class="keepsake-section" id="keepsake" aria-labelledby="keepsakeTitle" hidden>
+ <div class="keepsake-card" id="keepsakeCard">
+  <div class="keepsake-corner" aria-hidden="true">0216</div>
+  <div class="keepsake-seal" aria-hidden="true">♡</div>
+  <p class="keepsake-kicker">A little piece of forever</p>
+  <h2 id="keepsakeTitle">Forever <em>0216</em></h2>
+  <div class="keepsake-names">Rithwik <span>♡</span> Prapthi</div>
+  <div class="keepsake-rule"><span>✦</span></div>
+  <p class="keepsake-date">November 24, 2026</p>
+  <p class="keepsake-note">If I could keep one thing from every day, it would be the feeling of getting to choose you. Thank you for being my favourite part of this story. Here's to all the little tomorrows still waiting for us.</p>
+  <p class="keepsake-sign">With all my love, always,<br><strong>Rithwik</strong></p>
+  <div class="keepsake-footer">OUR LITTLE UNIVERSE · EST. 0216</div>
+ </div>
+ <div class="keepsake-actions"><button class="keepsake-action" id="replayKeepsake" type="button">Replay the reveal</button><button class="keepsake-action primary" id="printKeepsake" type="button">Save / print keepsake</button></div>
+</section>
+
 <aside class="music-player" id="musicPlayer" aria-label="Background music player"><audio id="backgroundAudio" preload="metadata" playsinline></audio><div class="music-top"><div class="music-cover-wrap"><img class="music-cover" src="/0216/photos/this-pic-changed-my-whole-idea.jpg" alt="Prapthi" width="96" height="96"></div><div class="music-meta"><div class="music-title" id="musicTitle">Reflections</div><div class="music-artist" id="musicArtist">The Neighbourhood</div></div><button class="music-btn primary" id="musicPlay" type="button" aria-label="Play music" title="Play or pause">▶</button><button class="music-btn music-toggle" id="musicMute" type="button" aria-label="Mute audio" title="Mute audio">♫</button><button class="music-btn music-expand" id="musicExpand" type="button" aria-label="Expand music player" aria-expanded="false" title="More controls">⌃</button></div><div class="music-details"><div class="music-details-inner"><div class="music-kicker">our little soundtrack ♡</div><div class="music-progress"><span id="musicCurrent">0:00</span><input class="music-seek" id="musicSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek through song"><span id="musicDuration">0:00</span></div><div class="music-controls"><button class="music-btn" id="musicPrev" type="button" aria-label="Previous song" title="Previous song">|◀</button><button class="music-btn" id="musicBack" type="button" aria-label="Back ten seconds" title="Back 10 seconds">↶10</button><button class="music-btn primary" id="musicPlayExpanded" type="button" aria-label="Play music" title="Play or pause">▶</button><button class="music-btn" id="musicForward" type="button" aria-label="Forward ten seconds" title="Forward 10 seconds">10↷</button><button class="music-btn" id="musicNext" type="button" aria-label="Next song" title="Next song">▶|</button></div><select class="music-track-select" id="musicTrackSelect" aria-label="Choose a song"></select><div class="music-bottom"><span class="music-status" id="musicStatus" aria-live="polite">Tap play to start ♡</span><div class="music-volume"><span aria-hidden="true">◖</span><input id="musicVolume" type="range" min="0" max="1" value="0.65" step="0.01" aria-label="Volume"></div></div></div></div></aside>
 <footer><span class="heart">♥</span><p>Made with all my heart for Prapthi · November 24 · just us</p></footer>
 
@@ -1028,6 +1131,7 @@ body.music-reactive .music-atmosphere{opacity:1}
  <div class="nov24-shell">
   <section class="nov24-panel active nov24-bouquet-panel" data-nov24-panel="intro">
    <div class="nov24-kicker">November 24 · made with all my love</div>
+   <div class="nov24-kicker nov24-midnight-note">It is our day, Munchkin. I made this little world for you. ♡</div>
    <div class="nov24-flower-scene" aria-label="An animated storybook illustration of Rithwik and Munchkin making a bouquet together">
     <div class="nov24-flower-glow"></div>
     <svg class="nov24-flower-art" viewBox="0 0 800 470" role="img" aria-label="Two illustrated characters carefully making a bouquet of roses and flowers together">
@@ -1210,6 +1314,38 @@ const scrapbook=document.getElementById('homeScrapbook');document.getElementById
 function updateCabinTime(){const hour=new Date().getHours();homeArt.classList.remove('time-dawn','time-day','time-sunset','time-night');const period=hour>=5&&hour<9?'dawn':hour>=9&&hour<16?'day':hour>=16&&hour<19?'sunset':'night';homeArt.classList.add('time-'+period);if(period==='dawn'&&homeInteractionState.weather==='clear')homeArt.classList.add('weather-dawn')}updateCabinTime();
 function writeLetter(article){if(!article||article.dataset.written==='yes')return;article.dataset.written='yes';article.classList.add('is-writing');article.querySelectorAll('p').forEach((p,pi)=>{const original=p.textContent.trim();p.setAttribute('aria-label',original);const parts=original.split(/(\s+)/);let wordIndex=0;const frag=document.createDocumentFragment();parts.forEach(part=>{if(!part)return;if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return}const span=document.createElement('span');span.className='letter-word';span.textContent=part;span.setAttribute('aria-hidden','true');span.style.animationDelay=(Math.min(wordIndex*.035+pi*.32,5.8))+'s';wordIndex++;frag.appendChild(span)});p.replaceChildren(frag)})}document.getElementById('finaleOpen').addEventListener('click',()=>{const letter=document.getElementById('finaleLetter'),opened=letter.classList.toggle('open');document.getElementById('finaleOpen').textContent=opened?'Keep this close to your heart ♡':'Open our last little letter ♡';if(opened){writeLetter(letter);letter.scrollIntoView({behavior:'smooth',block:'center'});floatHearts(22)}});
 
+const promiseCopy=[
+ "I promise to keep choosing you, not only on the easy days, but in the ordinary ones too. I want us to keep finding our way back to each other.",
+ "I promise to listen properly, to make space for what you feel, and to remember that it is us facing a problem, never you against me.",
+ "I promise to celebrate your wins, believe in your dreams, and remind you how much I admire the person you are becoming.",
+ "I promise we will keep collecting little adventures: early sunrises, quiet walks, silly detours, and stories that belong only to us.",
+ "I promise to keep building a home with you that feels safe, kind, and full of laughter. And yes, a very spoiled Bannana Bob belongs there too.",
+ "I promise to keep learning how to love you better. I won't assume I know everything; I'll keep asking, listening, growing, and choosing us."
+];
+const promiseButtons=[...document.querySelectorAll('[data-promise]')];
+const promiseSeen=new Set();
+const promiseMessage=document.getElementById('promiseMessage');
+const promiseCount=document.getElementById('promiseCount');
+const promiseFinale=document.getElementById('promiseFinale');
+promiseButtons.forEach(button=>button.addEventListener('click',()=>{
+ const index=Number(button.dataset.promise);
+ if(!Number.isInteger(index)||index<0||index>=promiseCopy.length)return;
+ promiseSeen.add(index);button.setAttribute('aria-pressed','true');
+ promiseMessage.innerHTML='<span class="promise-message-star" aria-hidden="true">✦</span><p></p>';
+ promiseMessage.querySelector('p').textContent=promiseCopy[index];
+ promiseCount.textContent=promiseSeen.size+' of 6 promises discovered';
+ if(promiseSeen.size===promiseCopy.length){promiseFinale.hidden=false;promiseFinale.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'})}
+}));
+const keepsakeSection=document.getElementById('keepsake');
+document.getElementById('openKeepsake').addEventListener('click',()=>{
+ keepsakeSection.hidden=false;keepsakeSection.classList.remove('is-revealed');void keepsakeSection.offsetWidth;keepsakeSection.classList.add('is-revealed');
+ keepsakeSection.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+});
+document.getElementById('replayKeepsake').addEventListener('click',()=>{
+ keepsakeSection.classList.remove('is-revealed');void keepsakeSection.offsetWidth;keepsakeSection.classList.add('is-revealed');
+});
+document.getElementById('printKeepsake').addEventListener('click',()=>window.print());
+
 const targetMonth=10,targetDay=24;
 const nov24=document.getElementById('nov24Experience');
 const nov24Shell=nov24.querySelector('.nov24-shell');
@@ -1234,7 +1370,7 @@ function openNov24(){if(nov24Started&&nov24.classList.contains('active'))return;
 const navMusic=document.getElementById('navMusic'),navReplay=document.getElementById('navReplay');
 navMusic?.addEventListener('click',()=>{const play=document.getElementById('musicPlay');if(play)play.click()});
 navReplay?.addEventListener('click',openNov24);
-const navTargets=['home','her-picture','open-when','letter'].map(id=>document.getElementById(id)).filter(Boolean);
+const navTargets=['home','her-picture','open-when','letter','promises'].map(id=>document.getElementById(id)).filter(Boolean);
 const navLinks=[...document.querySelectorAll('[data-nav-section]')],navProgressFill=document.getElementById('navProgressFill');
 function updateChapterNav(){const max=document.documentElement.scrollHeight-innerHeight;const progress=max>0?Math.max(0,Math.min(1,scrollY/max)):0;if(navProgressFill)navProgressFill.style.width=(progress*100)+'%';let active='home';for(const section of navTargets){if(section.getBoundingClientRect().top<=innerHeight*.42)active=section.id}navLinks.forEach(link=>{const on=link.dataset.navSection===active;link.classList.toggle('is-active',on);if(on)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')})}
 let navTick=false;window.addEventListener('scroll',()=>{if(navTick)return;navTick=true;requestAnimationFrame(()=>{updateChapterNav();navTick=false})},{passive:true});window.addEventListener('resize',updateChapterNav,{passive:true});updateChapterNav();
