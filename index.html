@@ -1370,7 +1370,7 @@ function openNov24(){if(nov24Started&&nov24.classList.contains('active'))return;
 const navMusic=document.getElementById('navMusic'),navReplay=document.getElementById('navReplay');
 navMusic?.addEventListener('click',()=>{const play=document.getElementById('musicPlay');if(play)play.click()});
 navReplay?.addEventListener('click',openNov24);
-const navTargets=['home','her-picture','open-when','letter'].map(id=>document.getElementById(id)).filter(Boolean);
+const navTargets=['home','her-picture','open-when','letter','promises'].map(id=>document.getElementById(id)).filter(Boolean);
 const navLinks=[...document.querySelectorAll('[data-nav-section]')],navProgressFill=document.getElementById('navProgressFill');
 function updateChapterNav(){const max=document.documentElement.scrollHeight-innerHeight;const progress=max>0?Math.max(0,Math.min(1,scrollY/max)):0;if(navProgressFill)navProgressFill.style.width=(progress*100)+'%';let active='home';for(const section of navTargets){if(section.getBoundingClientRect().top<=innerHeight*.42)active=section.id}navLinks.forEach(link=>{const on=link.dataset.navSection===active;link.classList.toggle('is-active',on);if(on)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')})}
 let navTick=false;window.addEventListener('scroll',()=>{if(navTick)return;navTick=true;requestAnimationFrame(()=>{updateChapterNav();navTick=false})},{passive:true});window.addEventListener('resize',updateChapterNav,{passive:true});updateChapterNav();
