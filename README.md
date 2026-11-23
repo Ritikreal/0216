@@ -12,3 +12,8 @@ The included GitHub Actions workflow publishes the static site to GitHub Pages w
 Edit the letter, memory cards, page title, and text in `index.html` before sharing. The countdown automatically targets the next November 24.
 
 Motion respects the visitor's reduced-motion accessibility preference.
+
+
+## Anniversary experience
+
+The November 24 experience includes the cinematic anniversary reveal, an interactive six-star promise constellation, and a printable `Forever 0216` keepsake. The promise messages and keepsake are implemented in `index.html`; no build step or external service is required.
